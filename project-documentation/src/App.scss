@@ -4,11 +4,14 @@
     height: 100vh;
     background-color: #ddd;
     flex-direction: column;
+    overflow-y: auto;
 
     .header{
         display: flex;
         width: 100%;
         height: 48px;
+        top: 0;
+        position: fixed;
         background-color: #222;
         justify-content: flex-start;
         align-items: center;
@@ -22,10 +25,10 @@
     .document{
         display: flex;
         width: 100%;
-        height: 100%;
+
         word-wrap: break-word;
         flex-direction: column;
-        padding: 16px 32px;
+        padding: 32px 32px;
         box-sizing: border-box;
 
         .text-bold{
@@ -42,6 +45,18 @@
             box-sizing: border-box;
             padding-left: 24px;
             flex-direction: column;
+        }
+
+        .horizontal{
+            display: flex;
+        }
+
+        .comment{
+            display: flex;
+            color: forestgreen;
+            font-weight: bold;
+            padding-left: 16px;
+            box-sizing: border-box;
         }
     }
 

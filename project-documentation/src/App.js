@@ -8,50 +8,90 @@ function App() {
       </div>
       <div className={'document'}>
         <h1>Название проекта "Социальная сеть Паритет"</h1>
-        <h2>ВЕРСИЯ 0.0.0</h2>
+        <h2>ВЕРСИЯ 0.0.1</h2>
         <h3>Фронтенд</h3>
-        <h3>*** Главная страница ***</h3>
+        <h3>*** Страница авторизации ***</h3>
 
         <div className={'space'}> </div>
-
-        <div className={'text-bold'}>Шаблон главной страницы</div>
-        <div className={'text'}>Инструменты разработки: React, Bootstrap.</div>
+        <div className={'text'}>Инструменты разработки: React, axios, Effector, React Final Form.</div>
 
         <div className={'space'}> </div>
-
-        <div className={'text-bold'}>Основные компоненты:</div>
-
+        <div className={'text-bold'}>Шаблон страницы</div>
         <div className={'space'}> </div>
-
-        <div className={'text-bold'}>- Хедер</div>
-        <div className={'paragraph'}>С левого края Логотип, кнопка меню</div>
-        <div className={'paragraph'}>С правого края Поисковик, иконка ЛК</div>
-
-        <div className={'space'}> </div>
-
-
-        <div className={'text-bold'}> - Тело</div>
-        <div className={'paragraph'}>В тело могут импортироваться любые компоненты(модули)</div>
-        <div className={'paragraph'}>Ширина полезного контента внутри тела ограничивается шириной Container</div>
-        <div className={'paragraph'}>Минимальная высота тела: высота экрана минус совокупность высот хедера и футера</div>
-
-        <div className={'space'}> </div>
-
         <div className={'paragraph'}>
-          <div className={'text-bold'}>  - Компоненты (модули)</div>
-          <div className={'paragraph'}>Ширина фона модуля может растягиваться на всю ширину экрана</div>
-          <div className={'paragraph'}>Ширина содержимого модуля соответствует ширине Container в котором оно находится</div>
-          <div className={'paragraph'}>В исключительных случаях полезный контент может выходить за пределы Container</div>
+          <div className={'text-bold'}>- Контейнер формы</div>
+          <div className={'text-bold'}>- Форма(React Final Form)</div>
+          <div className={'paragraph'}>
+            <div className={'text-bold'}>- Заголовок("Авторизация")</div>
+            <div className={'text-bold'}>- Поле ввода логина</div>
+            <div className={'text-bold'}>- Поле ввода пароля</div>
+            <div className={'text-bold'}>- Кнопка подтверждения ввода формы</div>
+          </div>
+        <div className={'space'}> </div>
         </div>
 
+        <div className={'text-bold'}>Функционал</div>
+        <div className={'space'}> </div>
+        <div className={'paragraph'}>
+          <div className={'text-bold'}>- Роутинг</div>
+          <div className={'paragraph'}>
+            <div className={'text-bold'}>MainPage - /</div>
+            <div className={'text-bold'}>AuthPage - /auth</div>
+          </div>
+        </div>
 
         <div className={'space'}> </div>
+        <div className={'paragraph'}>
+          <div className={'text-bold'}>- Effector Store(хранилище состояний приложения)</div>
+          <div className={'paragraph'}>
+            <div className={'horizontal'}>
+              <div className={'text-bold'}>- authState</div>
+              <div className={'comment'}>//состояние авторизации</div>
+            </div>
+            <div className={'paragraph'}>
+              <div className={'horizontal'}>
+                <div className={'text-bold'}>*getAuth</div>
+                <div className={'comment'}>//событие получения текущего состояния авторизации</div>
+              </div>
+              <div className={'horizontal'}>
+                <div className={'text-bold'}>*resetAuth</div>
+                <div className={'comment'}>//событие сброса авторизации</div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-        <div className={'text-bold'}> - Футер</div>
-        <div className={'paragraph'}>Расположение дочерних компонентов в ряд</div>
-        <div className={'paragraph'}>Контактные данные УК Паритет</div>
+        <div className={'space'}> </div>
+        <div className={'paragraph'}>
+          <div className={'text-bold'}>- RequestsController(оболочка для axios)</div>
+          <div className={'paragraph'}>
+            <div className={'horizontal'}>
+              <div className={'text-bold'}>*getAuth(user)</div>
+              <div className={'comment'}>//метод запроса состояния авторизации</div>
+            </div>
+            <div className={'horizontal'}>
+              <div className={'text-bold'}>*setAuth(user, password)</div>
+              <div className={'comment'}>//метод установки/сброса авторизации</div>
+            </div>
+          </div>
+        </div>
 
+        <div className={'space'}> </div>
+        <div className={'paragraph'}>
+          <div className={'text-bold'}>- Формы</div>
+          <div className={'paragraph'}>
+            <div className={'text-bold'}>*валидация пустых форм</div>
+            <div className={'text-bold'}>*валидация количества введенных символов форм(6-20)</div>
+          </div>
+        </div>
 
+        <div className={'space'}> </div>
+        <div className={'paragraph'}>
+          <div className={'text-bold'}>- Кнопка подтверждения ввода формы</div>
+          <div className={'paragraph'}>
+            <div className={'text-bold'}>*отправляет запрос на сервер с данными из полей ввода</div>
+          </div>
+        </div>
 
       </div>
     </div>
@@ -59,38 +99,3 @@ function App() {
 }
 
 export default App;
-
-/*
-* Документация
-
-Название проекта "Социальная сеть Паритет"
-
-ВЕРСИЯ 0.0.0
-
-Фронтенд
-
-    *** Главная страница ***
-
-    Шаблон главной страницы
-
-    Инструменты разработки: React, Bootstrap.
-
-    Основные компоненты:
-        - Хедер
-            - С левого края Логотип, кнопка меню
-            - С правого края Поисковик, иконка ЛК
-
-        - Тело
-            В тело могут импортироваться любые компоненты (модули).
-            Ширина полезного контента внутри тела ограничивается шириной Container
-
-            Минимальная высота тела: высота экрана минус совокупность высот хедера и футера
-            - Компоненты (модули)
-                Ширина фона модуля может растягиваться на всю ширину экрана
-                Ширина содержимого модуля соответствует ширине Container в котором оно находится
-                В исключительных случаях полезный контент может выходить за пределы Container
-
-        - Футер
-            Расположение дочерних компонентов в ряд
-            - Контактные данные УК Паритет
-* */
