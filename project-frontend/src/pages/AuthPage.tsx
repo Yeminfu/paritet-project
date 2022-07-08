@@ -1,0 +1,126 @@
+import React, {ReactNode, useState} from 'react'
+import 'antd/dist/antd.min.css'
+import './MainPage.scss'
+import { Form, Field } from 'react-final-form'
+import './AuthPage.scss'
+import axios from "axios";
+import AxiosController from "../AxiosController/AxiosController";
+
+interface Props{
+    children?: ReactNode;
+    onAuth: any;
+}
+
+interface Data{
+    login: String;
+    password: String;
+}
+
+function getAuth({login, password}: Data){
+    axios.post('http://maksia2w.beget.tech', {
+        login: login,
+        password: password,
+    })
+}
+
+
+export default function AuthPage({children, onAuth}: Props){
+
+    let auth = false;
+
+    const controller = new AxiosController;
+
+    const [userNameError, setUserNameError] = useState("")
+    const [passwordError, setPasswordError] = useState("")
+    const [isRegistration, setIsRegistration] = useState(false)
+
+    async function checkInputData(username: string, password: string, limits: [number, number]){
+        console.log(username)
+        console.log(password)
+        if(!username ||username.length === 0){
+            console.log('username is empty')
+            setUserNameError('Пустое поле')
+            setPasswordError('')
+            return
+        }
+        if(username.length < limits[0] || username.length > limits[1]){
+            console.log('username should be from 6 till 20 symbols')
+            setUserNameError('Имя должно быть от 6 до 20 символов')
+            setPasswordError('')
+            return
+        }
+        if(!password ||password.length === 0){
+            console.log('password is empty')
+            setUserNameError('')
+            setPasswordError('Пустое поле')
+            return
+        }
+        if(password.length < limits[0] || password.length > limits[1]){
+            console.log('password should be from 6 till 20 symbols')
+            setUserNameError('')
+            setPasswordError('Пароль должен быть от 6 до 20 символов')
+            return
+        }
+        else{
+            setUserNameError('')
+            setPasswordError('')
+            let getAuth = await controller.getAuth(username, password)
+            console.log('getAuth', getAuth)
+
+            if(getAuth === 'unkuser'){
+                setUserNameError(`Пользователя "${username}" не существует`)
+                setPasswordError('')
+            }
+            else if(getAuth === 'wrongpass'){
+                setUserNameError('')
+                setPasswordError('Неверный пароль')
+            }
+            else if(getAuth !== 'wrongpass' && getAuth !== 'unkuser'){
+                auth = true;
+                onAuth(auth, getAuth)
+            }
+        }
+        //else await controller.getAccountInfo(username, password)
+    }
+
+    const onSubmit = async (e: any) => {
+        await checkInputData(e.username, e.password, [6,20])
+    }
+
+
+    return(
+        <div className={'auth-page'}>
+                <Form
+                    onSubmit={onSubmit}
+                    render={({ handleSubmit }) => (
+                        <form onSubmit={handleSubmit} className={'auth-container'}>
+                            <h2>{isRegistration ? 'Регистрация' : 'Авторизация'}</h2>
+                            <div className={'input-container'}>
+                                <label>Логин</label>
+                                <Field className={'input1'}
+                                       name="username"
+                                       component="input"
+                                       placeholder=""
+                                       autoComplete={'on'} />
+                                <div className={'error'}>{userNameError}</div>
+                            </div>
+                            <div className={'input-container'}>
+                                <label>Пароль</label>
+                                <Field className={'input1'}
+                                       name="password"
+                                       component="input"
+                                       placeholder=""
+                                       type={'password'}
+                                       autoComplete={'on'}/>
+                                 <div className={'error'}>{passwordError}</div>
+                            </div>
+
+                            <div className={'submit-button-container'}>
+                                    <button type="submit" className={'button'}>Войти</button>
+                            </div>
+                        </form>
+                    )}
+                />
+        </div>
+    )
+}
