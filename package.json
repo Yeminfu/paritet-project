@@ -1,0 +1,15 @@
+{
+  "name": "news-gatherer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./news-gatherer.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^15.3.2"
+  }
+}
