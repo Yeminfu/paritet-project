@@ -4,7 +4,7 @@ import './MainPage.scss'
 import { Form, Field } from 'react-final-form'
 import './AuthPage.scss'
 import axios from "axios";
-import AxiosController from "../AxiosController/AxiosController";
+import Fetcher from "../Fetcher/Fetcher";
 
 interface Props{
     children?: ReactNode;
@@ -28,7 +28,7 @@ export default function AuthPage({children, onAuth}: Props){
 
     let auth = false;
 
-    const controller = new AxiosController;
+    const controller = new Fetcher;
 
     const [userNameError, setUserNameError] = useState("")
     const [passwordError, setPasswordError] = useState("")

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-export default class AxiosController{
+export default class Fetcher{
 
     controller: any;
     //baseUrl = 'https://maksia2w.beget.tech'
@@ -16,10 +16,6 @@ export default class AxiosController{
             },
         })
     }
-
-    //async getAuth(user: String){
-    //    return await this.controller.get(``)
-    //}
 
     async setAuth(username: String, password: String){
         return await this.controller.post('/api/login', JSON.stringify({
@@ -66,6 +62,19 @@ export default class AxiosController{
                     return 'wrongpass'
                 }
                 return response.data
+            })
+            .catch(function (error: any){
+                console.log(error);
+            })
+    }
+
+    async getNews(quantity?: number){
+        return await this.controller.post(`${this.baseUrl}/api/getNews`, JSON.stringify({
+            quantity: quantity?.toString()
+        }))
+            .then(await function (response: any){
+                console.log("FRONT GOT NEWS RESPONSE:", response)
+                return response
             })
             .catch(function (error: any){
                 console.log(error);
