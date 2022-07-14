@@ -18,20 +18,26 @@ const url = 'https://www.dvnovosti.ru/sitemap_news.xml';
 })();
 
 async function getArticleByLink(link){
-    console.log(link)
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
     await page.goto(link, { waitUntil: 'networkidle2' })
 
-    const pageContent = await page.evaluate(() => {
+
+    let pageContent = await page.evaluate(() => {
         let title = document.querySelector('.story__title').innerHTML
         let lead = document.querySelector('.story__lead').innerHTML
         let blocks = document.querySelector('.story__blocks_border').innerHTML
+        let smallImage = document.querySelector('.story__image_small').getAttribute('src')
+        //let bigImage = document.querySelector('img.images__active-image').getAttribute('src')
+        let publishDateTime = document.querySelector('time').innerText
 
-        return {
+        return{
             title: title,
             lead: lead,
             blocks: blocks,
+            smallImg: smallImage,
+            //bigImg: bigImage,
+            publishDateTime: publishDateTime
         }
     })
 

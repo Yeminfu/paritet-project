@@ -4,7 +4,7 @@
   "description": "",
   "main": "news-gatherer.js",
   "scripts": {
-    "test": "node news-gatherer.ts"
+    "start": "node news-gatherer.ts"
   },
   "keywords": [],
   "author": "",
