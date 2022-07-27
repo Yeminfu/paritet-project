@@ -2,16 +2,16 @@
   "name": "news-gatherer",
   "version": "1.0.0",
   "description": "",
-  "main": "news-gatherer.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node news-gatherer.ts"
+    "start": "node ./news-gatherer.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/es6-promise": "^3.3.0",
     "fast-xml-parser": "^4.0.9",
+    "mysql2": "^2.3.3",
     "puppeteer": "^15.3.2"
   }
 }
