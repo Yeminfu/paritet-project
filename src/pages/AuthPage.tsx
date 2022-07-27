@@ -1,10 +1,11 @@
-import React, {ReactNode, useState} from 'react'
+import React, {ReactNode, useEffect, useState} from 'react'
 import 'antd/dist/antd.min.css'
 import './MainPage.scss'
 import { Form, Field } from 'react-final-form'
 import './AuthPage.scss'
 import axios from "axios";
 import Fetcher from "../Fetcher/Fetcher";
+import {useLocation, useNavigate} from "react-router-dom";
 
 interface Props{
     children?: ReactNode;
@@ -26,6 +27,17 @@ function getAuth({login, password}: Data){
 
 export default function AuthPage({children, onAuth}: Props){
 
+    let location = useLocation()
+    let navigate = useNavigate();
+
+
+    useEffect(() => {
+        if(location.pathname !== '/login') {
+            navigate('../login')
+        }
+    }, [])
+
+
     let auth = false;
 
     const controller = new Fetcher;
@@ -35,8 +47,8 @@ export default function AuthPage({children, onAuth}: Props){
     const [isRegistration, setIsRegistration] = useState(false)
 
     async function checkInputData(username: string, password: string, limits: [number, number]){
-        console.log(username)
-        console.log(password)
+        console.log("Auth: username:", username)
+        console.log("Auth: password:", password)
         if(!username ||username.length === 0){
             console.log('username is empty')
             setUserNameError('Пустое поле')
@@ -64,21 +76,38 @@ export default function AuthPage({children, onAuth}: Props){
         else{
             setUserNameError('')
             setPasswordError('')
-            let getAuth = await controller.getAuth(username, password)
-            console.log('getAuth', getAuth)
+            let answer = await controller.getAuth(username, password)
+            console.log('answer', answer)
 
-            if(getAuth === 'unkuser'){
-                setUserNameError(`Пользователя "${username}" не существует`)
-                setPasswordError('')
-            }
-            else if(getAuth === 'wrongpass'){
-                setUserNameError('')
-                setPasswordError('Неверный пароль')
-            }
-            else if(getAuth !== 'wrongpass' && getAuth !== 'unkuser'){
+            if(answer?.id && answer?.username && answer?.token && answer?.token_update){
                 auth = true;
-                onAuth(auth, getAuth)
+                onAuth(auth, answer)
             }
+            else if(answer === null){
+                setUserNameError(``)
+                setPasswordError('Неверный логин или пароль')
+            }
+            else if(answer === undefined){
+                setUserNameError('')
+                setPasswordError('Ошибка сервера')
+            }
+
+            //if(answer === 'unkuser'){
+            //    setUserNameError(`Пользователя "${username}" не существует`)
+            //    setPasswordError('')
+            //}
+            //else if(answer === 'wrongpass'){
+            //    setUserNameError('')
+            //    setPasswordError('Неверный пароль')
+            //}
+            //else if(answer?.username === username && answer?.password === password){
+            //    auth = true;
+            //    onAuth(auth, answer)
+            //}
+            //else{
+            //    setUserNameError('')
+            //    setPasswordError('Ошибка сервера')
+            //}
         }
         //else await controller.getAccountInfo(username, password)
     }
@@ -86,6 +115,11 @@ export default function AuthPage({children, onAuth}: Props){
     const onSubmit = async (e: any) => {
         await checkInputData(e.username, e.password, [6,20])
     }
+
+    //async function a(){
+    //    const fetcher = new Fetcher()
+    //    await fetcher.getAuth('user_12', '111111')
+    //}
 
 
     return(
@@ -114,9 +148,9 @@ export default function AuthPage({children, onAuth}: Props){
                                        autoComplete={'on'}/>
                                  <div className={'error'}>{passwordError}</div>
                             </div>
-
+                            <a className={'to-registration-link'} onClick={() => { navigate('../registration')}}>Зарегистрироваться</a>
                             <div className={'submit-button-container'}>
-                                    <button type="submit" className={'button'}>Войти</button>
+                                <button type="submit" className={'button'}>Войти</button>
                             </div>
                         </form>
                     )}

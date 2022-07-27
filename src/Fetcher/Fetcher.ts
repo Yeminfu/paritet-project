@@ -5,7 +5,7 @@ export default class Fetcher{
 
     controller: any;
     //baseUrl = 'https://maksia2w.beget.tech'
-    baseUrl = 'http://localhost:3002'
+    baseUrl = 'http://62.113.110.6:3002'
 
 
     constructor(){
@@ -13,6 +13,7 @@ export default class Fetcher{
             baseURL: this.baseUrl,
             headers: {
                 accept: 'application/json',
+                'Access-Control-Allow-Origin': '*'
             },
         })
     }
@@ -54,14 +55,43 @@ export default class Fetcher{
             password: password,
         }))
             .then(function (response: any){
-                console.log("FRONT GOT RESPONSE:", response);
-                if(response.data === 'unkuser'){
-                    return 'unkuser'
+
+                console.log("FRONT GOT AUTH RESPONSE:", response);
+                if(response.data[0].username && response.data[0].token && response.data[0].token_update){
+                    return response.data[0]
                 }
-                if(response.data === 'wrongpass'){
-                    return 'wrongpass'
+                else if(response.data === "INCORRECT"){
+                    return null
                 }
-                return response.data
+                else{
+                    return undefined
+                }
+            })
+            .catch(function (error: any){
+                console.log(error);
+            })
+    }
+
+    async getRegistration(username: String, password: String){
+        return await this.controller.post(`${this.baseUrl}/api/getRegistration`, JSON.stringify({
+            username: username,
+            password: password,
+        }))
+            .then(function (response: any){
+
+                console.log("FRONT GOT REG RESPONSE:", response);
+                if(response.data[0].username && response.data[0].token && response.data[0].token_update){
+                    return response.data[0]
+                }
+                else if(response.data === "TAKEN"){
+                    return null
+                }
+                else if(response.data === "FAILED"){
+                    return 0
+                }
+                else{
+                    return undefined
+                }
             })
             .catch(function (error: any){
                 console.log(error);
@@ -74,6 +104,17 @@ export default class Fetcher{
         }))
             .then(await function (response: any){
                 console.log("FRONT GOT NEWS RESPONSE:", response)
+                return response
+            })
+            .catch(function (error: any){
+                console.log(error);
+            })
+    }
+
+    async getCategories(){
+        return await this.controller.post(`${this.baseUrl}/api/getCategories`)
+            .then(await function (response: any){
+                console.log("FRONT GOT CATEGORIES RESPONSE:", response)
                 return response
             })
             .catch(function (error: any){
