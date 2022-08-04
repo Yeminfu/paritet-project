@@ -14,9 +14,7 @@ import ForumCategoriesPage from "./pages/ForumCategoriesPage";
 import ForumTopicsPage from "./pages/ForumTopicsPage";
 
 
-
-function App() {
-
+export default function App(){
 
     return (
         <Col className="App">
@@ -38,6 +36,4 @@ function App() {
         </Col>
   );
 }
-
-export default App;
 
