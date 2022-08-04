@@ -1,7 +1,6 @@
 import React, {ReactNode, useState} from 'react';
 import './ForumCategoryComponent.scss';
 import Utils from "../lib/utils";
-import {useStore} from "effector-react";
 
 interface Props{
     children?: ReactNode;
@@ -16,7 +15,6 @@ interface Props{
 
 export default function ForumCategoryComponent({children, data, onItemClick}: Props){
 
-    const [username, setUsername] = useState(useStore($username))
     const utils = new Utils()
 
     return (
