@@ -1,15 +1,8 @@
-import React, {useState} from 'react';
-import { useStore } from "effector-react";
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import React from 'react';
+import {Routes, Route} from 'react-router-dom';
 import './App.scss';
 import { Col } from 'antd';
 import 'antd/dist/antd.min.css';
-import {
-    $authState, $token, $tokenExp, $username, $userId,
-    //$userState,
-    setAuthState, setTokenExpState, setTokenState, setUsernameState, setUserIdState,
-    //setUserState
-} from "./store/store";
 import Login from "./pages/Login";
 import MainPage from "./pages/MainPage";
 import NewsPage from "./pages/NewsPage";
