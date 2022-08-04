@@ -1,5 +1,4 @@
 import React, {ReactNode, useEffect, useState} from 'react'
-import 'antd/dist/antd.min.css'
 import './MainPage.scss'
 import Fetcher from "../Fetcher/Fetcher";
 import PageComponent from "./base/PageComponent";
