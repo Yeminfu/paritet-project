@@ -5,7 +5,7 @@
 /.idea
 /.pnp
 .pnp.js
-.yarn.lock
+yarn.lock
 ../project-documentation/node_modules
 
 # testing
