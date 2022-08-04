@@ -2,7 +2,7 @@ import React from 'react';
 import {Routes, Route} from 'react-router-dom';
 import './App.scss';
 import Login from "./pages/Login";
-import MainPage from "./pages/MainPage";
+import MainPage from "./pages/MainPage/MainPage";
 import NewsPage from "./pages/NewsPage";
 import NewsDetailsComponent from "./components/NewsDetailsComponent";
 import Registration from "./pages/Registration";
