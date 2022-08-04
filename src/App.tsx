@@ -1,8 +1,6 @@
 import React from 'react';
 import {Routes, Route} from 'react-router-dom';
 import './App.scss';
-import { Col } from 'antd';
-import 'antd/dist/antd.min.css';
 import Login from "./pages/Login";
 import MainPage from "./pages/MainPage";
 import NewsPage from "./pages/NewsPage";
@@ -17,7 +15,7 @@ import ForumTopicsPage from "./pages/ForumTopicsPage";
 export default function App(){
 
     return (
-        <Col className="App">
+        <div className="App">
             <Routes>
                 <Route path='/registration' element={<Registration/>}/>
                 <Route path='/login' element={<Login/>}/>
@@ -33,7 +31,7 @@ export default function App(){
                 <Route path='/forum/:id' element={<ForumTopicsPage/>}/>
                 <Route path='/forum/:id/:id' element={<ForumMessagesPage/>}/>
             </Routes>
-        </Col>
+        </div>
   );
 }
 
