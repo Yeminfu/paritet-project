@@ -1,3 +1,6 @@
+import MainHeader from "./MainHeader";
+import React from "react";
+
 interface Props{
     children: any;
 }
@@ -5,9 +8,9 @@ interface Props{
 export default ( {children}: Props ) => {
     return (
         <>
-            <header>
-                {/* тут своей позже своей жизнью будет жить компонент header */}
-            </header>
+            <MainHeader>
+
+            </MainHeader>
             <div id="page_content">
                 {children}
             </div>

@@ -1,8 +1,12 @@
-import React from "react";
+import React, {ReactNode} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import './MainHeader.scss'
 
-export default function MainHeader(){
+interface Props{
+    children?: ReactNode;
+}
+
+export default function MainHeader({children}: Props){
 
     const navigate = useNavigate()
 
