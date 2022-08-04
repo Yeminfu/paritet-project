@@ -59,36 +59,41 @@ let categories = [
     },
     {
         id: 2,
-        title: "Муниципальные/Социальные программы",
+        title: "Форум",
         description: "Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.\n",
     },
     {
         id: 3,
-        title: "Проекты/Голосования",
+        title: "Муниципальные/Социальные программы",
         description: "Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.\n",
     },
     {
         id: 4,
-        title: "Юриспруденция",
+        title: "Проекты/Голосования",
         description: "Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.\n",
     },
     {
         id: 5,
-        title: "ЖКХ",
+        title: "Юриспруденция",
         description: "Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.\n",
     },
     {
         id: 6,
-        title: "Объявления",
+        title: "ЖКХ",
         description: "Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.\n",
     },
     {
         id: 7,
-        title: "Трудоустройство",
+        title: "Объявления",
         description: "Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.\n",
     },
     {
         id: 8,
+        title: "Трудоустройство",
+        description: "Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.\n",
+    },
+    {
+        id: 9,
         title: "Частные услуги",
         description: "Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.\n",
     },
@@ -176,6 +181,14 @@ let news = [
 //    res.sendFile(path.join(__dirname, 'index.html'))
 //})
 
+
+
+
+
+
+
+
+//REGISTRATION/LOG IN
 server.post('/api/getRegistration', async (req, res) => {
     console.log("BACK GOT REG REQUEST", req)
     let data = Object.keys(req.body)
@@ -183,15 +196,6 @@ server.post('/api/getRegistration', async (req, res) => {
     res.send(response)
     if(response !== null) response = null
 })
-
-server.post('/api/getAuth', async (req, res) => {
-    //console.log("BACK GOT REQUEST", req)
-    let data = Object.keys(req.body)
-    await getAuth(JSON.parse(data[0]).username.toString(), JSON.parse(data[0]).password.toString())
-    res.send(response)
-    if(response !== null) response = null
-})
-
 async function getRegistration(username, password){
     response = {}
     console.log("SENDED", username, password)
@@ -213,16 +217,11 @@ async function getRegistration(username, password){
             +('0'+newDT.getMinutes()).slice(-2)+':'
             +('0'+newDT.getSeconds()).slice(-2)
         console.log("PRE3", tokenExpDate)
-        //const newTokenUpdate = new Date(tokenExpDate)
-        //const setTokenQuery = `UPDATE users SET token = "${newToken}", token_update = "${tokenExpDate}" WHERE username = "${username}" AND password = "${password}"`
-        //await connection.promise().query(setTokenQuery)
-        //const fullUserDataQuery0 = `SELECT id, username, token, token_update FROM users WHERE username = "${username}" AND password = "${password}"`
         const fullUserDataQuery = `INSERT INTO users(username, password, token, token_update) VALUES ("${username}","${password}","${newToken}","${tokenExpDate}")`
         const fullUserData = await connection.promise().query(fullUserDataQuery)
         const checkQuery = `SELECT * FROM users WHERE username = "${username}"`
         const addedResult = await connection.promise().query(checkQuery)
         const isSuccessfully = addedResult[0].length === 1 ? true : false
-        console.log("FLUD", fullUserData[0])
         if(isSuccessfully){
             response = addedResult[0]
         }
@@ -235,6 +234,13 @@ async function getRegistration(username, password){
     }
 }
 
+server.post('/api/getAuth', async (req, res) => {
+    //console.log("BACK GOT REQUEST", req)
+    let data = Object.keys(req.body)
+    await getAuth(JSON.parse(data[0]).username.toString(), JSON.parse(data[0]).password.toString())
+    res.send(response)
+    if(response !== null) response = null
+})
 async function getAuth(username, password){
     response = {}
     console.log("SENDED", username, password)
@@ -244,7 +250,7 @@ async function getAuth(username, password){
     if(data[0].length > 0){
         console.log("DATA.LNG > 0")
         const newToken = createToken()
-        const currentDTInMsecsPlus5Min = new Date().getTime()+5*60000
+        const currentDTInMsecsPlus5Min = new Date().getTime()+60*60000
         console.log("PRE1", currentDTInMsecsPlus5Min)
         const newDT = new Date(currentDTInMsecsPlus5Min)
         console.log("PRE2", newDT)
@@ -255,7 +261,6 @@ async function getAuth(username, password){
             +('0'+newDT.getMinutes()).slice(-2)+':'
             +('0'+newDT.getSeconds()).slice(-2)
         console.log("PRE3", tokenExpDate)
-        //const newTokenUpdate = new Date(tokenExpDate)
         const setTokenQuery = `UPDATE users SET token = "${newToken}", token_update = "${tokenExpDate}" WHERE username = "${username}" AND password = "${password}"`
         await connection.promise().query(setTokenQuery)
         const fullUserDataQuery = `SELECT id, username, token, token_update FROM users WHERE username = "${username}" AND password = "${password}"`
@@ -267,44 +272,15 @@ async function getAuth(username, password){
     }
 }
 
-server.post('/api/getNews', async (req, res) => {
-    let data = Object.keys(req.body)
-    await getNews(Number(JSON.parse(data[0]).quantity))
-    res.send(response)
-    response = null
-})
-async function getNews(quantity){
-    console.log("START GET NEWS")
-    if(quantity === 0){
-        const query = 'SELECT * FROM news ORDER BY id DESC'
-        let data = await connection.promise().query(query)
-            //.then(function (result){
-            //    console.log(`RESULT: ${result}`)
-            //    return result
-            //})
-            //.catch((e) => console.log("catched", e))
-        //console.log("DATA", data[0])
-        //let data = await gatherer.getAllNews()
-        //console.log("GATHERER_2:")
-        response = JSON.stringify(data[0])
-        console.log("NEWS OBTAINED")
 
-        //response = JSON.stringify([...news])
-    }
-    //else if(quantity > 0){
-    //    response = JSON.stringify([...news.slice(quantity*-1)])
-    //}
-}
 
-server.post('/api/getCategories', (req, res) => {
-    getCategories()
-    res.send(response)
-})
-function getCategories(){
-    response = JSON.stringify([...categories])
-    console.log("SERVER_GETS_CATS", categories)
-}
 
+
+
+
+
+
+//LOG OUT
 server.get('/api/logOut', (req, res) => {
     for(let i = 0; i < users.length; i++){
         console.log(users[i])
@@ -317,6 +293,281 @@ server.get('/api/logOut', (req, res) => {
     res.send(response)
 })
 
+
+
+
+
+
+
+
+
+
+//NEWS
+server.post('/api/getNews', async (req, res) => {
+    console.log("SERVER:", 'getNews()')
+    let data = Object.keys(req.body)
+    await getNews(Number(JSON.parse(data[0]).quantity))
+    res.send(response)
+    response = null
+})
+async function getNews(quantity){
+    if(quantity === 0){
+        const query = 'SELECT * FROM news ORDER BY id DESC'
+        let data = await connection.promise().query(query)
+        response = JSON.stringify(data[0])
+        console.log("SERVER: NEWS OBTAINED")
+    }
+    //else if(quantity > 0){
+    //    response = JSON.stringify([...news.slice(quantity*-1)])
+    //}
+}
+
+
+
+
+
+
+
+
+
+
+
+//FORUM CATEGORIES
+server.post('/api/setNewForumCategory', async (req, res) => {
+    console.log("SERVER: setNewForumCategory()")
+    let data = Object.keys(req.body)
+    await setNewForumCategory(data)
+    res.send(response)
+    response = null
+})
+async function setNewForumCategory(data){
+    //console.log("DATA", data)
+    const requestData = JSON.parse(data)
+    console.log("DATA", requestData)
+    const query = `INSERT INTO ForumCategories(title, slug, parent, description, has_children) 
+    VALUES("${requestData.title}","${requestData.slug}", ${requestData.parent},"${requestData.description}","${requestData.hasChildren}")`
+    let result = 'SUCCESSFUL'
+    await connection.promise().query(query).catch(e => {result = e})
+    response = result
+    console.log("SERVER: NEW FORUM CATEGORY CREATED")
+}
+
+server.post('/api/getForumCategories', async (req, res) => {
+    console.log("SERVER: getForumCategories()")
+    const query = 'SELECT * FROM ForumCategories WHERE parent IS NULL'
+    const data = await connection.promise().query(query)
+    response = JSON.stringify(data[0])
+    res.send(response)
+    console.log("SERVER: FORUM CATEGORIES OBTAINED", data)
+})
+
+server.post('/api/getForumCategoriesByParentId', async (req, res) => {
+    console.log("SERVER: getForumCategoriesByParentId()")
+    let data = Object.keys(req.body)
+    await getForumCategoriesByParentId(data)
+    res.send(response)
+    response = null
+})
+async function getForumCategoriesByParentId(data){
+    console.log("DATA", data)
+    const requestData = JSON.parse(data)
+    //console.log("DATA", requestData)
+    const query = requestData.id !== null
+        ? `SELECT * FROM ForumCategories WHERE parent=${requestData.id}`
+        : 'SELECT * FROM ForumCategories WHERE parent IS NULL'
+    //let result = 'SUCCESSFUL'
+    let result = await connection.promise().query(query)
+    response = JSON.stringify(result[0])
+    //await connection.promise().query(query).catch(e => {result = e})
+    //response = result
+    console.log("SERVER: GOT FORUM CATEGORY BY ID")
+}
+
+server.post('/api/getCategoryParent', async (req, res) => {
+    console.log("SERVER: getCategoryParent()")
+    let data = Object.keys(req.body)
+    await getCategoryParent(data)
+    res.send(response)
+    response = null
+})
+async function getCategoryParent(data){
+    //console.log("DATA", data)
+    const requestData = JSON.parse(data)
+    console.log("SERVER: getCategoryParent("+requestData.id+")")
+    //console.log("DATA", requestData)
+    const query = `SELECT * FROM ForumCategories WHERE id=${requestData.id}`
+    let result = await connection.promise().query(query)
+    response = JSON.stringify(result[0])
+    //await connection.promise().query(query).catch(e => {result = e})
+    //response = result
+    //console.log("SERVER: GOT FORUM CATEGORY PARENT")
+}
+
+server.post('/api/editForumCategory', async (req, res) => {
+    console.log("SERVER: editForumCategory()")
+    const data = Object.keys(req.body)
+    const requestData = JSON.parse(data[0])
+    const query = `UPDATE ForumCategories SET 
+                        title = "${requestData.title}", 
+                        slug = "${requestData.slug}", 
+                        parent = ${requestData.parent}, 
+                        description = "${requestData.description}", 
+                        has_children = ${requestData.hasChildren} where id = ${requestData.id}`
+    response = 'SUCCESSFUL'
+    await connection.promise().query(query).then(() => {console.log('then ->', data)}).catch(e => {response = e})
+    res.send(response)
+    response = null
+})
+
+server.post('/api/deleteForumCategory', async (req, res) => {
+    const data = Object.keys(req.body)
+    const requestData = JSON.parse(data[0])
+    console.log("SERVER: deleteForumCategory()", requestData.id)
+    const query = `DELETE FROM ForumCategories WHERE id = ${requestData.id}`
+    response = 'SUCCESSFUL'
+    await connection.promise().query(query).then(() => {console.log('then ->', data)}).catch(e => {response = e})
+    res.send(response)
+    response = null
+})
+
+
+
+
+
+
+
+
+
+//FORUM TOPICS
+server.post('/api/setNewForumTopic', async (req, res) => {
+    const data = Object.keys(req.body)
+    const requestData = JSON.parse(data[0])
+    console.log("SERVER: setNewTopic()", requestData)
+    //title, slug, authorId, categoryId, message, date
+    let result = 'SUCCESSFUL'
+    const insertTopicQuery = `insert into ForumTopics(title, slug, authorId, categoryId) 
+        values("${requestData.title}", "${requestData.slug}", ${requestData.authorId}, ${requestData.categoryId})`
+    let topicResponse = await connection.promise().query(insertTopicQuery).catch(e => {result = e})
+
+    console.log("SERVER: TR:", topicResponse[0].insertId)
+    if(result === "SUCCESSFUL"){
+        const addMessageQuery = `insert into Messages(userId, topicId, message, createdBy, date) 
+        values("${requestData.authorId}", "${topicResponse[0].insertId}", "${requestData.message}", "${requestData.date}", "${requestData.date}")`
+        let messageResponse = await connection.promise().query(addMessageQuery).catch(e => {result = e})
+        response = result
+        res.send(response)
+    }
+    else{
+        response = result
+        res.send(response)
+        response = null
+    }
+
+})
+
+
+server.post('/api/getTopicsByCategoryId', async (req, res) => {
+    const data = Object.keys(req.body)
+    console.log("SERVER: data >>>>", data)
+    const requestData = JSON.parse(data[0])
+    console.log("SERVER: getTopicsByCategoryId("+requestData.id+")", requestData.id)
+    const query = `select * from ForumTopics where categoryId = ${requestData.id}`
+    const answer = await connection.promise().query(query)
+    console.log("ANSWER:", answer[0])
+    res.send(answer[0])
+})
+
+
+
+
+
+
+
+
+
+
+
+//FORUM MESSAGES
+server.post('/api/setNewMessage', async (req, res) => {
+    let data = Object.keys(req.body)
+    const requestData = JSON.parse(data[0])
+    console.log("NM:", requestData)
+
+    const addMessageQuery = `insert into Messages(userId, topicId, message, createdBy, date) 
+        values(${requestData.userId}, ${requestData.topicId}, "${requestData.message}", "${requestData.createdBy}", "${requestData.date}")`
+
+    const answer = await connection.promise().query(addMessageQuery)
+    console.log("ANSWER:", answer[0])
+    res.send(answer[0])
+})
+
+server.post('/api/getMessages', async (req, res) => {
+    let data = Object.keys(req.body)
+    await getMessages()
+    res.send(response)
+    response = null
+})
+async function getMessages(){
+    console.log("START GET MESSAGES")
+    const query = 'SELECT * FROM Messages'
+    let data = await connection.promise().query(query)
+    response = JSON.stringify(data[0])
+    console.log("MESSAGES OBTAINED")
+}
+
+server.post('/api/getForumMessagesByTopicId', async (req, res) => {
+    const data = Object.keys(req.body)
+    console.log("SERVER: data >>>>", data)
+    const requestData = JSON.parse(data[0])
+    console.log("SERVER: getMessagesByCategoryId("+requestData.id+")", requestData.id)
+    const query = `select * from Messages where topicId = ${requestData.id}`
+    const answer = await connection.promise().query(query)
+    console.log("ANSWER:", answer[0])
+    res.send(answer[0])
+})
+
+server.post('/api/editMessage', async (req, res) => {
+    let data = Object.keys(req.body)
+    await editMessage(data)
+    res.send(response)
+    response = null
+})
+async function editMessage(data){
+    console.log("ddddataaa2", `${data}`)
+    const requestData = JSON.parse(data)
+    const query = `UPDATE Messages SET message = "${requestData.message}" WHERE id = "${requestData.id}"`
+
+    let result = 'SUCCESSFUL'
+    await connection.promise().query(query)
+        .then(() => {console.log('then ->', data)})
+        .catch(e => {result = e})
+    response = result
+    console.log("SERVER: MSG EDITED WITH RESULT ->", result)
+}
+
+
+
+
+
+
+
+
+//MAIN CATEGORIES
+server.post('/api/getCategories', (req, res) => {
+    getCategories()
+    res.send(response)
+})
+function getCategories(){
+    response = JSON.stringify([...categories])
+    console.log("SERVER_GETS_CATS", categories)
+}
+
+
+
+
+
+
+
 function createToken(){
     let result           = '';
     let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -327,7 +578,6 @@ function createToken(){
     }
     return result;
 }
-
 function checkReceivedData(userslist, username, password){
     response = JSON.stringify('unkuser')
     for(let i = 0; i < userslist.length; i++){
