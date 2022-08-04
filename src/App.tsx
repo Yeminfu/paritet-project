@@ -17,19 +17,20 @@ export default function App(){
     return (
         <div className="App">
             <Routes>
-                <Route path='/registration' element={<Registration/>}/>
+                <Route path='/' element={<MainPage/>}/>
+
+                {/*<Route path='/registration' element={<Registration/>}/>
                 <Route path='/login' element={<Login/>}/>
 
                 <Route path='/admin/forums/categories' element={<AdminCategoriesPage/>}/>
 
-                <Route path='/' element={<MainPage/>}/>
 
                 <Route path='/news' element={<NewsPage/>}/>
                 <Route path='/news/:id/*' element={<NewsDetailsComponent/>}/>
 
                 <Route path='/forum' element={<ForumCategoriesPage/>}/>
                 <Route path='/forum/:id' element={<ForumTopicsPage/>}/>
-                <Route path='/forum/:id/:id' element={<ForumMessagesPage/>}/>
+                <Route path='/forum/:id/:id' element={<ForumMessagesPage/>}/>*/}
             </Routes>
         </div>
   );
