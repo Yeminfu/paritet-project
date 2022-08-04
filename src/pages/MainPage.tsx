@@ -6,7 +6,7 @@ import Fetcher from "../Fetcher/Fetcher";
 import MainModuleComponent from "../components/MainModuleComponent";
 import {Link, Route, Routes, useNavigate} from "react-router-dom";
 import PageComponent from "./base/PageComponent";
-import AuthPage from "./AuthPage";
+import Login from "./Login";
 
 interface Props{
     children?: ReactNode;
