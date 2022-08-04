@@ -21,7 +21,7 @@ export default function HeaderAuth({children}: Props){
     }
 
     return(
-        <div>
+        <div onClick={onClicked}>
             {
                 isAuth
                     ? <button type="button" className="btn btn-primary">Войти</button>
