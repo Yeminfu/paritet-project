@@ -2,7 +2,6 @@ import React, {ReactNode, useState} from 'react';
 import './ForumCategoryComponent.scss';
 import Utils from "../lib/utils";
 import {useStore} from "effector-react";
-import {$username} from "../store/store";
 
 interface Props{
     children?: ReactNode;

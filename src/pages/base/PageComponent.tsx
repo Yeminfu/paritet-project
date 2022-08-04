@@ -1,8 +1,6 @@
-import React, {ReactNode, useState} from "react";
+import React, {ReactNode} from "react";
 import { Col } from 'antd';
 import Search from "antd/es/input/Search";
-import {$authState, $username, setAuthState, setUsernameState} from "../../store/store";
-import {useStore} from "effector-react";
 import './PageComponent.scss';
 import Fetcher from "../../Fetcher/Fetcher";
 import {Link, Navigate, Route, useNavigate} from "react-router-dom";
@@ -18,8 +16,6 @@ const onSearch = (value: string) => console.log(value);
 
 export default function PageComponent({children, floatButton, modal, isWrap = true}: Props){
 
-    const [auth, setAuth] = useState(useStore($authState))
-    const [username, setUsername] = useState(useStore($username))
 
     let fetcher = new Fetcher()
     let navigate = useNavigate()
@@ -28,11 +24,6 @@ export default function PageComponent({children, floatButton, modal, isWrap = tr
 
     const logOut = async () => {
         console.log("LOGOUT")
-        await fetcher.logOut(username)
-        setAuthState(null)
-        setUsernameState(null)
-        setAuth(null)
-        setUsername(null)
         localStorage.setItem('auth', 'null')
         localStorage.setItem('username', 'null')
 
@@ -53,7 +44,7 @@ export default function PageComponent({children, floatButton, modal, isWrap = tr
             <div className={'content-area'}>
                 <div className={'main-header'}>
                     <div className={'upper-header'}>
-                        <div className={'user-name-label'}>{username}</div>
+                        <div className={'user-name-label'}>{}</div>
                         <div className={'exit-button-wrapper'}>
                             <Link to={'/login'}>
                                 <button className={'button'}

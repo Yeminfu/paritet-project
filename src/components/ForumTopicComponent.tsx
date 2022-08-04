@@ -2,7 +2,6 @@ import React, {ReactNode, useState} from 'react';
 import './ForumTopicComponent.scss';
 import Utils from "../lib/utils";
 import {useStore} from "effector-react";
-import {$username} from "../store/store";
 
 interface Props{
     children?: ReactNode;
@@ -17,7 +16,6 @@ interface Props{
 
 export default function ForumTopicComponent({children, data, onItemClick}: Props){
 
-    const [username, setUsername] = useState(useStore($username))
     const utils = new Utils()
 
     return (
