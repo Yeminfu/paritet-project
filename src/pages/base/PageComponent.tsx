@@ -1,6 +1,4 @@
 import React, {ReactNode} from "react";
-import { Col } from 'antd';
-import Search from "antd/es/input/Search";
 import './PageComponent.scss';
 import Fetcher from "../../Fetcher/Fetcher";
 import {Link, Navigate, Route, useNavigate} from "react-router-dom";
@@ -39,8 +37,8 @@ export default function PageComponent({children, floatButton, modal, isWrap = tr
     }
 
     return(
-        <Col className={'page'}>
-            <Col sm={1} md={2} lg={4} xl={4} xxl={4}> </Col>
+        <div className={'page'}>
+            <div> </div>
             <div className={'content-area'}>
                 <div className={'main-header'}>
                     <div className={'upper-header'}>
@@ -55,9 +53,6 @@ export default function PageComponent({children, floatButton, modal, isWrap = tr
                     </div>
                     <div className={'lower-header'}>
                         <div className={'logo-wrapper'} onClick={() => {navigate("../", { replace: true });}}>Паритет</div>
-                        <Search className={'search-field'}
-                                placeholder={"Поиск..."}
-                                onSearch={onSearch} enterButton/>
                     </div>
                 </div>
                 <div className={'main-content'}>
@@ -72,8 +67,8 @@ export default function PageComponent({children, floatButton, modal, isWrap = tr
                 </div>
                 { floatButton }
             </div>
-            <Col sm={1} md={2} lg={4} xl={4} xxl={4}> </Col>
+            <div> </div>
             { modal }
-        </Col>
+        </div>
     )
 }
