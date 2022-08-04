@@ -1,15 +1,15 @@
 import React from 'react';
 import {Routes, Route} from 'react-router-dom';
 import './App.scss';
-import Login from "./pages/Login";
 import MainPage from "./pages/MainPage/MainPage";
+/*import Login from "./pages/Login";
 import NewsPage from "./pages/NewsPage";
 import NewsDetailsComponent from "./components/NewsDetailsComponent";
 import Registration from "./pages/Registration";
 import ForumMessagesPage from "./pages/ForumMessagesPage";
 import AdminCategoriesPage from "./pages/admin/AdminCategoriesPage";
 import ForumCategoriesPage from "./pages/ForumCategoriesPage";
-import ForumTopicsPage from "./pages/ForumTopicsPage";
+import ForumTopicsPage from "./pages/ForumTopicsPage";*/
 
 
 export default function App(){
@@ -18,7 +18,6 @@ export default function App(){
         <div className="App">
             <Routes>
                 <Route path='/' element={<MainPage/>}/>
-
                 {/*<Route path='/registration' element={<Registration/>}/>
                 <Route path='/login' element={<Login/>}/>
 
