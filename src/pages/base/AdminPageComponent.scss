@@ -1,0 +1,41 @@
+.page{
+  display: flex;
+  height: 100%;
+  width: 100%;
+
+  .header{
+    display: flex;
+    width: 100%;
+    height: 112px;
+
+    .upper-header{
+      display: flex;
+      width: 100%;
+      height: 48px;
+    }
+
+    .lower-header{
+      display: flex;
+      width: 100%;
+      height: 64px;
+    }
+  }
+
+  .main-area{
+    display: flex;
+    width: 100%;
+    height: 64px;
+
+    .admin-area{
+      display: flex;
+      width: 40%;
+      height: 100%;
+    }
+
+    .view-area{
+      display: flex;
+      width: 60%;
+      height: 100%;
+    }
+  }
+}

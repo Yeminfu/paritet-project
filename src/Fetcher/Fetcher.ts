@@ -18,30 +18,6 @@ export default class Fetcher{
         })
     }
 
-    async setAuth(username: String, password: String){
-        return await this.controller.post('/api/login', JSON.stringify({
-            username: username,
-            password: password,
-        }))
-            .then(function (response: any){
-                console.log(response);
-            })
-            .catch(function (error: any){
-                console.log(error);
-            })
-    }
-
-    async getAccountInfo(username: String, password: String){
-        //return await this.controller.get(`${this.baseUrl}/api/user/getAccountInfo?login=superuser&passwd=password123456789`)
-        return await this.controller.get(`${this.baseUrl}/getAccountInfo?login=superuser&passwd=password123456789`)
-            .then(function (response: any){
-                console.log(response);
-            })
-            .catch(function (error: any){
-                console.log(error);
-            })
-    }
-
     async logOut(user: any){
         return await this.controller.get(`${this.baseUrl}/api/logOut`)
             .then(function(response: any){
@@ -98,6 +74,17 @@ export default class Fetcher{
             })
     }
 
+    async getCategories(){
+        return await this.controller.post(`${this.baseUrl}/api/getCategories`)
+            .then(await function (response: any){
+                console.log("FRONT GOT CATEGORIES RESPONSE:", response)
+                return response
+            })
+            .catch(function (error: any){
+                console.log(error);
+            })
+    }
+
     async getNews(quantity?: number){
         return await this.controller.post(`${this.baseUrl}/api/getNews`, JSON.stringify({
             quantity: quantity?.toString()
@@ -111,15 +98,202 @@ export default class Fetcher{
             })
     }
 
-    async getCategories(){
-        return await this.controller.post(`${this.baseUrl}/api/getCategories`)
+
+
+
+
+
+    async setNewForumCategory(data: {title: string, slug: string, parent: number | null, description: string, hasChildren: boolean}){
+        console.log("FETCHER: DATA ->", data)
+        console.log("FETCHER: BOOLEAN ->", data.hasChildren)
+        console.log("FETCHER: TO NUMBER ->", Number(data.hasChildren))
+        return await this.controller.post(`${this.baseUrl}/api/setNewForumCategory`, JSON.stringify({
+            title: data.title,
+            slug: data.slug,
+            parent: data.parent,
+            description: data.description,
+            hasChildren: Number(data.hasChildren),
+        }))
             .then(await function (response: any){
-                console.log("FRONT GOT CATEGORIES RESPONSE:", response)
+                console.log("FETCHER1: GOT SET NEW FORUM CATEGORY RESPONSE:", response.data)
+                return response
+            })
+            .catch(function (error: any){
+                console.log(error);
+                return error
+            })
+    }
+
+    async getForumCategories(){
+        return await this.controller.post(`${this.baseUrl}/api/getForumCategories`)
+            .then(await function(response: any){
+                console.log("FETCHER2:", response.data)
+                return response.data
+            })
+            .catch((e: any) => e)
+    }
+
+    async getForumCategoriesByParentId(id: number){
+        return await this.controller.post(`${this.baseUrl}/api/getForumCategoriesByParentId`, JSON.stringify({
+            id: id,
+        }))
+            .then(await function(response: any){
+                console.log("FETCHER3:", response.data)
+                return response.data
+            })
+            .catch((e: any) => e)
+    }
+
+    async getCategoryParent(id: number){
+        return await this.controller.post(`${this.baseUrl}/api/getCategoryParent`, JSON.stringify({
+            id: id,
+        }))
+            .then(await function(response: any){
+                console.log("FETCHER4:", response.data)
+                return response.data
+            })
+            .catch((e: any) => e)
+    }
+
+    async editForumCategory(data: {id: number, title: string, slug: string, parent: number | null, description: string, hasChildren: boolean}){
+        console.log("FETCHER: DATA ->", data)
+        console.log("FETCHER: BOOLEAN ->", data.hasChildren)
+        console.log("FETCHER: TO NUMBER ->", Number(data.hasChildren))
+        return await this.controller.post(`${this.baseUrl}/api/editForumCategory`, JSON.stringify({
+            id: data.id,
+            title: data.title,
+            slug: data.slug,
+            parent: data.parent,
+            description: data.description,
+            hasChildren: Number(data.hasChildren),
+        }))
+            .then(await function (response: any){
+                console.log("FETCHER5: GOT EDIT FORUM CATEGORY RESPONSE:", response.data)
+                return response
+            })
+            .catch(function (error: any){
+                console.log(error);
+                return error
+            })
+    }
+
+    async deleteForumCategory(id: number){
+        return await this.controller.post(`${this.baseUrl}/api/deleteForumCategory`, JSON.stringify({
+            id: id,
+        }))
+            .then(await function (response: any){
+                console.log("FETCHER6: GOT DELETE FORUM CATEGORY RESPONSE:", response.data)
+                return response
+            })
+            .catch(function (error: any){
+                console.log(error);
+                return error
+            })
+    }
+
+
+
+
+
+
+
+    async setNewForumTopic(data: {title: string, slug: string, authorId: number, categoryId: number, message: string, date: string}){
+        return await this.controller.post(`${this.baseUrl}/api/setNewForumTopic`, JSON.stringify({
+            title: data.title,
+            slug: data.slug,
+            authorId: data.authorId,
+            categoryId: data.categoryId,
+            message: data.message,
+            date: data.date,
+        }))
+            .then(await function (response: any){
+                console.log("FETCHER009: GOT SET NEW FORUM TOPIC RESPONSE:", response.data)
+                return response
+            })
+            .catch(function (error: any){
+                console.log(error);
+                return error
+            })
+    }
+
+    async getTopicsByCategoryId(id: number){
+        return await this.controller.post(`${this.baseUrl}/api/getTopicsByCategoryId`, JSON.stringify({
+            id: id,
+        }))
+            .then(await function (response: any){
+                console.log("FETCHER010: GOT FORUM TOPICS BY ID RESPONSE:", response.data)
+                return response
+            })
+            .catch(function (error: any){
+                console.log(error);
+                return error
+            })
+    }
+
+
+
+
+
+
+
+
+    async getMessages(){
+        return await this.controller.post(`${this.baseUrl}/api/getMessages`)
+            .then(await function (response: any){
+                console.log("FRONT GOT MESSAGES RESPONSE:", response)
                 return response
             })
             .catch(function (error: any){
                 console.log(error);
             })
     }
+
+    async getForumMessagesByTopicId(id: number){
+        return await this.controller.post(`${this.baseUrl}/api/getForumMessagesByTopicId`, JSON.stringify({
+            id: id,
+        }))
+            .then(await function (response: any){
+                console.log("FETCHER011: GOT FORUM MESSAGES BY TOPIC_ID RESPONSE:", response.data)
+                return response
+            })
+            .catch(function (error: any){
+                console.log(error);
+                return error
+            })
+    }
+
+    async setNewMessage(data: {userId: number, topicId: number, message: string, createdBy: string, date: string}){
+        console.log("fetcher", data)
+        return await this.controller.post(`${this.baseUrl}/api/setNewMessage`, JSON.stringify({
+            userId: data.userId,
+            topicId: data.topicId,
+            message: data.message,
+            createdBy: data.createdBy,
+            date: data.date
+        }))
+            .then(await function (response: any){
+                console.log("FRONT GOT SETTED MESSAGES RESPONSE:", response)
+                return response
+            })
+            .catch(function (error: any){
+                console.log(error);
+            })
+    }
+
+    async editMessage(id: number, message: string){
+
+        return await this.controller.post(`${this.baseUrl}/api/editMessage`, JSON.stringify({
+            id: id,
+            message: message
+        }))
+            .then(await function (response: any){
+                console.log("FRONT GOT EDITED MESSAGE RESPONSE:", response)
+                return response
+            })
+            .catch(function (error: any){
+                console.log(error);
+            })
+    }
+
 
 }

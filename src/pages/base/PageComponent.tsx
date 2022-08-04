@@ -9,11 +9,14 @@ import {Link, Navigate, Route, useNavigate} from "react-router-dom";
 
 interface Props{
     children?: [ReactNode];
+    floatButton?: JSX.Element | null;
+    modal?: JSX.Element | null;
+    isWrap?: boolean;
 }
 
 const onSearch = (value: string) => console.log(value);
 
-export default function PageComponent({children}: Props){
+export default function PageComponent({children, floatButton, modal, isWrap = true}: Props){
 
     const [auth, setAuth] = useState(useStore($authState))
     const [username, setUsername] = useState(useStore($username))
@@ -51,7 +54,7 @@ export default function PageComponent({children}: Props){
                 <div className={'main-header'}>
                     <div className={'upper-header'}>
                         <div className={'user-name-label'}>{username}</div>
-                        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                        <div className={'exit-button-wrapper'}>
                             <Link to={'/login'}>
                                 <button className={'button'}
                                         type="submit"
@@ -67,7 +70,7 @@ export default function PageComponent({children}: Props){
                     </div>
                 </div>
                 <div className={'main-content'}>
-                    <div className={'modules-area'}>
+                    <div className={'modules-area'} style={{'flexFlow': isWrap ? 'wrap' : 'none'}}>
                         {getList()}
                     </div>
                     <div className={'main-footer'}
@@ -76,8 +79,10 @@ export default function PageComponent({children}: Props){
                              bottom: children && (children.length < 2) ? 'none' : '0',
                          }}>Контактные данные 89241237687</div>
                 </div>
+                { floatButton }
             </div>
             <Col sm={1} md={2} lg={4} xl={4} xxl={4}> </Col>
+            { modal }
         </Col>
     )
 }

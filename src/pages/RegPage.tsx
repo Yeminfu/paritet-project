@@ -18,13 +18,6 @@ export default function RegPage({children, onReg}: Props){
     let navigate = useNavigate();
 
 
-    //useEffect(() => {
-    //    if(location.pathname !== '/auth') {
-    //        navigate('../auth')
-    //    }
-    //}, [])
-
-
     let auth = false;
 
     const controller = new Fetcher;
@@ -117,7 +110,7 @@ export default function RegPage({children, onReg}: Props){
                                    autoComplete={'on'}/>
                             <div className={'error'}>{passwordError}</div>
                         </div>
-                        <a className={'to-login-link'} onClick={() => { navigate('../login')}}>Войти</a>
+                        <a className={'to-login-link'} onClick={() => { navigate('../login', { replace: true })}}>Войти</a>
                         <div className={'submit-button-container'}>
                             <button type="submit" className={'button'}>Зарегистрироваться</button>
                         </div>

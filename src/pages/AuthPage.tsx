@@ -12,19 +12,6 @@ interface Props{
     onAuth: any;
 }
 
-interface Data{
-    login: String;
-    password: String;
-}
-
-function getAuth({login, password}: Data){
-    axios.post('http://maksia2w.beget.tech', {
-        login: login,
-        password: password,
-    })
-}
-
-
 export default function AuthPage({children, onAuth}: Props){
 
     let location = useLocation()
@@ -33,7 +20,7 @@ export default function AuthPage({children, onAuth}: Props){
 
     useEffect(() => {
         if(location.pathname !== '/login') {
-            navigate('../login')
+            navigate('../login', { replace: true })
         }
     }, [])
 
@@ -148,7 +135,7 @@ export default function AuthPage({children, onAuth}: Props){
                                        autoComplete={'on'}/>
                                  <div className={'error'}>{passwordError}</div>
                             </div>
-                            <a className={'to-registration-link'} onClick={() => { navigate('../registration')}}>Зарегистрироваться</a>
+                            <a className={'to-registration-link'} onClick={() => { navigate('../registration', { replace: true })}}>Зарегистрироваться</a>
                             <div className={'submit-button-container'}>
                                 <button type="submit" className={'button'}>Войти</button>
                             </div>
