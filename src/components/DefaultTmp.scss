@@ -5,6 +5,7 @@
   flex-flow: wrap;
   justify-content: flex-start;
   margin: -4px;
+  padding: 24px 0;
   //ЭТО КОСТЫЛЬ, ТАК НЕ НАДО ДЕЛАТЬ
   &>.main-module{
     max-width: calc(50% - 8px);
