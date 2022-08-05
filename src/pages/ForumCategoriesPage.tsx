@@ -1,5 +1,5 @@
 import React, {ReactNode, useEffect, useState} from 'react'
-import './MainPage.scss'
+import './MainPage/MainPage.scss'
 import Fetcher from "../Fetcher/Fetcher";
 import PageComponent from "./base/PageComponent";
 import ForumCategoryComponent from "../components/ForumCategoryComponent";

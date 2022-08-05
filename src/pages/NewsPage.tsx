@@ -1,6 +1,5 @@
 import React, {ReactNode, useEffect, useState} from 'react'
-import 'antd/dist/antd.min.css'
-import './MainPage.scss'
+import './MainPage/MainPage.scss'
 import Fetcher from "../Fetcher/Fetcher";
 import NewsModuleComponent from '../components/NewsModuleComponent';
 import {Link} from "react-router-dom";

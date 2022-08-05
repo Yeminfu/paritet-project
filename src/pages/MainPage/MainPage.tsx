@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react'
-import 'antd/dist/antd.min.css'
 import './MainPage.scss'
 import DefaultTmp from "../../components/DefaultTmp";
 import MainModuleComponent from "../../components/MainModuleComponent";

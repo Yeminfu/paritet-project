@@ -1,9 +1,7 @@
 import React, {ReactNode, useEffect, useState} from 'react'
-import 'antd/dist/antd.min.css'
-import './MainPage.scss'
+import './MainPage/MainPage.scss'
 import { Form, Field } from 'react-final-form'
 import './Login.scss'
-import axios from "axios";
 import Fetcher from "../Fetcher/Fetcher";
 import {useLocation, useNavigate} from "react-router-dom";
 
