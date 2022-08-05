@@ -4,23 +4,22 @@ import './MainModuleComponent.scss';
 interface Props{
     children?: ReactNode;
     data: {
-        id: number,
         title: string,
-        description: string,
-        photo: string,
+        text: string,
+        link: string,
+        img: string,
     };
 }
 
 export default function MainModuleComponent({children, data}: Props){
 
 
-
     return (
         <div className={'main-module'}>
             <h2 className={'header'}>{data.title}</h2>
             <div className={'body'}>
-                <img className={'photo'} src={require('../images/news.webp')}/>
-                <div className={'text-content'}>{data.description}</div>
+                <img className={'photo'} src={data.img}/>
+                <div className={'text-content'}>{data.text}</div>
             </div>
         </div>
     )
