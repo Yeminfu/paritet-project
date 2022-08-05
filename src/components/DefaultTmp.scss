@@ -1,0 +1,13 @@
+.page-content{
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  flex-flow: wrap;
+  justify-content: flex-start;
+  //ЭТО КОСТЫЛЬ, ТАК НЕ НАДО ДЕЛАТЬ
+  &>.main-module{
+    max-width: calc(50% - 8px);
+    margin: 4px;
+    text-decoration: none;
+  }
+}

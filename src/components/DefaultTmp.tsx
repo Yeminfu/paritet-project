@@ -1,5 +1,7 @@
 import MainHeader from "./MainHeader";
 import React from "react";
+import 'bootstrap/dist/css/bootstrap.min.css'
+import './DefaultTmp.scss'
 
 interface Props{
     children: any;
@@ -7,13 +9,13 @@ interface Props{
 
 export default ( {children}: Props ) => {
     return (
-        <>
+        <div className={'container'}>
             <MainHeader>
 
             </MainHeader>
-            <div id="page_content">
+            <div className={'page-content'}>
                 {children}
             </div>
-        </>
+        </div>
     )
 }
