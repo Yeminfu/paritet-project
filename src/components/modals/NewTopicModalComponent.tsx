@@ -1,7 +1,6 @@
 import React, {ReactNode, useEffect, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './NewTopicModalComponent.scss'
-import { Col } from 'antd';
 
 
 interface Props{
@@ -66,7 +65,7 @@ export default function NewTopicModalComponent({
 
     return(
         <div className="modal" tabIndex={-1} onClick={(e) => {onClosed(e)}}>
-            <Col xs={20} sm={18} md={20} lg={18} xl={12} xxl={12}>
+            <div>
                 <div className="modal-dialog" onClick={(e) => {
                     e.preventDefault()
                     e.stopPropagation();
@@ -91,7 +90,7 @@ export default function NewTopicModalComponent({
                         </div>
                     </div>
                 </div>
-            </Col>
+            </div>
 
         </div>
     )
