@@ -2,6 +2,7 @@ import React from 'react';
 import {Routes, Route} from 'react-router-dom';
 import './App.scss';
 import MainPage from "./pages/MainPage/MainPage";
+import {BrowserRouter} from 'react-router-dom';
 /*import Login from "./pages/Login";
 import NewsPage from "./pages/NewsPage";
 import NewsDetailsComponent from "./components/NewsDetailsComponent";
@@ -16,9 +17,10 @@ export default function App(){
 
     return (
         <div className="App">
-            <Routes>
-                <Route path='/' element={<MainPage/>}/>
-                {/*<Route path='/registration' element={<Registration/>}/>
+            <BrowserRouter>
+                <Routes>
+                    <Route path='/' element={<MainPage/>}/>
+                    {/*<Route path='/registration' element={<Registration/>}/>
                 <Route path='/login' element={<Login/>}/>
 
                 <Route path='/admin/forums/categories' element={<AdminCategoriesPage/>}/>
@@ -30,7 +32,8 @@ export default function App(){
                 <Route path='/forum' element={<ForumCategoriesPage/>}/>
                 <Route path='/forum/:id' element={<ForumTopicsPage/>}/>
                 <Route path='/forum/:id/:id' element={<ForumMessagesPage/>}/>*/}
-            </Routes>
+                </Routes>
+            </BrowserRouter>
         </div>
   );
 }
