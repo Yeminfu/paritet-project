@@ -10,11 +10,15 @@ interface Props{
 export default ( {children}: Props ) => {
     return (
         <>
-            <MainHeader>
-
-            </MainHeader>
             <div className={'container'}>
-                {children}
+                <MainHeader>
+
+                </MainHeader>
+            </div>
+            <div className={'container'}>
+                <div className={'content-container'}>
+                    {children}
+                </div>
             </div>
         </>
     )
