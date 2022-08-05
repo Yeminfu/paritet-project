@@ -3,14 +3,14 @@ import {Routes, Route} from 'react-router-dom';
 import './App.scss';
 import MainPage from "./pages/MainPage/MainPage";
 import {BrowserRouter} from 'react-router-dom';
-/*import Login from "./pages/Login";
+import Login from "./pages/Login";
 import NewsPage from "./pages/NewsPage";
 import NewsDetailsComponent from "./components/NewsDetailsComponent";
 import Registration from "./pages/Registration";
 import ForumMessagesPage from "./pages/ForumMessagesPage";
 import AdminCategoriesPage from "./pages/admin/AdminCategoriesPage";
 import ForumCategoriesPage from "./pages/ForumCategoriesPage";
-import ForumTopicsPage from "./pages/ForumTopicsPage";*/
+import ForumTopicsPage from "./pages/ForumTopicsPage";
 
 
 export default function App(){
@@ -20,19 +20,19 @@ export default function App(){
             <BrowserRouter>
                 <Routes>
                     <Route path='/' element={<MainPage/>}/>
-                    {/*<Route path='/registration' element={<Registration/>}/>
-                <Route path='/login' element={<Login/>}/>
+                    <Route path='/registration' element={<Registration/>}/>
+                    <Route path='/login' element={<Login/>}/>
 
-                <Route path='/admin/forums/categories' element={<AdminCategoriesPage/>}/>
+                    <Route path='/admin/forums/categories' element={<AdminCategoriesPage/>}/>
 
 
-                <Route path='/news' element={<NewsPage/>}/>
-                <Route path='/news/:id/*' element={<NewsDetailsComponent/>}/>
+                    <Route path='/news' element={<NewsPage/>}/>
+                    <Route path='/news/:id/*' element={<NewsDetailsComponent/>}/>
 
-                <Route path='/forum' element={<ForumCategoriesPage/>}/>
-                <Route path='/forum/:id' element={<ForumTopicsPage/>}/>
-                <Route path='/forum/:id/:id' element={<ForumMessagesPage/>}/>*/}
-                </Routes>
+                    <Route path='/forum' element={<ForumCategoriesPage/>}/>
+                    <Route path='/forum/:id' element={<ForumTopicsPage/>}/>
+                    <Route path='/forum/:id/:id' element={<ForumMessagesPage/>}/>
+                    </Routes>
             </BrowserRouter>
         </div>
   );

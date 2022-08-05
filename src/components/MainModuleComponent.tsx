@@ -1,5 +1,6 @@
 import React, {ReactNode} from 'react';
 import './MainModuleComponent.scss';
+import {useNavigate} from "react-router-dom";
 
 interface Props{
     children?: ReactNode;
@@ -13,9 +14,10 @@ interface Props{
 
 export default function MainModuleComponent({children, data}: Props){
 
+    const navigate = useNavigate()
 
     return (
-        <div className={'main-module'}>
+        <div className={'main-module'} onClick={() => navigate(`..${data.link}`)}>
             <h2 className={'header'}>{data.title}</h2>
             <div className={'body'}>
                 <img className={'photo'} src={data.img}/>

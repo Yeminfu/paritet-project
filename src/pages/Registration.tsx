@@ -7,10 +7,9 @@ import {useLocation, useNavigate} from "react-router-dom";
 
 interface Props{
     children?: ReactNode;
-    onReg: any;
 }
 
-export default function Registration({children, onReg}: Props){
+export default function Registration({children}: Props){
 
     let location = useLocation()
     let navigate = useNavigate();
@@ -58,7 +57,7 @@ export default function Registration({children, onReg}: Props){
 
             if (answer?.id && answer?.username && answer?.token && answer?.token_update) {
                 auth = true;
-                onReg(auth, answer)
+                //onReg(auth, answer)
             } else if (answer === null) {
                 setUserNameError(``)
                 setPasswordError(`Имя "${username}" занято`)

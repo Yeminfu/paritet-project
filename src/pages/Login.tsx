@@ -7,10 +7,9 @@ import {useLocation, useNavigate} from "react-router-dom";
 
 interface Props{
     children?: ReactNode;
-    onAuth: any;
 }
 
-export default function Login({children, onAuth}: Props){
+export default function Login({children}: Props){
 
     let location = useLocation()
     let navigate = useNavigate();
@@ -66,7 +65,7 @@ export default function Login({children, onAuth}: Props){
 
             if(answer?.id && answer?.username && answer?.token && answer?.token_update){
                 auth = true;
-                onAuth(auth, answer)
+                //onAuth(auth, answer)
             }
             else if(answer === null){
                 setUserNameError(``)

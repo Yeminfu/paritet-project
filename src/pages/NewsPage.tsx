@@ -7,12 +7,11 @@ import PageComponent from "./base/PageComponent";
 
 interface Props{
     children?: ReactNode;
-    user: any;
 }
 
 const onSearch = (value: string) => console.log(value)
 
-export default function NewsPage({children, user}: Props){
+export default function NewsPage({children}: Props){
     console.log("START NEWS PAGE")
     const [news, setNews] = useState([])
 
