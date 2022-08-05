@@ -1,17 +1,6 @@
 .main-header{
-  display: flex;
-  min-height: 112px;
   background: linear-gradient(#cccccc, #ffffff);
-  top: 0;
-  left: 0;
-  right: 0;
   box-shadow: 0 4px 12px 4px rgba(0,0,0,0.12);
-  border-bottom: 1px solid rgba(0,0,0,0.12);
-  padding: 0 32px;
-  box-sizing: border-box;
-  flex-direction: column;
-  z-index: 1;
-
 
   .upper-header{
     display: flex;
