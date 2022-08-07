@@ -20,6 +20,7 @@ export default function App(){
             <BrowserRouter>
                 <Routes>
                     <Route path='/' element={<MainPage/>}/>
+
                     <Route path='/registration' element={<Registration/>}/>
                     <Route path='/login' element={<Login/>}/>
 

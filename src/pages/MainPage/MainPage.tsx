@@ -1,5 +1,4 @@
 import React from 'react'
-import './MainPage.scss'
 import DefaultTmp from "../../components/DefaultTmp";
 import MainModuleComponent from "../../components/MainModuleComponent";
 

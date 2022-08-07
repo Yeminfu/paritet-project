@@ -1,8 +1,10 @@
 .main-header{
   background: linear-gradient(#cccccc, #ffffff);
   box-shadow: 0 4px 12px 4px rgba(0,0,0,0.12);
+  box-sizing: border-box;
 
   .container{
+    width: 100%;
 
     .upper-header{
       display: flex;
@@ -64,16 +66,5 @@
 
 
 
-  @media(max-width: 1200px){
-    padding: 0 32px;
-  }
-  @media(max-width: 992px){
-    padding: 0 24px;
-  }
-  @media(max-width: 768px){
-    padding: 0 20px;
-  }
-  @media(max-width: 576px){
-    padding: 0 16px;
-  }
+
 }

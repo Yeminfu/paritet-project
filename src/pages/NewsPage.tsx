@@ -1,15 +1,11 @@
 import React, {ReactNode, useEffect, useState} from 'react'
-import './MainPage/MainPage.scss'
 import Fetcher from "../Fetcher/Fetcher";
 import NewsModuleComponent from '../components/NewsModuleComponent';
-import {Link} from "react-router-dom";
-import PageComponent from "./base/PageComponent";
+import DefaultTmp from "../components/DefaultTmp";
 
 interface Props{
     children?: ReactNode;
 }
-
-const onSearch = (value: string) => console.log(value)
 
 export default function NewsPage({children}: Props){
     console.log("START NEWS PAGE")
@@ -18,20 +14,13 @@ export default function NewsPage({children}: Props){
     let fetcher = new Fetcher()
 
     useEffect(() => {
-        console.log("START NEWS PAGE USE EFFECT")
         async function loadNews(){
-            try{
-                const response = await fetcher.getNews(0)
-                const data = response.data.filter((e: any) => {
-                    console.log("EEE", e.small_img)
-                    if(e.small_img !== 'undefined' && e.small_img !== undefined)
-                        return e
-                })
-                console.log("DATA", ...[data])
-                setNews(data)
-            } catch{
-
-            }
+            const response = await fetcher.getNews(0)
+            const data = response.data.filter((e: any) => {
+                if(e.small_img !== 'undefined' && e.small_img !== undefined)
+                    return e
+            })
+            setNews(data)
         }
         loadNews();
     }, []);
@@ -40,26 +29,13 @@ export default function NewsPage({children}: Props){
         return `/news/${url.slice(25)}`
     }
 
-    const getData = news?.map(function(e:any, index){
-        return <Link key={index}
-                     to={getURLTemplate(e.url)} state={
-                         {
-                             url: e.url,
-                             title: e.title,
-                             description: e.description,
-                             blocks: e.blocks,
-                             smallImg: e.smallImg,
-                             publishDateTime: e.publishDateTime
-                         }
-                     }>
-            <NewsModuleComponent data={e}/>
-        </Link>
-
-    })
-
     return(
-        <PageComponent>
-            { [getData] }
-        </PageComponent>
+        <DefaultTmp>
+            {
+                news?.map(function(e:any, index){
+                    return <NewsModuleComponent data={e} key={index}/>
+                })
+            }
+        </DefaultTmp>
     )
 }
