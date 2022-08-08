@@ -114,7 +114,6 @@ export default function AdminCategoriesPage({children}: Props) {
     }
 
     return(
-        <AuthChecker>
             <div className={'admin-categories-page'}>
                 <div className={'header'}>
                     <div className={'upper-header'}>
@@ -156,6 +155,5 @@ export default function AdminCategoriesPage({children}: Props) {
                     }
                 </div>
             </div>
-        </AuthChecker>
     )
 }

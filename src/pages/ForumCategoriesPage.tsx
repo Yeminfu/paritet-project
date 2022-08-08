@@ -25,7 +25,6 @@ export default function ForumCategoriesPage({children}: Props){
 
 
     return(
-        <AuthChecker>
             <DefaultTmp>
                 {
                     categories?.map(function(e, index){
@@ -36,6 +35,5 @@ export default function ForumCategoriesPage({children}: Props){
                     })
                 }
             </DefaultTmp>
-        </AuthChecker>
     )
 }

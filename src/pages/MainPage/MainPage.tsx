@@ -74,7 +74,6 @@ export default function MainPage(){
 
 
     return(
-        <AuthChecker>
             <DefaultTmp>
                 {
                     faceModules.map(e => {
@@ -82,6 +81,5 @@ export default function MainPage(){
                     })
                 }
             </DefaultTmp>
-        </AuthChecker>
     )
 }

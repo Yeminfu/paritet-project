@@ -31,7 +31,6 @@ export default function NewsDetailsComponent({children, data}: Props){
     }, [])
 
     return(
-        <AuthChecker>
             <DefaultTmp>
                 {[<div className={'news-details'} key={Math.random() + 1000000} style={{maxWidth: '100%'}}>
                     <div className={'news-header'}>
@@ -48,6 +47,5 @@ export default function NewsDetailsComponent({children, data}: Props){
                     </div>
                 </div>]}
             </DefaultTmp>
-        </AuthChecker>
     )
 }

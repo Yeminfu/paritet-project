@@ -2,7 +2,6 @@ import React, {ReactNode} from "react";
 import './PageComponent.scss';
 import Fetcher from "../../Fetcher/Fetcher";
 import {Link, Navigate, Route, useNavigate} from "react-router-dom";
-import HeaderAuth from "../../components/HeaderAuth/HeaderAuth";
 
 interface Props{
     children?: [ReactNode];
@@ -45,7 +44,7 @@ export default function PageComponent({children, floatButton, modal, isWrap = tr
                     <div className={'upper-header'}>
                         <div className={'user-name-label'}>{}</div>
                         <div className={'exit-button-wrapper'}>
-                            <HeaderAuth/>
+
                         </div>
                     </div>
                     <div className={'lower-header'}>

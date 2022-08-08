@@ -2,6 +2,7 @@ import React, {ReactNode} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import './MainHeader.scss'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import HeaderAuthButton from "./HeaderAuthButton/HeaderAuthButton";
 
 interface Props{
     children?: ReactNode;
@@ -18,9 +19,7 @@ export default function MainHeader({children}: Props){
                     <div className={'user-name-label'}>{}</div>
                     <div className={'exit-button-wrapper'}>
                         <Link to={'/login'}>
-                            <button className={'button'}
-                                    type="submit"
-                                    onClick={() => {}}>Выйти</button>
+                            <HeaderAuthButton/>
                         </Link>
                     </div>
                 </div>

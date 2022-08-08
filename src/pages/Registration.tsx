@@ -4,6 +4,7 @@ import { Form, Field } from 'react-final-form'
 import './Registration.scss'
 import Fetcher from "../Fetcher/Fetcher";
 import {useLocation, useNavigate} from "react-router-dom";
+import {$auth, setAuth} from "../store/store";
 
 interface Props{
     children?: ReactNode;
@@ -55,16 +56,32 @@ export default function Registration({children}: Props){
             let answer = await controller.getRegistration(username, password)
             console.log('answer', answer)
 
-            if (answer?.id && answer?.username && answer?.token && answer?.token_update) {
-                auth = true;
-                //onReg(auth, answer)
-            } else if (answer === null) {
+        if (answer?.id && answer?.username && answer?.token) {
+            auth = true;
+            const authData = {
+                token: answer.token,
+                user: {
+                    id: answer.id,
+                    username: answer.username,
+                }
+            }
+            console.log("BEFORE LOGIN", $auth.getState())
+            setAuth(authData)
+            console.log("AFTER LOGIN", $auth.getState())
+            localStorage.setItem('id', authData.user.id)
+            localStorage.setItem('username', authData.user.username)
+            localStorage.setItem('token', authData.token)
+            navigate('../',{replace: true})
+        }
+        else if (answer === null) {
                 setUserNameError(``)
                 setPasswordError(`Имя "${username}" занято`)
-            } else if (answer === 0) {
+            }
+        else if (answer === 0) {
                 setUserNameError(``)
                 setPasswordError(`Пользователь не создан`)
-            } else if (answer === undefined) {
+            }
+        else if (answer === undefined) {
                 setUserNameError('')
                 setPasswordError('Ошибка сервера')
             }
@@ -74,11 +91,6 @@ export default function Registration({children}: Props){
     const onSubmit = async (e: any) => {
         await checkInputData(e.username, e.password, [6,20])
     }
-
-    //async function a(){
-    //    const fetcher = new Fetcher()
-    //    await fetcher.getAuth('user_12', '111111')
-    //}
 
 
     return(

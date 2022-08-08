@@ -4,6 +4,8 @@ import { Form, Field } from 'react-final-form'
 import './Login.scss'
 import Fetcher from "../Fetcher/Fetcher";
 import {useLocation, useNavigate} from "react-router-dom";
+import {$auth, setAuth} from "../store/store";
+import {useStore} from "effector-react";
 
 interface Props{
     children?: ReactNode;
@@ -30,7 +32,7 @@ export default function Login({children}: Props){
     const [passwordError, setPasswordError] = useState("")
     const [isRegistration, setIsRegistration] = useState(false)
 
-    async function checkInputData(username: string, password: string, limits: [number, number]){
+    async function СheckInputData(username: string, password: string, limits: [number, number]){
         console.log("Auth: username:", username)
         console.log("Auth: password:", password)
         if(!username ||username.length === 0){
@@ -65,6 +67,20 @@ export default function Login({children}: Props){
 
             if(answer?.id && answer?.username && answer?.token && answer?.token_update){
                 auth = true;
+                const authData = {
+                    token: answer.token,
+                    user: {
+                        id: answer.id,
+                        username: answer.username,
+                    }
+                }
+                console.log("BEFORE LOGIN", $auth.getState())
+                setAuth(authData)
+                console.log("AFTER LOGIN", $auth.getState())
+                localStorage.setItem('id', authData.user.id)
+                localStorage.setItem('username', authData.user.username)
+                localStorage.setItem('token', authData.token)
+                navigate('../',{replace: true})
                 //onAuth(auth, answer)
             }
             else if(answer === null){
@@ -97,7 +113,7 @@ export default function Login({children}: Props){
     }
 
     const onSubmit = async (e: any) => {
-        await checkInputData(e.username, e.password, [6,20])
+        await СheckInputData(e.username, e.password, [6,20])
     }
 
     //async function a(){

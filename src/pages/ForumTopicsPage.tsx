@@ -101,7 +101,6 @@ export default function ForumTopicsPage({}: Props){
 
 
     return(
-        <AuthChecker>
             <DefaultTmp>
                 {
                     topics?.map(function(e, index){
@@ -129,6 +128,5 @@ export default function ForumTopicsPage({}: Props){
                         : null
                 }
             </DefaultTmp>
-        </AuthChecker>
     )
 }

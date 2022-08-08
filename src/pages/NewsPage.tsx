@@ -31,7 +31,6 @@ export default function NewsPage({children}: Props){
     }
 
     return(
-        <AuthChecker>
             <DefaultTmp>
                 {
                     news?.map(function(e:any, index){
@@ -39,6 +38,5 @@ export default function NewsPage({children}: Props){
                     })
                 }
             </DefaultTmp>
-        </AuthChecker>
     )
 }

@@ -87,7 +87,6 @@ export default function ForumMessagesPage({children}: Props){
 
 
     return(
-        <AuthChecker>
             <DefaultTmp>
                 {
                     messages?.map(function(e, index){
@@ -112,6 +111,5 @@ export default function ForumMessagesPage({children}: Props){
                         : null
                 }
             </DefaultTmp>
-        </AuthChecker>
     )
 }
