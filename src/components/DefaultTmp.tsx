@@ -9,7 +9,7 @@ interface Props{
 
 export default ( {children}: Props ) => {
     return (
-        <>
+        <div className='default-tmp-wrapper'>
             <div className={'container'}>
                 <MainHeader>
 
@@ -20,6 +20,6 @@ export default ( {children}: Props ) => {
                     {children}
                 </div>
             </div>
-        </>
+        </div>
     )
 }

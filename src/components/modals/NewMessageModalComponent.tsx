@@ -46,8 +46,9 @@ export default function NewMessageModalComponent(
     }
 
     return(
-        <div className="modal" tabIndex={-1} onClick={(e) => {onClosed(e)}}>
-            <div>
+        <div className="modal" tabIndex={-1}
+             onClick={(e) => {onClosed(e)}} style={{maxWidth: '100%'}}>
+            <div className='container'>
                 <div className="modal-dialog" onClick={(e) => {
                     e.preventDefault()
                     e.stopPropagation();

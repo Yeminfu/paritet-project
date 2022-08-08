@@ -9,6 +9,8 @@ import Utils from "../lib/utils";
 import slugify from "slugify";
 import {useLocation, useNavigate} from "react-router-dom";
 import {setCurrentForumTopic} from "../store/store";
+import DefaultTmp from "../components/DefaultTmp";
+import ForumCategoryComponent from "../components/ForumCategoryComponent";
 
 interface Props{
     children?: ReactNode;
@@ -26,7 +28,6 @@ export default function ForumTopicsPage({}: Props){
     const location = useLocation();
 
     let fetcher = new Fetcher()
-    let isModal = false
     const utils = new Utils()
 
     useEffect(() => {
@@ -40,7 +41,6 @@ export default function ForumTopicsPage({}: Props){
             }
         }
         loadTopics();
-        console.log("USEEFFECT", topics)
     }, []);
 
     const onFloatClicked = () => {
@@ -70,7 +70,6 @@ export default function ForumTopicsPage({}: Props){
         console.log("CATEGORY_ID:", categoryId)
 
         await fetcher.setNewForumTopic(data)
-        //topicId to insert into messages
         const response = await fetcher.getTopicsByCategoryId(categoryId)
         console.log("GET TOPICS BY ID ("+categoryId+"):", response)
         setTopics(response.data)
@@ -92,43 +91,41 @@ export default function ForumTopicsPage({}: Props){
     }
 
     const onItemClicked = async (id: number, slug: string) => {
-        //const response = await fetcher.getForumMessagesByTopicId(id)
-        //console.log("location", location.pathname)
         console.log("CUR TOPIC ID:", id)
         navigate(`..${location.pathname}/${slug}`)
         localStorage.setItem('currentForumTopic', String(id))
         setCurrentForumTopic(String(id))
-        //setVisibility(true)
-        //console.log("EDIT MSG", msg)
-        //setInitialModalMsg(msg)
-        //setMsgID(id)
     }
 
-    const getData = topics?.map(function(e, index){
-        return <ForumTopicComponent
-            data={e}
-            key={index+Math.random()+2000000}
-            onItemClick={() => onItemClicked(e.id, e.slug)}/>
-    })
+
 
     return(
-        <PageComponent isWrap={false}
-                       floatButton={<FloatButtonComponent clicked={onFloatClicked}
-                                                          title={'Новая тема'}
-                                                          color={'lightblue'}
-                                                          icon={'/assets/IconNewTopic.svg'}/>}
-                       modal={visibility
-                           ? <NewTopicModalComponent
-                               user={localStorage.getItem('username')}
-                               msgID={msgID}
-                               title={'Новая тема'}
-                               firstPlaceholder={'Заголовок'}
-                               secondPlaceholder={'Текст сообщения'}
-                               initialMsg={initialModalMsg}
-                               onClose={onModalClosed}
-                               onAccept={onModalAccepted}/>
-                           : null}>
-            { [getData] }
-        </PageComponent>
+        <DefaultTmp>
+            {
+                topics?.map(function(e, index){
+                    return <ForumTopicComponent
+                        data={e}
+                        key={index+Math.random()+2000000}
+                        onItemClick={() => onItemClicked(e.id, e.slug)}/>
+                })
+            }
+            <FloatButtonComponent clicked={onFloatClicked}
+                                  title={'Новая тема'}
+                                  color={'lightblue'}
+                                  icon={'/assets/IconNewTopic.svg'}/>
+            {
+                visibility
+                    ? <NewTopicModalComponent
+                        user={localStorage.getItem('username')}
+                        msgID={msgID}
+                        title={'Новая тема'}
+                        firstPlaceholder={'Заголовок'}
+                        secondPlaceholder={'Текст сообщения'}
+                        initialMsg={initialModalMsg}
+                        onClose={onModalClosed}
+                        onAccept={onModalAccepted}/>
+                    : null
+            }
+        </DefaultTmp>
     )
 }

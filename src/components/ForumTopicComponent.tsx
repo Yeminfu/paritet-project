@@ -19,7 +19,9 @@ export default function ForumTopicComponent({children, data, onItemClick}: Props
     const utils = new Utils()
 
     return (
-        <div className={'forum-category-module'} onClick={() => onItemClick(data.id, data.slug)}>
+        <div className={'forum-category-module'}
+             onClick={() => onItemClick(data.id, data.slug)}
+             style={{maxWidth: '100%'}}>
             <div className={'header'}>
                 <div className={'category-title'}>{data.title}</div>
             </div>

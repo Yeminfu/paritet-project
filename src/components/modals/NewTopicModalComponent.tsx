@@ -64,8 +64,10 @@ export default function NewTopicModalComponent({
     }
 
     return(
-        <div className="modal" tabIndex={-1} onClick={(e) => {onClosed(e)}}>
-            <div>
+        <div className="modal" tabIndex={-1}
+             style={{maxWidth: '100%'}}
+             onClick={(e) => {onClosed(e)}}>
+            <div className='container'>
                 <div className="modal-dialog" onClick={(e) => {
                     e.preventDefault()
                     e.stopPropagation();

@@ -1,18 +1,16 @@
 import React, {ReactNode, useEffect, useState} from 'react'
 import './MainPage/MainPage.scss'
 import Fetcher from "../Fetcher/Fetcher";
-import PageComponent from "./base/PageComponent";
 import FloatButtonComponent from "../components/buttons/FloatButtonComponent";
 import NewMessageModalComponent from "../components/modals/NewMessageModalComponent";
 import Utils from "../lib/utils";
 import ForumMessageComponent from "../components/ForumMessageComponent";
-import {$currentForumTopic} from "../store/store";
+import DefaultTmp from "../components/DefaultTmp";
 
 interface Props{
     children?: ReactNode;
 }
 
-const onSearch = (value: string) => console.log(value)
 
 export default function ForumMessagesPage({children}: Props){
 
@@ -22,13 +20,13 @@ export default function ForumMessagesPage({children}: Props){
     const [initialModalMsg, setInitialModalMsg] = useState('')
 
     let fetcher = new Fetcher()
-    let isModal = false
     const utils = new Utils()
 
     useEffect(() => {
         async function loadMessages(){
             try{
                 const response = await fetcher.getForumMessagesByTopicId(parseInt(String(localStorage.getItem('currentForumTopic'))))
+                console.log("dtaaa", response.data)
                 setMessages(response.data)
             }
             catch{
@@ -36,7 +34,6 @@ export default function ForumMessagesPage({children}: Props){
             }
         }
         loadMessages();
-        console.log("USEEFFECT", messages)
     }, []);
 
     const onFloatClicked = () => {
@@ -86,28 +83,32 @@ export default function ForumMessagesPage({children}: Props){
         setMsgID(id)
     }
 
-    const getData = messages?.map(function(e, index){
-        return <ForumMessageComponent key={index+Math.random()+2000000}
-            data={e}
-            onEditClick={() => onEditClicked(e?.message, e.id)}/>
-    })
+
 
     return(
-        <PageComponent isWrap={false}
-            floatButton={<FloatButtonComponent clicked={onFloatClicked}
-                                               title={'Новое сообщение'}
-                                               color={'mediumseagreen'}
-                                               icon={'/assets/IconMessage.svg'}/>}
-            modal={visibility
-                ? <NewMessageModalComponent
-                    msgID={msgID}
-                    title={'Новое сообщение'}
-                    placeholder={'Текст сообщения'}
-                    initialMsg={initialModalMsg}
-                    onClose={onModalClosed}
-                    onAccept={onModalAccepted}/>
-                : null}>
-            { [getData] }
-        </PageComponent>
+        <DefaultTmp>
+            {
+                messages?.map(function(e, index){
+                    return <ForumMessageComponent key={index+Math.random()+2000000}
+                                                  data={e}
+                                                  onEditClick={() => onEditClicked(e?.message, e.id)}/>
+                })
+            }
+            <FloatButtonComponent clicked={onFloatClicked}
+                                  title={'Новое сообщение'}
+                                  color={'mediumseagreen'}
+                                  icon={'/assets/IconMessage.svg'}/>
+            {
+                visibility
+                    ? <NewMessageModalComponent
+                        msgID={msgID}
+                        title={'Новое сообщение'}
+                        placeholder={'Текст сообщения'}
+                        initialMsg={initialModalMsg}
+                        onClose={onModalClosed}
+                        onAccept={onModalAccepted}/>
+                    : null
+            }
+        </DefaultTmp>
     )
 }

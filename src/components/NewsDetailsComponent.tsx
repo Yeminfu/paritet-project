@@ -2,6 +2,9 @@ import React, {ReactNode, useEffect} from 'react'
 import PageComponent from "../pages/base/PageComponent";
 import {useLocation} from 'react-router-dom';
 import './NewsDetailsComponent.scss';
+import DefaultTmp from "./DefaultTmp";
+import NewsModuleComponent from "./NewsModuleComponent";
+import Utils from "../lib/utils";
 
 interface Props{
     children?: ReactNode;
@@ -18,17 +21,22 @@ interface Props{
 
 export default function NewsDetailsComponent({children, data}: Props){
 
+    const utils = new Utils()
     const location = useLocation();
     const state = location.state as any;
 
+    useEffect(() => {
+        console.log("ldd2", data)
+    }, [])
+
     return(
-        <PageComponent>
-            {[<div className={'news-details'} key={Math.random() + 1000000}>
+        <DefaultTmp>
+            {[<div className={'news-details'} key={Math.random() + 1000000} style={{maxWidth: '100%'}}>
                 <div className={'news-header'}>
                     {state.title}
                 </div>
                 <div className={'news-date'}>
-                    {state.publishDateTime}
+                    {utils.formatDate(state.publishDateTime)}
                 </div>
                 <div className={'news-description'}>
                     {state.description}
@@ -37,7 +45,7 @@ export default function NewsDetailsComponent({children, data}: Props){
 
                 </div>
             </div>]}
-        </PageComponent>
+        </DefaultTmp>
 
     )
 }
