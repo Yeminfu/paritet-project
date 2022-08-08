@@ -1,6 +1,9 @@
 import React from 'react'
 import DefaultTmp from "../../components/DefaultTmp";
 import MainModuleComponent from "../../components/MainModuleComponent";
+import {$auth} from "../../store/store";
+import Login from "../Login";
+import AuthChecker from "../../components/AuthChecker";
 
 interface Modules {
     title: string;
@@ -71,12 +74,14 @@ export default function MainPage(){
 
 
     return(
-        <DefaultTmp>
-            {
-                faceModules.map(e => {
-                    return <MainModuleComponent data={e} key={e.link}/>
-                })
-            }
-        </DefaultTmp>
+        <AuthChecker>
+            <DefaultTmp>
+                {
+                    faceModules.map(e => {
+                        return <MainModuleComponent data={e} key={e.link}/>
+                    })
+                }
+            </DefaultTmp>
+        </AuthChecker>
     )
 }

@@ -5,6 +5,7 @@ import {useNavigate} from "react-router-dom";
 import AdminCategoryObserver from "../../components/admin/AdminCategoryObserver";
 import Fetcher from "../../Fetcher/Fetcher";
 import {$adminSettingsCategoryCurrentId, setAdminSettingsCategoryCurrentIdState} from "../../store/store";
+import AuthChecker from "../../components/AuthChecker";
 
 interface Props{
     children?: ReactNode;
@@ -113,46 +114,48 @@ export default function AdminCategoriesPage({children}: Props) {
     }
 
     return(
-        <div className={'admin-categories-page'}>
-            <div className={'header'}>
-                <div className={'upper-header'}>
-                    <div className={'back-button'} onClick={() => {navigate('../', { replace: true })}}>{'❮'}</div>
-                    Форум/Категории
+        <AuthChecker>
+            <div className={'admin-categories-page'}>
+                <div className={'header'}>
+                    <div className={'upper-header'}>
+                        <div className={'back-button'} onClick={() => {navigate('../', { replace: true })}}>{'❮'}</div>
+                        Форум/Категории
+                    </div>
+                    <div className={'lower-header'}>
+                        Форум/Категории
+                    </div>
                 </div>
-                <div className={'lower-header'}>
-                    Форум/Категории
-                </div>
-            </div>
-            <div className={'main-area'}>
-                <div className={'admin-area'}>
-                    <AdminCategorySettingsComponent
-                        onCategorySave={refreshCategories}
-                        editingCategory={categoryForEdit}
-                        parentId={currentCategoryId}
-                        onCancelEdit={cancelEdit}
-                        onError={showError}>
+                <div className={'main-area'}>
+                    <div className={'admin-area'}>
+                        <AdminCategorySettingsComponent
+                            onCategorySave={refreshCategories}
+                            editingCategory={categoryForEdit}
+                            parentId={currentCategoryId}
+                            onCancelEdit={cancelEdit}
+                            onError={showError}>
 
-                    </AdminCategorySettingsComponent>
-                </div>
-                <div className={'view-area'}>
-                    <AdminCategoryObserver
-                        categories={categories}
-                        currentLocation={location}
-                        onCategoryClicked={onCategoryClicked}
-                        onGoToUpper={getCategoryParent}
-                        onEdit={onCategoryEdit}
-                        onDelete={onCategoryDelete}>
+                        </AdminCategorySettingsComponent>
+                    </div>
+                    <div className={'view-area'}>
+                        <AdminCategoryObserver
+                            categories={categories}
+                            currentLocation={location}
+                            onCategoryClicked={onCategoryClicked}
+                            onGoToUpper={getCategoryParent}
+                            onEdit={onCategoryEdit}
+                            onDelete={onCategoryDelete}>
 
-                    </AdminCategoryObserver>
+                        </AdminCategoryObserver>
+                    </div>
+                </div>
+                <div className={'alert-wrapper'}>
+                    {
+                        errorMsg.length > 0
+                            ? <div className="alert alert-danger" role="alert">{errorMsg}</div>
+                            : null
+                    }
                 </div>
             </div>
-            <div className={'alert-wrapper'}>
-                {
-                    errorMsg.length > 0
-                        ? <div className="alert alert-danger" role="alert">{errorMsg}</div>
-                        : null
-                }
-            </div>
-        </div>
+        </AuthChecker>
     )
 }

@@ -6,6 +6,7 @@ import NewMessageModalComponent from "../components/modals/NewMessageModalCompon
 import Utils from "../lib/utils";
 import ForumMessageComponent from "../components/ForumMessageComponent";
 import DefaultTmp from "../components/DefaultTmp";
+import AuthChecker from "../components/AuthChecker";
 
 interface Props{
     children?: ReactNode;
@@ -86,29 +87,31 @@ export default function ForumMessagesPage({children}: Props){
 
 
     return(
-        <DefaultTmp>
-            {
-                messages?.map(function(e, index){
-                    return <ForumMessageComponent key={index+Math.random()+2000000}
-                                                  data={e}
-                                                  onEditClick={() => onEditClicked(e?.message, e.id)}/>
-                })
-            }
-            <FloatButtonComponent clicked={onFloatClicked}
-                                  title={'Новое сообщение'}
-                                  color={'mediumseagreen'}
-                                  icon={'/assets/IconMessage.svg'}/>
-            {
-                visibility
-                    ? <NewMessageModalComponent
-                        msgID={msgID}
-                        title={'Новое сообщение'}
-                        placeholder={'Текст сообщения'}
-                        initialMsg={initialModalMsg}
-                        onClose={onModalClosed}
-                        onAccept={onModalAccepted}/>
-                    : null
-            }
-        </DefaultTmp>
+        <AuthChecker>
+            <DefaultTmp>
+                {
+                    messages?.map(function(e, index){
+                        return <ForumMessageComponent key={index+Math.random()+2000000}
+                                                      data={e}
+                                                      onEditClick={() => onEditClicked(e?.message, e.id)}/>
+                    })
+                }
+                <FloatButtonComponent clicked={onFloatClicked}
+                                      title={'Новое сообщение'}
+                                      color={'mediumseagreen'}
+                                      icon={'/assets/IconMessage.svg'}/>
+                {
+                    visibility
+                        ? <NewMessageModalComponent
+                            msgID={msgID}
+                            title={'Новое сообщение'}
+                            placeholder={'Текст сообщения'}
+                            initialMsg={initialModalMsg}
+                            onClose={onModalClosed}
+                            onAccept={onModalAccepted}/>
+                        : null
+                }
+            </DefaultTmp>
+        </AuthChecker>
     )
 }

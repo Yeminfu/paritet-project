@@ -5,6 +5,7 @@ import './NewsDetailsComponent.scss';
 import DefaultTmp from "./DefaultTmp";
 import NewsModuleComponent from "./NewsModuleComponent";
 import Utils from "../lib/utils";
+import AuthChecker from "./AuthChecker";
 
 interface Props{
     children?: ReactNode;
@@ -30,22 +31,23 @@ export default function NewsDetailsComponent({children, data}: Props){
     }, [])
 
     return(
-        <DefaultTmp>
-            {[<div className={'news-details'} key={Math.random() + 1000000} style={{maxWidth: '100%'}}>
-                <div className={'news-header'}>
-                    {state.title}
-                </div>
-                <div className={'news-date'}>
-                    {utils.formatDate(state.publishDateTime)}
-                </div>
-                <div className={'news-description'}>
-                    {state.description}
-                </div>
-                <div className={'news-content'} dangerouslySetInnerHTML={{__html: state.blocks}}>
+        <AuthChecker>
+            <DefaultTmp>
+                {[<div className={'news-details'} key={Math.random() + 1000000} style={{maxWidth: '100%'}}>
+                    <div className={'news-header'}>
+                        {state.title}
+                    </div>
+                    <div className={'news-date'}>
+                        {utils.formatDate(state.publishDateTime)}
+                    </div>
+                    <div className={'news-description'}>
+                        {state.description}
+                    </div>
+                    <div className={'news-content'} dangerouslySetInnerHTML={{__html: state.blocks}}>
 
-                </div>
-            </div>]}
-        </DefaultTmp>
-
+                    </div>
+                </div>]}
+            </DefaultTmp>
+        </AuthChecker>
     )
 }

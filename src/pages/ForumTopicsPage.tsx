@@ -11,6 +11,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {setCurrentForumTopic} from "../store/store";
 import DefaultTmp from "../components/DefaultTmp";
 import ForumCategoryComponent from "../components/ForumCategoryComponent";
+import AuthChecker from "../components/AuthChecker";
 
 interface Props{
     children?: ReactNode;
@@ -100,32 +101,34 @@ export default function ForumTopicsPage({}: Props){
 
 
     return(
-        <DefaultTmp>
-            {
-                topics?.map(function(e, index){
-                    return <ForumTopicComponent
-                        data={e}
-                        key={index+Math.random()+2000000}
-                        onItemClick={() => onItemClicked(e.id, e.slug)}/>
-                })
-            }
-            <FloatButtonComponent clicked={onFloatClicked}
-                                  title={'Новая тема'}
-                                  color={'lightblue'}
-                                  icon={'/assets/IconNewTopic.svg'}/>
-            {
-                visibility
-                    ? <NewTopicModalComponent
-                        user={localStorage.getItem('username')}
-                        msgID={msgID}
-                        title={'Новая тема'}
-                        firstPlaceholder={'Заголовок'}
-                        secondPlaceholder={'Текст сообщения'}
-                        initialMsg={initialModalMsg}
-                        onClose={onModalClosed}
-                        onAccept={onModalAccepted}/>
-                    : null
-            }
-        </DefaultTmp>
+        <AuthChecker>
+            <DefaultTmp>
+                {
+                    topics?.map(function(e, index){
+                        return <ForumTopicComponent
+                            data={e}
+                            key={index+Math.random()+2000000}
+                            onItemClick={() => onItemClicked(e.id, e.slug)}/>
+                    })
+                }
+                <FloatButtonComponent clicked={onFloatClicked}
+                                      title={'Новая тема'}
+                                      color={'lightblue'}
+                                      icon={'/assets/IconNewTopic.svg'}/>
+                {
+                    visibility
+                        ? <NewTopicModalComponent
+                            user={localStorage.getItem('username')}
+                            msgID={msgID}
+                            title={'Новая тема'}
+                            firstPlaceholder={'Заголовок'}
+                            secondPlaceholder={'Текст сообщения'}
+                            initialMsg={initialModalMsg}
+                            onClose={onModalClosed}
+                            onAccept={onModalAccepted}/>
+                        : null
+                }
+            </DefaultTmp>
+        </AuthChecker>
     )
 }

@@ -3,6 +3,7 @@ import './MainPage/MainPage.scss'
 import Fetcher from "../Fetcher/Fetcher";
 import ForumCategoryComponent from "../components/ForumCategoryComponent";
 import DefaultTmp from "../components/DefaultTmp";
+import AuthChecker from "../components/AuthChecker";
 
 interface Props{
     children?: ReactNode;
@@ -24,15 +25,17 @@ export default function ForumCategoriesPage({children}: Props){
 
 
     return(
-        <DefaultTmp>
-            {
-                categories?.map(function(e, index){
-                    return <ForumCategoryComponent
-                        data={e}
-                        key={index+Math.random()+2000000}>
-                    </ForumCategoryComponent>
-                })
-            }
-        </DefaultTmp>
+        <AuthChecker>
+            <DefaultTmp>
+                {
+                    categories?.map(function(e, index){
+                        return <ForumCategoryComponent
+                            data={e}
+                            key={index+Math.random()+2000000}>
+                        </ForumCategoryComponent>
+                    })
+                }
+            </DefaultTmp>
+        </AuthChecker>
     )
 }

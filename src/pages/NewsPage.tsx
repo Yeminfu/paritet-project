@@ -2,6 +2,7 @@ import React, {ReactNode, useEffect, useState} from 'react'
 import Fetcher from "../Fetcher/Fetcher";
 import NewsModuleComponent from '../components/NewsModuleComponent';
 import DefaultTmp from "../components/DefaultTmp";
+import AuthChecker from "../components/AuthChecker";
 
 interface Props{
     children?: ReactNode;
@@ -30,12 +31,14 @@ export default function NewsPage({children}: Props){
     }
 
     return(
-        <DefaultTmp>
-            {
-                news?.map(function(e:any, index){
-                    return <NewsModuleComponent data={e} key={index}/>
-                })
-            }
-        </DefaultTmp>
+        <AuthChecker>
+            <DefaultTmp>
+                {
+                    news?.map(function(e:any, index){
+                        return <NewsModuleComponent data={e} key={index}/>
+                    })
+                }
+            </DefaultTmp>
+        </AuthChecker>
     )
 }
