@@ -31,16 +31,18 @@ export default function NewsModuleComponent({children, data}: Props){
     }
 
     return(
-        <Link to={goToNewsDetails(data.url)} state={
-            {
-                url: data.url,
-                title: data.title,
-                description: data.description,
-                blocks: data.blocks,
-                smallImg: data.small_img,
-                publishDateTime: data.date_time
-            }
-        }>
+        <Link to={goToNewsDetails(data.url)}
+              className='news-link'
+              state={
+                {
+                    url: data.url,
+                    title: data.title,
+                    description: data.description,
+                    blocks: data.blocks,
+                    smallImg: data.small_img,
+                    publishDateTime: data.date_time
+                }
+            }>
             <div className={'news-module'} onClick={() => {goToNewsDetails(data.url)}}>
                 <h2 className={'header'}>{data.title}</h2>
                 <div className={'body'}>
