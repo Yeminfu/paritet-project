@@ -4,7 +4,7 @@ import './AdminCategoriesPage.scss'
 import {useNavigate} from "react-router-dom";
 import AdminCategoryObserver from "../../components/admin/AdminCategoryObserver";
 import Fetcher from "../../Fetcher/Fetcher";
-import {$adminSettingsCategoryCurrentId, setAdminSettingsCategoryCurrentIdState} from "../../store/store";
+import {$adminCategoryId, setAdminCategoryId} from "../../store/store";
 import AuthChecker from "../../components/AuthChecker";
 
 interface Props{
@@ -16,7 +16,7 @@ export default function AdminCategoriesPage({children}: Props) {
     const [categories, setCategories] = useState<[]>([])
     const [currentCategoryId, setCurrentCategoryId] = useState<number | null>(localStorage.getItem('adminSettingsCategoryCurrentId') === null
         ? null
-        : parseInt(($adminSettingsCategoryCurrentId).toString()))
+        : parseInt(($adminCategoryId).toString()))
     const [location, setLocation] = useState<string[]>([])
     const [errorMsg, setErrorMsg] = useState('')
 
@@ -33,8 +33,8 @@ export default function AdminCategoriesPage({children}: Props) {
                 ? await fetcher.getForumCategoriesByParentId(currentCategoryId)
                 : await fetcher.getForumCategories()
             currentCategoryId !== null
-                ? setAdminSettingsCategoryCurrentIdState(currentCategoryId.toString())
-                : setAdminSettingsCategoryCurrentIdState(null)
+                ? setAdminCategoryId(currentCategoryId.toString())
+                : setAdminCategoryId(null)
             setCategories(response)
         }
         getCategories()
@@ -52,8 +52,8 @@ export default function AdminCategoriesPage({children}: Props) {
         setCurrentCategoryId(category.id)
         localStorage.setItem('adminSettingsCategoryCurrentId', category.id)
         category.id !== null
-            ? setAdminSettingsCategoryCurrentIdState(category.id.toString())
-            : setAdminSettingsCategoryCurrentIdState(null)
+            ? setAdminCategoryId(category.id.toString())
+            : setAdminCategoryId(null)
         const response = await fetcher.getForumCategoriesByParentId(category.id)
 
         setCategories(response)
@@ -90,7 +90,7 @@ export default function AdminCategoriesPage({children}: Props) {
         setLocation(path)
         setCurrentCategoryId(response[0].parent)
         localStorage.setItem('adminSettingsCategoryCurrentId', categories.parent)
-        setAdminSettingsCategoryCurrentIdState(categories.parent)
+        setAdminCategoryId(categories.parent)
     }
 
     const onCategoryEdit = function(category: any){

@@ -1,8 +1,8 @@
 import { createEvent, createStore } from 'effector'
 
-export const setAdminSettingsCategoryCurrentIdState = createEvent<string | null>('setAdminSettingsCategoryCurrentIdState')
-export const $adminSettingsCategoryCurrentId = createStore(localStorage.getItem('adminSettingsCategoryCurrentId'))
-    .on(setAdminSettingsCategoryCurrentIdState, (o: any, n: string | null) => n)
+export const setAdminCategoryId = createEvent<string | null>('setAdminCategoryId')
+export const $adminCategoryId = createStore(localStorage.getItem('adminSettingsCategoryCurrentId'))
+    .on(setAdminCategoryId, (o: any, n: string | null) => n)
 
 //USER STATES
 interface AuthData {
