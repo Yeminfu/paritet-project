@@ -18,6 +18,7 @@ export default function ForumMessagesPage({children}: Props){
     const [messages, setMessages] = useState<any[]>([])
     const [visibility, setVisibility] = useState(false)
     const [msgID, setMsgID] = useState(0)
+    const [modalTitle, setModalTitle] = useState('Новое сообщение')
     const [initialModalMsg, setInitialModalMsg] = useState('')
 
     let fetcher = new Fetcher()
@@ -40,12 +41,14 @@ export default function ForumMessagesPage({children}: Props){
     const onFloatClicked = () => {
         setVisibility(true)
         setInitialModalMsg('')
+        setModalTitle('Новое сообщение')
         setMsgID(0)
     }
 
     const onModalClosed = () => {
         setVisibility(false)
         setInitialModalMsg('')
+        setModalTitle('Новое сообщение')
     }
 
     const onModalAccepted = async (data: string, id?: number) => {
@@ -78,10 +81,11 @@ export default function ForumMessagesPage({children}: Props){
     }
 
     const onEditClicked = (msg: string, id: number) => {
-        setVisibility(true)
+        setModalTitle('Редактирование сообщения')
         console.log("EDIT MSG", msg)
         setInitialModalMsg(msg)
         setMsgID(id)
+        setVisibility(true)
     }
 
 
@@ -103,7 +107,7 @@ export default function ForumMessagesPage({children}: Props){
                     visibility
                         ? <NewMessageModalComponent
                             msgID={msgID}
-                            title={'Новое сообщение'}
+                            title={modalTitle}
                             placeholder={'Текст сообщения'}
                             initialMsg={initialModalMsg}
                             onClose={onModalClosed}
