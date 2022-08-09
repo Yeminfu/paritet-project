@@ -20,7 +20,9 @@ export default function MainModuleComponent({children, data}: Props){
         <div className={'main-module'} onClick={() => navigate(`..${data.link}`)}>
             <h2 className={'header'}>{data.title}</h2>
             <div className={'body'}>
-                <img className={'photo'} src={data.img}/>
+                <div className='photo-wrapper'>
+                    <img className={'photo'} src={data.img}/>
+                </div>
                 <div className={'text-content'}>{data.text}</div>
             </div>
         </div>
