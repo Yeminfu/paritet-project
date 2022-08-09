@@ -26,6 +26,7 @@
     position: relative;
     //ЭТО КОСТЫЛЬ, ТАК НЕ НАДО ДЕЛАТЬ
     &>*{
+      display: flex;
       max-width: calc(50% - 8px);
       margin: 4px;
       text-decoration: none;
