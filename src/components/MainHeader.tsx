@@ -13,20 +13,20 @@ export default function MainHeader({children}: Props){
     const navigate = useNavigate()
 
     return(
-        <div className={'main-header'}>
-            <div className='container'>
-                <div className={'upper-header'}>
-                    <div className={'user-name-label'}>{}</div>
-                    <div className={'exit-button-wrapper'}>
-                        <Link to={'/login'}>
-                            <HeaderAuthButton/>
-                        </Link>
+            <div className={'main-header'}>
+                <div className='container'>
+                    <div className={'upper-header'}>
+                        <div className={'user-name-label'}>{}</div>
+                        <div className={'exit-button-wrapper'}>
+                            <Link to={'/login'}>
+                                <HeaderAuthButton/>
+                            </Link>
+                        </div>
+                    </div>
+                    <div className={'lower-header'}>
+                        <div className={'logo-wrapper'} onClick={() => {navigate("../", { replace: true });}}>Паритет</div>
                     </div>
                 </div>
-                <div className={'lower-header'}>
-                    <div className={'logo-wrapper'} onClick={() => {navigate("../", { replace: true });}}>Паритет</div>
-                </div>
             </div>
-        </div>
     )
 }

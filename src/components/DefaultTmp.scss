@@ -1,15 +1,37 @@
-.content-container{
+.container{
+  position: relative;
+  .default-tmp-wrapper{
   display: flex;
-  flex: 1;
+  height: 100vh;
   flex-direction: column;
-  flex-flow: wrap;
-  justify-content: flex-start;
-  margin: -4px;
-  padding: 24px 0;
-  //ЭТО КОСТЫЛЬ, ТАК НЕ НАДО ДЕЛАТЬ
-  &>*{
-    max-width: calc(50% - 8px);
-    margin: 4px;
-    text-decoration: none;
+
+  .header-content-container{
+      z-index: 2;
+      position: sticky;
+      top: 0;
+      margin: 0 12px;
+    }
+
+
+  .content-container{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    flex-flow: wrap;
+    justify-content: flex-start;
+    margin: -4px;
+    padding: 24px 0;
+    position: relative;
+    //ЭТО КОСТЫЛЬ, ТАК НЕ НАДО ДЕЛАТЬ
+    &>*{
+      max-width: calc(50% - 8px);
+      margin: 4px;
+      text-decoration: none;
+    }
   }
+
+  .footer-content-container{
+
+  }
+}
 }
