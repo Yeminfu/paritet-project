@@ -17,7 +17,7 @@ export default function MainModuleComponent({children, data}: Props){
     const navigate = useNavigate()
 
     return (
-        <div className={'main-module'} onClick={() => navigate(`..${data.link}`)}>
+        <div className={'main-module'} onClick={() => navigate(`..${data.link}`,{replace: true})}>
             <h2 className={'header'}>{data.title}</h2>
             <div className={'body'}>
                 <div className='photo-wrapper'>

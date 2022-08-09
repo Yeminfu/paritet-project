@@ -2,12 +2,16 @@
   display: flex;
   height: 64px;
   width: 64px;
+  max-height: 64px;
+  max-width: 64px;
+  min-height: 64px;
+  min-width: 64px;
   position: fixed;
   right: 32px;
   bottom: 100px;
   justify-content: center;
   align-items: center;
-  border-radius: 50%;
+  border-radius: 32px;
   //background-color: mediumseagreen;
   opacity: 0.7;
   cursor: pointer;

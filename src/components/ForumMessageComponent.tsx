@@ -1,7 +1,6 @@
 import React, {ReactNode, useEffect, useState} from 'react';
 import './ForumMessageComponent.scss';
 import Utils from "../lib/utils";
-import {useStore} from "effector-react";
 import {$auth} from "../store/store";
 
 interface Props{

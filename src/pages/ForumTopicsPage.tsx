@@ -2,7 +2,6 @@ import React, {ReactNode, useEffect, useState} from 'react'
 import './MainPage/MainPage.scss'
 import Fetcher from "../Fetcher/Fetcher";
 import ForumTopicComponent from "../components/ForumTopicComponent";
-import PageComponent from "./base/PageComponent";
 import FloatButtonComponent from "../components/buttons/FloatButtonComponent";
 import NewTopicModalComponent from "../components/modals/NewTopicModalComponent";
 import Utils from "../lib/utils";
@@ -10,8 +9,6 @@ import slugify from "slugify";
 import {useLocation, useNavigate} from "react-router-dom";
 import {setCurrentForumTopic} from "../store/store";
 import DefaultTmp from "../components/DefaultTmp";
-import ForumCategoryComponent from "../components/ForumCategoryComponent";
-import AuthChecker from "../components/AuthChecker";
 
 interface Props{
     children?: ReactNode;
@@ -93,7 +90,7 @@ export default function ForumTopicsPage({}: Props){
 
     const onItemClicked = async (id: number, slug: string) => {
         console.log("CUR TOPIC ID:", id)
-        navigate(`..${location.pathname}/${slug}`)
+        navigate(`..${location.pathname}/${slug}`,{replace: true})
         localStorage.setItem('currentForumTopic', String(id))
         setCurrentForumTopic(String(id))
     }
@@ -110,10 +107,6 @@ export default function ForumTopicsPage({}: Props){
                             onItemClick={() => onItemClicked(e.id, e.slug)}/>
                     })
                 }
-                <FloatButtonComponent clicked={onFloatClicked}
-                                      title={'Новая тема'}
-                                      color={'lightblue'}
-                                      icon={'/assets/IconNewTopic.svg'}/>
                 {
                     visibility
                         ? <NewTopicModalComponent
@@ -127,6 +120,10 @@ export default function ForumTopicsPage({}: Props){
                             onAccept={onModalAccepted}/>
                         : null
                 }
+                <FloatButtonComponent clicked={onFloatClicked}
+                                      title={'Новая тема'}
+                                      color={'lightblue'}
+                                      icon={'/assets/IconNewTopic.svg'}/>
             </DefaultTmp>
     )
 }

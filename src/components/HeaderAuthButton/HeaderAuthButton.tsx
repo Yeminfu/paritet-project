@@ -18,7 +18,7 @@ export default function HeaderAuthButton({children}: Props){
         if(!$auth.getState()){
             logout()
         }
-        navigate('../login')
+        navigate('../login',{replace: true})
     }
 
     return(

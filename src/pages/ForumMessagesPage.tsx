@@ -99,10 +99,6 @@ export default function ForumMessagesPage({children}: Props){
                                                       onEditClick={() => onEditClicked(e?.message, e.id)}/>
                     })
                 }
-                <FloatButtonComponent clicked={onFloatClicked}
-                                      title={'Новое сообщение'}
-                                      color={'mediumseagreen'}
-                                      icon={'/assets/IconMessage.svg'}/>
                 {
                     visibility
                         ? <NewMessageModalComponent
@@ -114,6 +110,10 @@ export default function ForumMessagesPage({children}: Props){
                             onAccept={onModalAccepted}/>
                         : null
                 }
+                <FloatButtonComponent clicked={onFloatClicked}
+                                      title={'Новое сообщение'}
+                                      color={'mediumseagreen'}
+                                      icon={'/assets/IconMessage.svg'}/>
             </DefaultTmp>
     )
 }

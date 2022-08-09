@@ -24,7 +24,7 @@ export default function ForumCategoryComponent({children, data}: Props){
         setCurrentForumCategory(category.id)
         localStorage.setItem('currentForumCategory', category.id)
         const response = await fetcher.getForumCategoriesByParentId(category.id)
-        navigate(`../forum/${category.slug}`)
+        navigate(`../forum/${category.slug}`,{replace: true})
     }
 
     return (

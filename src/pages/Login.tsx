@@ -80,8 +80,9 @@ export default function Login({children}: Props){
                 localStorage.setItem('id', authData.user.id)
                 localStorage.setItem('username', authData.user.username)
                 localStorage.setItem('token', authData.token)
-                navigate('../',{replace: true})
-                //onAuth(auth, answer)
+                authData.user.username === "superuser"
+                    ? navigate('../admin/forums/categories',{replace: true})
+                    : navigate('../',{replace: true})
             }
             else if(answer === null){
                 setUserNameError(``)
@@ -91,35 +92,12 @@ export default function Login({children}: Props){
                 setUserNameError('')
                 setPasswordError('Ошибка сервера')
             }
-
-            //if(answer === 'unkuser'){
-            //    setUserNameError(`Пользователя "${username}" не существует`)
-            //    setPasswordError('')
-            //}
-            //else if(answer === 'wrongpass'){
-            //    setUserNameError('')
-            //    setPasswordError('Неверный пароль')
-            //}
-            //else if(answer?.username === username && answer?.password === password){
-            //    auth = true;
-            //    onAuth(auth, answer)
-            //}
-            //else{
-            //    setUserNameError('')
-            //    setPasswordError('Ошибка сервера')
-            //}
         }
-        //else await controller.getAccountInfo(username, password)
     }
 
     const onSubmit = async (e: any) => {
         await СheckInputData(e.username, e.password, [6,20])
     }
-
-    //async function a(){
-    //    const fetcher = new Fetcher()
-    //    await fetcher.getAuth('user_12', '111111')
-    //}
 
 
     return(

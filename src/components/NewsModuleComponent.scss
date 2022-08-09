@@ -1,12 +1,13 @@
 .news-module{
   display: flex;
   width: 100%;
-  height: 300px;
-  max-height: 300px;
   flex-direction: column;
   background-color: #fff;
   box-shadow: 0 4px 12px 4px rgba(0,0,0,0.12);
   color: #333;
+  @media (max-width: 992px){
+    max-width: 100%;
+  }
 
   .header{
     display: flex;
@@ -29,17 +30,22 @@
     padding: 12px 24px;
     box-sizing: border-box;
     overflow: hidden;
+    @media (max-width: 992px){
+      flex-direction: column;
+    }
 
     .photo-area{
       display: flex;
       width: 300px;
-      height: 200px;
       margin-right: 12px;
       object-fit: contain;
       align-items: start;
       justify-content: start;
       overflow: hidden;
       flex-direction: column;
+      @media (max-width: 992px){
+        margin-right: 0;
+      }
 
       .photo{
         display: block;
@@ -56,14 +62,20 @@
     .text-content{
       display: inline-block;
       width: 70%;
-      height: 100%;
-      justify-content: flex-end;
-      text-overflow: fade;
+      max-height: 100%;
       overflow: hidden;
+      text-overflow: fade;
       font-size: 16px;
-      line-height: 20px;
+      line-height: 16px;
+      @media (max-width: 992px){
+        align-items: center;
+        margin-left: 0;
+        width: 100%;
+      }
     }
-
+    @media (max-width: 992px){
+      align-items: center;
+    }
   }
 
 }
