@@ -6,7 +6,7 @@ import NewMessageModalComponent from "../components/modals/NewMessageModalCompon
 import Utils from "../lib/utils";
 import ForumMessageComponent from "../components/ForumMessageComponent";
 import DefaultTmp from "../components/DefaultTmp";
-import AuthChecker from "../components/AuthChecker";
+import {useLocation} from "react-router-dom";
 
 interface Props{
     children?: ReactNode;
@@ -23,12 +23,13 @@ export default function ForumMessagesPage({children}: Props){
 
     let fetcher = new Fetcher()
     const utils = new Utils()
+    const location = useLocation();
 
     useEffect(() => {
         async function loadMessages(){
             try{
-                const response = await fetcher.getForumMessagesByTopicId(parseInt(String(localStorage.getItem('currentForumTopic'))))
-                console.log("dtaaa", response.data)
+                const state = location.state as any;
+                const response = await fetcher.getForumMessagesByTopicId(state.topicId)
                 setMessages(response.data)
             }
             catch{
@@ -59,14 +60,13 @@ export default function ForumMessagesPage({children}: Props){
         }
         else if(data.length > 0){
             const date = utils.formatDateForDB(new Date())
-            console.log("MSG PAGE CUR TOPIC ID:", parseInt(String(localStorage.getItem('currentForumTopic'))))
 
             const topicId = parseInt(String(localStorage.getItem('currentForumTopic')))
 
             id
                 ? await fetcher.editMessage(id, data)
                 : await fetcher.setNewMessage({
-                    userId: parseInt(String(localStorage.getItem('userId'))),
+                    userId: parseInt(String(localStorage.getItem('id'))),
                     topicId: topicId,
                     message: data,
                     createdBy: date,

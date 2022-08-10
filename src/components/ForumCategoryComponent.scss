@@ -1,60 +1,64 @@
-.forum-category-module{
+.forum-category-link{
   display: flex;
-  height: 200px;
   width: 100%;
-  flex-direction: column;
-  margin-bottom: 24px;
-  box-shadow: 0 4px 12px 4px rgba(0,0,0,0.12);
-
-  .header{
+  .forum-category-module{
     display: flex;
-    height: 64px;
+    height: 200px;
     width: 100%;
-    background-color: black;
-    justify-content: flex-start;
-    align-items: center;
-    color: white;
-    font-size: 24px;
-    padding: 24px 24px;
-    box-sizing: border-box;
+    flex-direction: column;
+    box-shadow: 0 4px 12px 4px rgba(0,0,0,0.12);
 
-    .category-title{
-
-    }
-  }
-
-  .body{
-    display: flex;
-    height: 100%;
-    width: 100%;
-    background-color: white;
-
-    .icon-segment{
+    .header{
       display: flex;
-      height: 100%;
-      width: 64px;
-      justify-content: center;
+      height: 64px;
+      width: 100%;
+      background-color: black;
+      justify-content: flex-start;
       align-items: center;
+      color: white;
+      font-size: 24px;
+      padding: 24px 24px;
+      box-sizing: border-box;
 
-      .icon{
-        display: flex;
-        height: 32px;
-        width: 32px;
-        justify-content: center;
-        align-items: center;
-        background-color: #666;
-        color: white;
-        font-size: 10px;
-        border-radius: 4px;
+      .category-title{
+
       }
     }
 
-    .description-segment{
+    .body{
       display: flex;
       height: 100%;
       width: 100%;
-      align-items: center;
-      padding: 24px 24px;
+      background-color: white;
+
+      .icon-segment{
+        display: flex;
+        height: 100%;
+        width: 64px;
+        justify-content: center;
+        align-items: center;
+
+        .icon{
+          display: flex;
+          height: 32px;
+          width: 32px;
+          justify-content: center;
+          align-items: center;
+          background-color: #666;
+          color: white;
+          font-size: 10px;
+          border-radius: 4px;
+        }
+      }
+
+      .description-segment{
+        display: flex;
+        height: 100%;
+        width: 100%;
+        align-items: center;
+        padding: 24px 24px;
+        color: #333;
+      }
     }
   }
 }

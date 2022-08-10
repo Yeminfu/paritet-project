@@ -7,8 +7,8 @@ import NewTopicModalComponent from "../components/modals/NewTopicModalComponent"
 import Utils from "../lib/utils";
 import slugify from "slugify";
 import {useLocation, useNavigate} from "react-router-dom";
-import {setCurrentForumTopic} from "../store/store";
 import DefaultTmp from "../components/DefaultTmp";
+
 
 interface Props{
     children?: ReactNode;
@@ -31,7 +31,9 @@ export default function ForumTopicsPage({}: Props){
     useEffect(() => {
         async function loadTopics(){
             try{
-                const response = await fetcher.getTopicsByCategoryId(parseInt(String(localStorage.getItem('currentForumCategory'))))
+                const state = location.state as any;
+                console.log("CATCHED_ID", state.categoryId)
+                const response = await fetcher.getTopicsByCategoryId(state.categoryId)
                 setTopics(response.data)
             }
             catch{
@@ -55,7 +57,7 @@ export default function ForumTopicsPage({}: Props){
     const onModalAccepted = async (title: string, message: string, id?: number) => {
         setVisibility(false)
 
-        const authorId = parseInt(String(localStorage.getItem('userId')))
+        const authorId = parseInt(String(localStorage.getItem('id')))
         const categoryId = parseInt(String(localStorage.getItem('currentForumCategory')))
         const slug = slugify(title)
         const date = utils.formatDateForDB(new Date())
@@ -69,30 +71,11 @@ export default function ForumTopicsPage({}: Props){
 
         await fetcher.setNewForumTopic(data)
         const response = await fetcher.getTopicsByCategoryId(categoryId)
+
         console.log("GET TOPICS BY ID ("+categoryId+"):", response)
+
         setTopics(response.data)
-
-        //console.log("TITLE:", title)
-        //if(data.length === 0){
-        //    console.log("EMPTY MSG!")
-        //}
-        //else if(data.length > 0){
-        //    const date = utils.formatDateForDB(new Date())
-        //    id
-        //        ? await fetcher.editTopic(id, data)
-        //        : await fetcher.setNewTopic({user: username, topic: data, createdBy: date, date: date})
-        //    const response = await fetcher.getTopics()
-        //    setTopics(response.data)
-        //}
-
         setInitialModalMsg('')
-    }
-
-    const onItemClicked = async (id: number, slug: string) => {
-        console.log("CUR TOPIC ID:", id)
-        navigate(`..${location.pathname}/${slug}`,{replace: true})
-        localStorage.setItem('currentForumTopic', String(id))
-        setCurrentForumTopic(String(id))
     }
 
 
@@ -103,8 +86,7 @@ export default function ForumTopicsPage({}: Props){
                     topics?.map(function(e, index){
                         return <ForumTopicComponent
                             data={e}
-                            key={index+Math.random()+2000000}
-                            onItemClick={() => onItemClicked(e.id, e.slug)}/>
+                            key={index+Math.random()+2000000}/>
                     })
                 }
                 {

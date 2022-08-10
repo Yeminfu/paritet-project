@@ -1,7 +1,6 @@
-import React, {ReactNode, useEffect, useState} from 'react';
+import React, {ReactNode} from 'react';
 import './ForumMessageComponent.scss';
 import Utils from "../lib/utils";
-import {$auth} from "../store/store";
 
 interface Props{
     children?: ReactNode;
@@ -15,24 +14,12 @@ interface Props{
     };
     onEditClick: any;
 }
-interface AuthData {
-    token: string;
-    user: {
-        id?: number;
-        username: string;
-    }
-}
+
 export default function ForumMessageComponent({children, data, onEditClick}: Props){
 
-    const [userId, setUserId] = useState(parseInt(String(localStorage.getItem('userId'))))
-    const [auth, setAuth] = useState($auth)
+    const userId = parseInt(String(localStorage.getItem('id')))
     const utils = new Utils()
 
-    useEffect(() => {
-        auth.map(e => {
-            console.log("EEEEE", e)
-        })
-    }, [])
 
     return (
         <div className={'forum-message-module'} style={{maxWidth: '100%'}}>
