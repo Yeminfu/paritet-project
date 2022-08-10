@@ -27,21 +27,6 @@ export const $rights = createStore([])
 
 
 
-//FORUM CATEGORIES STATES
-export const setCurrentForumCategory = createEvent<string | null>();
-export const $currentForumCategory = createStore(localStorage.getItem('currentForumCategory'))
-    .on(setCurrentForumCategory, (o: any, n: string | null) => n)
-
-
-
-
-//FORUM TOPICS STATES
-export const setCurrentForumTopic = createEvent<string | null>();
-export const $currentForumTopic = createStore(localStorage.getItem('currentForumTopic'))
-    .on(setCurrentForumTopic, (o: any, n: string | null) => n)
-
-
-
 
 
 
