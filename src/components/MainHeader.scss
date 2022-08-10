@@ -17,16 +17,23 @@
       padding: 16px 0;
       box-sizing: border-box;
 
-      .user-name-label{
-        display: flex;
-        font-size: 20px;
+      .logo-wrapper{
+        font-family: 'Lobster', cursive;
+        font-size: 32px;
+        cursor: pointer;
       }
+
       .exit-button-wrapper{
         display: flex;
         justify-content: space-between;
         align-items: center;
         &>a{
           text-decoration: none;
+        }
+        .user-name-label{
+          display: flex;
+          font-size: 20px;
+          margin-right: 8px;
         }
         .button{
           display: flex;
@@ -53,11 +60,6 @@
       padding: 16px 0 32px 0;
       box-sizing: border-box;
 
-      .logo-wrapper{
-        font-family: 'Lobster', cursive;
-        font-size: 32px;
-        cursor: pointer;
-      }
 
       .search-field{
         display: flex;

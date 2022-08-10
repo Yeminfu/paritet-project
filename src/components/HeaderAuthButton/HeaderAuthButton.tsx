@@ -1,7 +1,7 @@
-import React, {ReactNode, useState} from "react";
+import React, {ReactNode, useEffect, useState} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {$auth, logout} from "../../store/store";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 interface Props{
     children?: ReactNode;
@@ -10,6 +10,12 @@ interface Props{
 export default function HeaderAuthButton({children}: Props){
 
     const navigate = useNavigate()
+
+    let id = localStorage.getItem('id')
+    let username = localStorage.getItem('username')
+    let token = localStorage.getItem('token')
+
+
 
 
     const onClicked = () => {
@@ -22,12 +28,14 @@ export default function HeaderAuthButton({children}: Props){
     }
 
     return(
-        <div onClick={onClicked}>
-            {
-                $auth.getState()
-                    ? <button type="button" className="btn btn-danger">Выйти</button>
-                    : <button type="button" className="btn btn-primary">Войти</button>
-            }
-        </div>
+        <Link to={'/login'}>
+            <div>
+                {
+                    id && username && token && id?.length > 0 && token?.length > 0 && username?.length > 0
+                        ? <button type="button" className="btn btn-danger">Выйти</button>
+                        : <button type="button" className="btn btn-primary">Войти</button>
+                }
+            </div>
+        </Link>
     )
 }
