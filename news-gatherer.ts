@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer')
-const {getParsed} = require('./modules/xmlParser.ts');
-
+const {getParsed} = require('./modules/xmlParser.ts')
 const mysql = require('mysql2')
+const slugger = require('slugify')
 
 const connection = mysql.createConnection({
     host: '127.0.0.1',
@@ -38,17 +38,17 @@ function closeDB(){
 
 async function insertNews(news){
     let query = `
-    INSERT INTO news(
-        url, 
-        title, 
+    INSERT INTO News(
+        title,
+        slug,
         description, 
-        small_img, 
-        date_time, 
+        smallImg, 
+        dateTime, 
         blocks
-    ) 
+    )
     VALUES(
-        '${news.url}', 
         '${news.title}', 
+        '${news.slug}', 
         '${news.description}', 
         '${news.smallImg}', 
         '${news.dateTime}', 
@@ -102,13 +102,11 @@ async function getArticleByLink(link){
     await page.goto(link, { })
 
     let pageContent = await page.evaluate(() => {
-        const url = document.URL
         const title = document.querySelector('.story__title')?.innerHTML
         const description = document.querySelector('.story__lead')?.innerHTML
         const blocks = document.querySelector('.story__blocks_border')?.innerHTML
         const smallImg = document.querySelector('.story__image_small')?.getAttribute('src')
         let dateTime = document.querySelector('.story__time')?.getAttribute('datetime')
-
         const newDT = new Date(dateTime)
         dateTime = newDT.getFullYear()+'-'
             +('0'+(newDT.getMonth()+1)).slice(-2)+'-'
@@ -117,9 +115,10 @@ async function getArticleByLink(link){
             +('0'+newDT.getMinutes()).slice(-2)+':'
             +('0'+newDT.getSeconds()).slice(-2)
 
+
         return{
-            url: url,
             title: title?.trim(),
+            slug: title?.trim(),
             description: description?.trim(),
             blocks: blocks,
             smallImg: smallImg,
@@ -144,7 +143,13 @@ async function getAllNews(){
     async function getData(){
         for(let i = 0; i < links.length; i++){
             console.log(`PROCESSING NEWS ${i+1}/${links.length}`)
-            await insertNews(await getArticleByLink(links[i]))
+            let data = await getArticleByLink(links[i])
+            console.log(`TITLE: "${data.title}"`)
+            console.log(`SLUG: "${data.slug}"`)
+            console.log(`DESC: "${data.description}"`)
+            if(data.slug !== undefined)
+                data.slug = slugger(data.slug, '_').toLowerCase()
+            await insertNews(data)
             //console.log("DATETIME", links[i], typeof links[i].dateTime)
             //console.log("NEWS:", await getArticleByLink(links[i]))
         }
