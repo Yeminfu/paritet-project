@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios from "axios"
+import swal from 'sweetalert2'
 
 
 export default class Fetcher{
@@ -18,6 +19,10 @@ export default class Fetcher{
         })
     }
 
+
+
+
+
     async logOut(user: any){
         return await this.controller.get(`${this.baseUrl}/api/logOut`)
             .then(function(response: any){
@@ -33,7 +38,7 @@ export default class Fetcher{
             .then(function (response: any){
 
                 console.log("FRONT GOT AUTH RESPONSE:", response);
-                if(response.data[0].username && response.data[0].token && response.data[0].token_update){
+                if(response.data[0].username && response.data[0].token && response.data[0].tokenUpdate){
                     return response.data[0]
                 }
                 else if(response.data === "INCORRECT"){
@@ -56,7 +61,7 @@ export default class Fetcher{
             .then(function (response: any){
 
                 console.log("FRONT GOT REG RESPONSE:", response);
-                if(response.data[0].username && response.data[0].token && response.data[0].token_update){
+                if(response.data[0].username && response.data[0].token && response.data[0].tokenUpdate){
                     return response.data[0]
                 }
                 else if(response.data === "TAKEN"){
@@ -85,6 +90,11 @@ export default class Fetcher{
             })
     }
 
+
+
+
+
+
     async getNews(quantity?: number){
         return await this.controller.post(`${this.baseUrl}/api/getNews`, JSON.stringify({
             quantity: quantity?.toString()
@@ -98,6 +108,19 @@ export default class Fetcher{
             })
     }
 
+    async getNewsDetails(slug: string){
+        console.log("FTCH", slug)
+        return await this.controller.post(`${this.baseUrl}/api/getNewsDetails`, JSON.stringify({
+            slug: slug
+        }))
+            .then(await function (response: any){
+                console.log("FRONT GOT NEWS DETAILS RESPONSE:", response)
+                return response.data[0]
+            })
+            .catch(function (error: any){
+                console.log(error);
+            })
+    }
 
 
 
@@ -197,12 +220,12 @@ export default class Fetcher{
 
 
 
-    async setNewForumTopic(data: {title: string, slug: string, authorId: number, categoryId: number, message: string, date: string}){
+    async setNewForumTopic(data: {title: string, slug: string, authorId: number, categorySlug: string, message: string, date: string}){
         return await this.controller.post(`${this.baseUrl}/api/setNewForumTopic`, JSON.stringify({
             title: data.title,
             slug: data.slug,
             authorId: data.authorId,
-            categoryId: data.categoryId,
+            categorySlug: data.categorySlug,
             message: data.message,
             date: data.date,
         }))
@@ -230,6 +253,19 @@ export default class Fetcher{
             })
     }
 
+    async getForumTopics(slug: string){
+        return await this.controller.post(`${this.baseUrl}/api/getForumTopics`, JSON.stringify({
+            slug: slug,
+        }))
+            .then(await function (response: any){
+                console.log("FETCHER015: GOT FORUM TOPICS RESPONSE:", response.data)
+                return response
+            })
+            .catch(function (error: any){
+                console.log(error);
+                return error
+            })
+    }
 
 
 
@@ -262,22 +298,50 @@ export default class Fetcher{
             })
     }
 
-    async setNewMessage(data: {userId: number, topicId: number, message: string, createdBy: string, date: string}){
-        console.log("fetcher", data)
-        return await this.controller.post(`${this.baseUrl}/api/setNewMessage`, JSON.stringify({
-            userId: data.userId,
-            topicId: data.topicId,
-            message: data.message,
-            createdBy: data.createdBy,
-            date: data.date
+    async getForumMessages(topicSlug: string){
+        return await this.controller.post(`${this.baseUrl}/api/getForumMessages`, JSON.stringify({
+            topicSlug: topicSlug,
         }))
             .then(await function (response: any){
-                console.log("FRONT GOT SETTED MESSAGES RESPONSE:", response)
+                console.log("FETCHER016: GOT FORUM MESSAGES BY SLUG RESPONSE:", response.data)
                 return response
             })
             .catch(function (error: any){
                 console.log(error);
+                return error
             })
+    }
+
+    async setNewForumMessage(data: {message: string, createdAt: string, authorId: number, topicSlug: string}){
+
+        console.log("fetcher", data)
+
+        //code: "ER_NO_SUCH_TABLE"
+        //errno: 1146
+        //message: "Table 'testdb.orumMessages' doesn't exist"
+        //sql: "insert into orumMessages(message, createdAt, authorId, topicSlug)\n        values(\"123\", \"2022-08-12 16:56:44\", 1, \"111\")"
+        //sqlMessage: "Table 'testdb.orumMessages' doesn't exist"
+        //sqlState: "42S02"
+
+        this.controller.interceptors.response.use((response: any) => {
+                console.log("fetcher response", response.data)
+                return response.data;
+            },
+            (error: any) => {
+                console.log("fetcher error", error)
+                swal.fire(
+                    `${JSON.stringify(error.name, null, " ")}`,
+                    `<pre class="text-left">${JSON.stringify(error.message, null, " ")}</pre>`
+                )
+                return error;
+            })
+
+        return await this.controller.post(`${this.baseUrl}/api/setNewForumMessage`, JSON.stringify({
+            message: data.message,
+            createdAt: data.createdAt,
+            authorId: data.authorId,
+            topicSlug: data.topicSlug,
+        }))
     }
 
     async editMessage(id: number, message: string){

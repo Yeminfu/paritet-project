@@ -65,7 +65,7 @@ export default function Login({children}: Props){
             let answer = await controller.getAuth(username, password)
             console.log('answer', answer)
 
-            if(answer?.id && answer?.username && answer?.token && answer?.token_update){
+            if(answer?.id && answer?.username && answer?.token && answer?.tokenUpdate){
                 auth = true;
                 const authData = {
                     token: answer.token,

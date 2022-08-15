@@ -28,8 +28,11 @@ export default function ForumMessagesPage({children}: Props){
     useEffect(() => {
         async function loadMessages(){
             try{
-                const state = location.state as any;
-                const response = await fetcher.getForumMessagesByTopicId(state.topicId)
+                //const state = location.state as any;
+                let url = location.pathname.split('/', 10)
+                console.log("PATHHH", url[url.length-1])
+                const response = await fetcher.getForumMessages(url[url.length-1])
+                console.log("PATHHH", response.data)
                 setMessages(response.data)
             }
             catch{
@@ -37,7 +40,7 @@ export default function ForumMessagesPage({children}: Props){
             }
         }
         loadMessages();
-    }, []);
+    }, [visibility]);
 
     const onFloatClicked = () => {
         setVisibility(true)
@@ -47,6 +50,7 @@ export default function ForumMessagesPage({children}: Props){
     }
 
     const onModalClosed = () => {
+        console.log("CLOSE")
         setVisibility(false)
         setInitialModalMsg('')
         setModalTitle('Новое сообщение')
@@ -60,21 +64,21 @@ export default function ForumMessagesPage({children}: Props){
         }
         else if(data.length > 0){
             const date = utils.formatDateForDB(new Date())
-
-            const topicId = parseInt(String(localStorage.getItem('currentForumTopic')))
+            let url = location.pathname.split('/', 10)
+            const slug = url[url.length-1]
 
             id
-                ? await fetcher.editMessage(id, data)
-                : await fetcher.setNewMessage({
-                    userId: parseInt(String(localStorage.getItem('id'))),
-                    topicId: topicId,
+                ? await fetcher.editMessage(msgID, data)
+                : await fetcher.setNewForumMessage({
                     message: data,
-                    createdBy: date,
-                    date: date
+                    createdAt: date,
+                    authorId: parseInt(String(localStorage.getItem('id'))),
+                    topicSlug: slug
                 })
-
-            const response = await fetcher.getForumMessagesByTopicId(topicId)
-            setMessages(response.data)
+            const response = await fetcher.getForumMessages(slug)
+            setMessages(response)
+            //const response = await fetcher.getForumMessagesByTopicId(topicId)
+            //setMessages(response.data)
         }
 
         setInitialModalMsg('')
@@ -96,11 +100,11 @@ export default function ForumMessagesPage({children}: Props){
                     messages?.map(function(e, index){
                         return <ForumMessageComponent key={index+Math.random()+2000000}
                                                       data={e}
-                                                      onEditClick={() => onEditClicked(e?.message, e.id)}/>
+                                                      onEditClick={() => onEditClicked(e.message, e.authorId)}/>
                     })
                 }
                 {
-                    visibility
+                    visibility === true
                         ? <NewMessageModalComponent
                             msgID={msgID}
                             title={modalTitle}

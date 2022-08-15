@@ -2,7 +2,6 @@ import React, {ReactNode, useEffect, useState} from 'react'
 import Fetcher from "../Fetcher/Fetcher";
 import NewsModuleComponent from '../components/NewsModuleComponent';
 import DefaultTmp from "../components/DefaultTmp";
-import AuthChecker from "../components/AuthChecker";
 
 interface Props{
     children?: ReactNode;
@@ -18,7 +17,7 @@ export default function NewsPage({children}: Props){
         async function loadNews(){
             const response = await fetcher.getNews(0)
             const data = response.data.filter((e: any) => {
-                if(e.small_img !== 'undefined' && e.small_img !== undefined)
+                if(e.smallImg !== 'undefined' && e.smallImg !== undefined)
                     return e
             })
             setNews(data)

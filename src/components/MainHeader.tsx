@@ -1,4 +1,4 @@
-import React, {ReactNode} from "react";
+import React, {ReactNode, useEffect} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import './MainHeader.scss'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -13,13 +13,17 @@ export default function MainHeader({children}: Props){
 
     const navigate = useNavigate()
 
+    useEffect(() => {
+        console.log("HEADERRRR")
+    })
+
     return(
             <div className={'main-header'}>
                 <div className='container'>
                     <div className={'upper-header'}>
                         <div className={'logo-wrapper'} onClick={() => {navigate("../", { replace: true });}}>Паритет</div>
                         <div className={'exit-button-wrapper'}>
-                            <div className={'user-name-label'}>{$auth.getState()?.user.username}</div>
+                            <div className={'user-name-label'}>{$auth.getState()?.user.username || localStorage.getItem('username')}</div>
                             <Link to={'/login'}>
                                 <HeaderAuthButton/>
                             </Link>

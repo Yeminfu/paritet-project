@@ -24,6 +24,9 @@ export const setRights = createEvent();
 export const $rights = createStore([])
     .on(setRights, (_, todo) => todo);
 
+export const setHeaderPath = createEvent<string>()
+export const $headerPath = createStore<string>('')
+    .on(setHeaderPath, (_, newPath: string) => {return newPath})
 
 
 

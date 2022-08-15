@@ -33,7 +33,14 @@ export default function ForumTopicsPage({}: Props){
             try{
                 const state = location.state as any;
                 console.log("CATCHED_ID", state.categoryId)
-                const response = await fetcher.getTopicsByCategoryId(state.categoryId)
+                //const response = await fetcher.getTopicsByCategoryId(state.categoryId)
+
+
+                let url = location.pathname.split('/', 10)
+                console.log("PATHHH", url[url.length-1])
+                const response = await fetcher.getForumTopics(url[url.length-1])
+                console.log("rs", response)
+
                 setTopics(response.data)
             }
             catch{
@@ -58,23 +65,34 @@ export default function ForumTopicsPage({}: Props){
         setVisibility(false)
 
         const authorId = parseInt(String(localStorage.getItem('id')))
-        const categoryId = parseInt(String(localStorage.getItem('currentForumCategory')))
+        //const categoryId = parseInt(String(localStorage.getItem('currentForumCategory')))
+        let url = location.pathname.split('/', 10)
+        const categorySlug = url[url.length-1]
         const slug = slugify(title)
         const date = utils.formatDateForDB(new Date())
-        const data = {title, slug, authorId, categoryId, message, date}
+        const data = {title, slug, authorId, categorySlug, message, date}
 
         console.log("TITLE:", title)
         console.log("SLUG:", slug)
         console.log("MSG:", message)
         console.log("USER_ID:", authorId)
-        console.log("CATEGORY_ID:", categoryId)
+        console.log("CATEGORY_SLUG:", categorySlug)
 
         await fetcher.setNewForumTopic(data)
-        const response = await fetcher.getTopicsByCategoryId(categoryId)
 
-        console.log("GET TOPICS BY ID ("+categoryId+"):", response)
+        const dataMsg = {
+            message: message,
+            createdAt: utils.formatDateForDB(new Date()),
+            authorId: authorId,
+            topicSlug: slug
+        }
+        await fetcher.setNewForumMessage(dataMsg)
+        const response = await fetcher.getForumTopics(categorySlug)
+        //message, createdAt, authorId, topicSlug
 
-        setTopics(response.data)
+        console.log("GET TOPICS BY SLUG ("+categorySlug+"):", response)
+
+        setTopics(response)
         setInitialModalMsg('')
     }
 
