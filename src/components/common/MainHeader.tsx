@@ -2,7 +2,7 @@ import React, {ReactNode, useEffect} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import './MainHeader.scss'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import HeaderAuthButton from "../base/HeaderAuthButton";
+import HeaderAuthButton from "../buttons/HeaderAuthButton";
 import {$auth} from "../../store/store";
 
 interface Props{
