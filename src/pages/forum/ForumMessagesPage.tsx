@@ -76,7 +76,7 @@ export default function ForumMessagesPage({children}: Props){
                     topicSlug: slug
                 })
             const response = await fetcher.getForumMessages(slug)
-            setMessages(response)
+            setMessages(response.data)
             //const response = await fetcher.getForumMessagesByTopicId(topicId)
             //setMessages(response.data)
         }
@@ -100,7 +100,7 @@ export default function ForumMessagesPage({children}: Props){
                     messages?.map(function(e, index){
                         return <ForumMessageComponent key={index+Math.random()+2000000}
                                                       data={e}
-                                                      onEditClick={() => onEditClicked(e.message, e.authorId)}/>
+                                                      onEditClick={() => onEditClicked(e.message, e.id)}/>
                     })
                 }
                 {
