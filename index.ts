@@ -199,7 +199,7 @@ server.post('/api/getRegistration', async (req, res) => {
 async function getRegistration(username, password){
     response = {}
     console.log("SENDED", username, password)
-    const query = `SELECT id FROM users WHERE username = "${username}"`
+    const query = `SELECT id FROM Users WHERE username = "${username}"`
     const result = await connection.promise().query(query)
     console.log("RESSss:", result[0])
     const isUserExists = result[0].length === 0 ? false : true
@@ -217,9 +217,9 @@ async function getRegistration(username, password){
             +('0'+newDT.getMinutes()).slice(-2)+':'
             +('0'+newDT.getSeconds()).slice(-2)
         console.log("PRE3", tokenExpDate)
-        const fullUserDataQuery = `INSERT INTO users(username, password, token, token_update) VALUES ("${username}","${password}","${newToken}","${tokenExpDate}")`
+        const fullUserDataQuery = `INSERT INTO Users(username, password, token, tokenUpdate) VALUES ("${username}","${password}","${newToken}","${tokenExpDate}")`
         const fullUserData = await connection.promise().query(fullUserDataQuery)
-        const checkQuery = `SELECT * FROM users WHERE username = "${username}"`
+        const checkQuery = `SELECT * FROM Users WHERE username = "${username}"`
         const addedResult = await connection.promise().query(checkQuery)
         const isSuccessfully = addedResult[0].length === 1 ? true : false
         if(isSuccessfully){
@@ -244,7 +244,7 @@ server.post('/api/getAuth', async (req, res) => {
 async function getAuth(username, password){
     response = {}
     console.log("SENDED", username, password)
-    const query = `SELECT id FROM users WHERE username = "${username}" AND password = "${password}"`
+    const query = `SELECT id FROM Users WHERE username = "${username}" AND password = "${password}"`
     let data = await connection.promise().query(query)
     console.log("DATA", data[0])
     if(data[0].length > 0){
@@ -261,9 +261,9 @@ async function getAuth(username, password){
             +('0'+newDT.getMinutes()).slice(-2)+':'
             +('0'+newDT.getSeconds()).slice(-2)
         console.log("PRE3", tokenExpDate)
-        const setTokenQuery = `UPDATE users SET token = "${newToken}", token_update = "${tokenExpDate}" WHERE username = "${username}" AND password = "${password}"`
+        const setTokenQuery = `UPDATE Users SET token = "${newToken}", tokenUpdate = "${tokenExpDate}" WHERE username = "${username}" AND password = "${password}"`
         await connection.promise().query(setTokenQuery)
-        const fullUserDataQuery = `SELECT id, username, token, token_update FROM users WHERE username = "${username}" AND password = "${password}"`
+        const fullUserDataQuery = `SELECT id, username, token, tokenUpdate FROM Users WHERE username = "${username}" AND password = "${password}"`
         const fullUserData = await connection.promise().query(fullUserDataQuery)
         response = fullUserData[0]
     }
@@ -312,7 +312,7 @@ server.post('/api/getNews', async (req, res) => {
 })
 async function getNews(quantity){
     if(quantity === 0){
-        const query = 'SELECT * FROM news ORDER BY id DESC'
+        const query = 'SELECT * FROM News ORDER BY id DESC'
         let data = await connection.promise().query(query)
         response = JSON.stringify(data[0])
         console.log("SERVER: NEWS OBTAINED")
@@ -321,6 +321,21 @@ async function getNews(quantity){
     //    response = JSON.stringify([...news.slice(quantity*-1)])
     //}
 }
+
+server.post('/api/getNewsDetails', async (req, res) => {
+    console.log("SERVER:", 'getNewsDetails()')
+    console.log(">>>>> req.body", req.body)
+    let data = Object.keys(req.body)
+    console.log("BY SLUG", JSON.parse(data[0]))
+    const parsed = JSON.parse(data[0])
+    const slug = parsed.slug
+
+    const query = `SELECT * FROM News WHERE slug="${slug}"`
+
+    response = await connection.promise().query(query).catch(e => response = e)
+    res.send(response[0])
+    response = null
+})
 
 
 
@@ -442,14 +457,14 @@ server.post('/api/deleteForumCategory', async (req, res) => {
 server.post('/api/setNewForumTopic', async (req, res) => {
     const data = Object.keys(req.body)
     const requestData = JSON.parse(data[0])
-    console.log("SERVER: setNewTopic()", requestData)
+    console.log("SERVER: setNewForumTopic()", requestData)
     //title, slug, authorId, categoryId, message, date
     let result = 'SUCCESSFUL'
-    const insertTopicQuery = `insert into ForumTopics(title, slug, authorId, categoryId) 
-        values("${requestData.title}", "${requestData.slug}", ${requestData.authorId}, ${requestData.categoryId})`
+    const insertTopicQuery = `insert into ForumTopics(title, slug, authorId, categorySlug) 
+        values("${requestData.title}", "${requestData.slug}", ${requestData.authorId}, "${requestData.categorySlug}")`
     let topicResponse = await connection.promise().query(insertTopicQuery).catch(e => {result = e})
 
-    console.log("SERVER: TR:", topicResponse[0].insertId)
+    //console.log("SERVER: TR:", topicResponse[0].insertId)
     if(result === "SUCCESSFUL"){
         const addMessageQuery = `insert into Messages(userId, topicId, message, createdBy, date) 
         values("${requestData.authorId}", "${topicResponse[0].insertId}", "${requestData.message}", "${requestData.date}", "${requestData.date}")`
@@ -465,7 +480,6 @@ server.post('/api/setNewForumTopic', async (req, res) => {
 
 })
 
-
 server.post('/api/getTopicsByCategoryId', async (req, res) => {
     const data = Object.keys(req.body)
     console.log("SERVER: data >>>>", data)
@@ -475,6 +489,26 @@ server.post('/api/getTopicsByCategoryId', async (req, res) => {
     const answer = await connection.promise().query(query)
     console.log("ANSWER:", answer[0])
     res.send(answer[0])
+})
+
+
+
+server.post('/api/getForumTopics', async (req, res) => {
+    console.log(">>>>> req.body", req.body)
+
+    let data = Object.keys(req.body)
+    const requestData = JSON.parse(data[0])
+
+    const query = `SELECT * FROM ForumTopics 
+        INNER JOIN Users
+        ON ForumTopics.authorId = Users.id
+        WHERE categorySlug = "${requestData.slug}"`
+
+    response = await connection.promise().query(query).catch(e => response = e)
+    //console.log("RESPONSE", response[0])
+    res.send(response[0])
+    response = null
+
 })
 
 
@@ -520,7 +554,9 @@ server.post('/api/getForumMessagesByTopicId', async (req, res) => {
     console.log("SERVER: data >>>>", data)
     const requestData = JSON.parse(data[0])
     console.log("SERVER: getMessagesByCategoryId("+requestData.id+")", requestData.id)
-    const query = `select * from Messages where topicId = ${requestData.id}`
+    const query = `select * from Messages 
+    inner join Users on Messages.userId = Users.id
+    where topicId = ${requestData.id}`
     const answer = await connection.promise().query(query)
     console.log("ANSWER:", answer[0])
     res.send(answer[0])
@@ -528,14 +564,10 @@ server.post('/api/getForumMessagesByTopicId', async (req, res) => {
 
 server.post('/api/editMessage', async (req, res) => {
     let data = Object.keys(req.body)
-    await editMessage(data)
-    res.send(response)
-    response = null
-})
-async function editMessage(data){
-    console.log("ddddataaa2", `${data}`)
-    const requestData = JSON.parse(data)
-    const query = `UPDATE Messages SET message = "${requestData.message}" WHERE id = "${requestData.id}"`
+
+    const requestData = JSON.parse(data[0])
+    console.log("SERVER: data[0]", data[0])
+    const query = `UPDATE ForumMessages SET message = "${requestData.message}" WHERE id = "${requestData.id}"`
 
     let result = 'SUCCESSFUL'
     await connection.promise().query(query)
@@ -543,9 +575,49 @@ async function editMessage(data){
         .catch(e => {result = e})
     response = result
     console.log("SERVER: MSG EDITED WITH RESULT ->", result)
-}
 
 
+    res.send(response)
+    response = null
+})
+
+
+server.post('/api/getForumMessages', async (req, res) => {
+    console.log(">>>>> req.body", req.body)
+
+    let data = Object.keys(req.body)
+    const requestData = JSON.parse(data[0])
+
+    const query = `SELECT * FROM ForumMessages 
+        INNER JOIN Users
+        ON ForumMessages.authorId = Users.id
+        WHERE topicSlug = "${requestData.topicSlug}"`
+
+    response = await connection.promise().query(query).catch(e => response = e)
+    console.log("RESPONSE", response[0])
+    res.send(response[0])
+    response = null
+
+})
+server.post('/api/setNewForumMessage', async (req, res) => {
+
+    const data = Object.keys(req.body)
+
+    const requestData = JSON.parse(data[0])
+
+    console.log("SERVER: setNewForumMessage()", requestData)
+
+    const addMessageQuery = `insert into ForumMessages(message, createdAt, authorId, topicSlug)
+        values("${requestData.message}", "${requestData.createdAt}", ${requestData.authorId}, "${requestData.topicSlug}")`
+
+    await connection.promise().query(addMessageQuery)
+        .catch(e => {
+            console.log("e", e.code)
+            response = {data: null, error: e.code}
+        })
+
+    res.send(response)
+})
 
 
 
@@ -553,13 +625,20 @@ async function editMessage(data){
 
 
 //MAIN CATEGORIES
-server.post('/api/getCategories', (req, res) => {
-    getCategories()
+server.post('/api/getCategories', async (req, res) => {
+    let data = Object.keys(req.body)
+    await getCategories()
     res.send(response)
+    response = null
 })
-function getCategories(){
-    response = JSON.stringify([...categories])
-    console.log("SERVER_GETS_CATS", categories)
+async function getCategories(){
+    const query = `SELECT * FROM MainCategories`
+    let result = 'SUCCESSFUL'
+    const data = await connection.promise().query(query)
+        .then(() => {console.log('then ->', data)})
+        .catch(e => {result = e})
+    response = result
+    console.log("SERVER: GOT MAIN CATEGORIES", result)
 }
 
 
