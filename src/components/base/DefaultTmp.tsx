@@ -1,8 +1,8 @@
-import MainHeader from "./MainHeader";
-import React, {useEffect} from "react";
+import MainHeader from "../common/MainHeader";
+import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './DefaultTmp.scss'
-import MainFooter from "./MainFooter";
+import MainFooter from "../common/MainFooter";
 
 interface Props{
     children: any;

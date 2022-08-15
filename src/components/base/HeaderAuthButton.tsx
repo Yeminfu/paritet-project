@@ -1,4 +1,4 @@
-import React, {ReactNode, useEffect, useState} from "react";
+import React, {ReactNode} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {$auth, logout} from "../../store/store";
 import {Link, useNavigate} from "react-router-dom";

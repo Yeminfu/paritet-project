@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react';
 import './MainModuleComponent.scss';
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 interface Props{
     children?: ReactNode;
@@ -13,8 +13,6 @@ interface Props{
 }
 
 export default function MainModuleComponent({children, data}: Props){
-
-    const navigate = useNavigate()
 
     return (
         <Link className='main-link' to={`..${data.link}`}>

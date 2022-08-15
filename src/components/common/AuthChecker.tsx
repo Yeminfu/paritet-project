@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
-import {$auth} from "../store/store";
+import {$auth} from "../../store/store";
 import {useNavigate} from "react-router-dom";
-import Login from "../pages/Login";
+import Login from "../../pages/authorization/Login";
 import {useStore} from "effector-react";
 
 interface Props{

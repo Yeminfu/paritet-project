@@ -1,7 +1,7 @@
 import React, {ReactNode, useEffect} from 'react';
 import './NewsModuleComponent.scss';
-import Utils from "../lib/utils";
-import {Link, useNavigate} from "react-router-dom";
+import Utils from "../../lib/utils";
+import {Link} from "react-router-dom";
 
 interface Props{
     children?: ReactNode;

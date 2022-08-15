@@ -1,9 +1,8 @@
 import React, {ReactNode, useEffect, useState} from 'react'
-import './MainPage/MainPage.scss'
-import Fetcher from "../Fetcher/Fetcher";
-import ForumCategoryComponent from "../components/ForumCategoryComponent";
-import DefaultTmp from "../components/DefaultTmp";
-import AuthChecker from "../components/AuthChecker";
+import '../MainPage/MainPage.scss'
+import Fetcher from "../../Fetcher/Fetcher";
+import ForumCategoryComponent from "../../components/forum/ForumCategoryComponent";
+import DefaultTmp from "../../components/base/DefaultTmp";
 
 interface Props{
     children?: ReactNode;

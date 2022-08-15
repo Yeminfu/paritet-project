@@ -1,16 +1,16 @@
 import React from 'react';
 import {Routes, Route} from 'react-router-dom';
 import './App.scss';
-import MainPage from "./pages/MainPage/MainPage";
+import MainPage from "./pages/main/MainPage";
 import {BrowserRouter} from 'react-router-dom';
-import Login from "./pages/Login";
-import NewsPage from "./pages/NewsPage";
-import NewsDetailsComponent from "./components/NewsDetailsComponent";
-import Registration from "./pages/Registration";
-import ForumMessagesPage from "./pages/ForumMessagesPage";
+import Login from "./pages/authorization/Login";
+import NewsPage from "./pages/news/NewsPage";
+import NewsDetailsComponent from "./components/news/NewsDetailsComponent";
+import Registration from "./pages/authorization/Registration";
+import ForumMessagesPage from "./pages/forum/ForumMessagesPage";
 import AdminCategoriesPage from "./pages/admin/AdminCategoriesPage";
-import ForumCategoriesPage from "./pages/ForumCategoriesPage";
-import ForumTopicsPage from "./pages/ForumTopicsPage";
+import ForumCategoriesPage from "./pages/forum/ForumCategoriesPage";
+import ForumTopicsPage from "./pages/forum/ForumTopicsPage";
 
 
 export default function App(){

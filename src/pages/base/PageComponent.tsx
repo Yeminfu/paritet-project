@@ -1,7 +1,7 @@
 import React, {ReactNode} from "react";
 import './PageComponent.scss';
 import Fetcher from "../../Fetcher/Fetcher";
-import {Link, Navigate, Route, useNavigate} from "react-router-dom";
+import {Navigate, Route, useNavigate} from "react-router-dom";
 
 interface Props{
     children?: [ReactNode];
@@ -12,7 +12,7 @@ interface Props{
 
 const onSearch = (value: string) => console.log(value);
 
-export default function PageComponent({children, floatButton, modal, isWrap = true}: Props){
+function PageComponent({children, floatButton, modal, isWrap = true}: Props){
 
 
     let fetcher = new Fetcher()

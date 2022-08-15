@@ -1,9 +1,6 @@
 import React from 'react'
-import DefaultTmp from "../../components/DefaultTmp";
-import MainModuleComponent from "../../components/MainModuleComponent";
-import {$auth} from "../../store/store";
-import Login from "../Login";
-import AuthChecker from "../../components/AuthChecker";
+import DefaultTmp from "../../components/base/DefaultTmp";
+import MainModuleComponent from "../../components/main/MainModuleComponent";
 
 interface Modules {
     title: string;

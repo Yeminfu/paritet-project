@@ -1,11 +1,11 @@
 import React, {ReactNode, useEffect, useState} from 'react'
-import './MainPage/MainPage.scss'
-import Fetcher from "../Fetcher/Fetcher";
-import FloatButtonComponent from "../components/buttons/FloatButtonComponent";
-import NewMessageModalComponent from "../components/modals/NewMessageModalComponent";
-import Utils from "../lib/utils";
-import ForumMessageComponent from "../components/ForumMessageComponent";
-import DefaultTmp from "../components/DefaultTmp";
+import '../MainPage/MainPage.scss'
+import Fetcher from "../../Fetcher/Fetcher";
+import FloatButtonComponent from "../../components/buttons/FloatButtonComponent";
+import NewMessageModalComponent from "../../components/modals/NewMessageModalComponent";
+import Utils from "../../lib/utils";
+import ForumMessageComponent from "../../components/forum/ForumMessageComponent";
+import DefaultTmp from "../../components/base/DefaultTmp";
 import {useLocation} from "react-router-dom";
 
 interface Props{

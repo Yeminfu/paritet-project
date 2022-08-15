@@ -1,13 +1,13 @@
 import React, {ReactNode, useEffect, useState} from 'react'
-import './MainPage/MainPage.scss'
-import Fetcher from "../Fetcher/Fetcher";
-import ForumTopicComponent from "../components/ForumTopicComponent";
-import FloatButtonComponent from "../components/buttons/FloatButtonComponent";
-import NewTopicModalComponent from "../components/modals/NewTopicModalComponent";
-import Utils from "../lib/utils";
+import '../MainPage/MainPage.scss'
+import Fetcher from "../../Fetcher/Fetcher";
+import ForumTopicComponent from "../../components/forum/ForumTopicComponent";
+import FloatButtonComponent from "../../components/buttons/FloatButtonComponent";
+import NewTopicModalComponent from "../../components/modals/NewTopicModalComponent";
+import Utils from "../../lib/utils";
 import slugify from "slugify";
 import {useLocation, useNavigate} from "react-router-dom";
-import DefaultTmp from "../components/DefaultTmp";
+import DefaultTmp from "../../components/base/DefaultTmp";
 
 
 interface Props{

@@ -64,7 +64,7 @@ export default function NewMessageModalComponent(
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={(e) => {onClosed(e)}}>Отмена</button>
-                            <button type="submit" className="btn btn-primary" onClick={onAccepted}>Отправить</button>
+                            <button type="submit" className="btn btn-primary" onClick={onAccepted}>Готово</button>
                         </div>
                     </div>
                 </div>

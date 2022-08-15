@@ -1,7 +1,7 @@
 import React, {ReactNode, useEffect, useState} from 'react'
-import Fetcher from "../Fetcher/Fetcher";
-import NewsModuleComponent from '../components/NewsModuleComponent';
-import DefaultTmp from "../components/DefaultTmp";
+import Fetcher from "../../Fetcher/Fetcher";
+import NewsModuleComponent from '../../components/news/NewsModuleComponent';
+import DefaultTmp from "../../components/base/DefaultTmp";
 
 interface Props{
     children?: ReactNode;

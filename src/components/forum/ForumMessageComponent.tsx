@@ -1,6 +1,6 @@
 import React, {ReactNode, useEffect} from 'react';
 import './ForumMessageComponent.scss';
-import Utils from "../lib/utils";
+import Utils from "../../lib/utils";
 
 interface Props{
     children?: ReactNode;

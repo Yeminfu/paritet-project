@@ -1,10 +1,10 @@
 import React, {ReactNode, useState} from 'react'
-import './MainPage/MainPage.scss'
+import '../MainPage/MainPage.scss'
 import { Form, Field } from 'react-final-form'
 import './Registration.scss'
-import Fetcher from "../Fetcher/Fetcher";
+import Fetcher from "../../Fetcher/Fetcher";
 import {useLocation, useNavigate} from "react-router-dom";
-import {$auth, setAuth} from "../store/store";
+import {$auth, setAuth} from "../../store/store";
 
 interface Props{
     children?: ReactNode;

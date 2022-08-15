@@ -1,12 +1,9 @@
 import React, {ReactNode, useEffect, useState} from 'react'
-import PageComponent from "../pages/base/PageComponent";
 import {useLocation} from 'react-router-dom';
 import './NewsDetailsComponent.scss';
-import DefaultTmp from "./DefaultTmp";
-import NewsModuleComponent from "./NewsModuleComponent";
-import Utils from "../lib/utils";
-import AuthChecker from "./AuthChecker";
-import Fetcher from "../Fetcher/Fetcher";
+import DefaultTmp from "../base/DefaultTmp";
+import Utils from "../../lib/utils";
+import Fetcher from "../../Fetcher/Fetcher";
 
 interface Props{
     children?: ReactNode;

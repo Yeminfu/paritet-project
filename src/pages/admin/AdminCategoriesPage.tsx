@@ -5,7 +5,6 @@ import {useNavigate} from "react-router-dom";
 import AdminCategoryObserver from "../../components/admin/AdminCategoryObserver";
 import Fetcher from "../../Fetcher/Fetcher";
 import {$adminCategoryId, setAdminCategoryId} from "../../store/store";
-import AuthChecker from "../../components/AuthChecker";
 
 interface Props{
     children?: ReactNode;
