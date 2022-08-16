@@ -28,6 +28,12 @@ export const setHeaderPath = createEvent<string>()
 export const $headerPath = createStore<string>('')
     .on(setHeaderPath, (_, newPath: string) => {return newPath})
 
+export const setBreadCrumbs = createEvent<Array<string>>()
+//export const addBreadCrumbs = createEvent<{crumb: string}>()
+export const $breadCrumbs: any = createStore(['Главная'])
+    .on(setBreadCrumbs, (oldState, newState: Array<string>) => newState)
+    //.on(addBreadCrumbs, (o, n: [{crumb: string}]) => n)
+
 
 
 

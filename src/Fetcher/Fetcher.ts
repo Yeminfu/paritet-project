@@ -20,16 +20,7 @@ export default class Fetcher{
     }
 
 
-
-
-
-    async logOut(user: any){
-        return await this.controller.get(`${this.baseUrl}/api/logOut`)
-            .then(function(response: any){
-
-            })
-    }
-
+    //REGISTRATION/AUTHORIZATION
     async getAuth(username: String, password: String){
         return await this.controller.post(`${this.baseUrl}/api/getAuth`, JSON.stringify({
             username: username,
@@ -52,7 +43,6 @@ export default class Fetcher{
                 console.log(error);
             })
     }
-
     async getRegistration(username: String, password: String){
         return await this.controller.post(`${this.baseUrl}/api/getRegistration`, JSON.stringify({
             username: username,
@@ -79,22 +69,8 @@ export default class Fetcher{
             })
     }
 
-    async getCategories(){
-        return await this.controller.post(`${this.baseUrl}/api/getCategories`)
-            .then(await function (response: any){
-                console.log("FRONT GOT CATEGORIES RESPONSE:", response)
-                return response
-            })
-            .catch(function (error: any){
-                console.log(error);
-            })
-    }
 
-
-
-
-
-
+    //NEWS
     async getNews(quantity?: number){
         return await this.controller.post(`${this.baseUrl}/api/getNews`, JSON.stringify({
             quantity: quantity?.toString()
@@ -107,7 +83,6 @@ export default class Fetcher{
                 console.log(error);
             })
     }
-
     async getNewsDetails(slug: string){
         console.log("FTCH", slug)
         return await this.controller.post(`${this.baseUrl}/api/getNewsDetails`, JSON.stringify({
@@ -123,9 +98,7 @@ export default class Fetcher{
     }
 
 
-
-
-
+    //FORUM CATEGORIES
     async setNewForumCategory(data: {title: string, slug: string, parent: number | null, description: string, hasChildren: boolean}){
         console.log("FETCHER: DATA ->", data)
         console.log("FETCHER: BOOLEAN ->", data.hasChildren)
@@ -146,7 +119,6 @@ export default class Fetcher{
                 return error
             })
     }
-
     async getForumCategories(){
         return await this.controller.post(`${this.baseUrl}/api/getForumCategories`)
             .then(await function(response: any){
@@ -155,7 +127,6 @@ export default class Fetcher{
             })
             .catch((e: any) => e)
     }
-
     async getForumCategoriesByParentId(id: number){
         return await this.controller.post(`${this.baseUrl}/api/getForumCategoriesByParentId`, JSON.stringify({
             id: id,
@@ -166,7 +137,6 @@ export default class Fetcher{
             })
             .catch((e: any) => e)
     }
-
     async getCategoryParent(id: number){
         return await this.controller.post(`${this.baseUrl}/api/getCategoryParent`, JSON.stringify({
             id: id,
@@ -177,7 +147,6 @@ export default class Fetcher{
             })
             .catch((e: any) => e)
     }
-
     async editForumCategory(data: {id: number, title: string, slug: string, parent: number | null, description: string, hasChildren: boolean}){
         console.log("FETCHER: DATA ->", data)
         console.log("FETCHER: BOOLEAN ->", data.hasChildren)
@@ -199,7 +168,6 @@ export default class Fetcher{
                 return error
             })
     }
-
     async deleteForumCategory(id: number){
         return await this.controller.post(`${this.baseUrl}/api/deleteForumCategory`, JSON.stringify({
             id: id,
@@ -215,11 +183,7 @@ export default class Fetcher{
     }
 
 
-
-
-
-
-
+    //FORUM TOPICS
     async setNewForumTopic(data: {title: string, slug: string, authorId: number, categorySlug: string, message: string, date: string}){
         return await this.controller.post(`${this.baseUrl}/api/setNewForumTopic`, JSON.stringify({
             title: data.title,
@@ -238,21 +202,6 @@ export default class Fetcher{
                 return error
             })
     }
-
-    async getTopicsByCategoryId(id: number){
-        return await this.controller.post(`${this.baseUrl}/api/getTopicsByCategoryId`, JSON.stringify({
-            id: id,
-        }))
-            .then(await function (response: any){
-                console.log("FETCHER010: GOT FORUM TOPICS BY ID RESPONSE:", response.data)
-                return response
-            })
-            .catch(function (error: any){
-                console.log(error);
-                return error
-            })
-    }
-
     async getForumTopics(slug: string){
         return await this.controller.post(`${this.baseUrl}/api/getForumTopics`, JSON.stringify({
             slug: slug,
@@ -268,36 +217,7 @@ export default class Fetcher{
     }
 
 
-
-
-
-
-
-    async getMessages(){
-        return await this.controller.post(`${this.baseUrl}/api/getMessages`)
-            .then(await function (response: any){
-                console.log("FRONT GOT MESSAGES RESPONSE:", response)
-                return response
-            })
-            .catch(function (error: any){
-                console.log(error);
-            })
-    }
-
-    async getForumMessagesByTopicId(id: number){
-        return await this.controller.post(`${this.baseUrl}/api/getForumMessagesByTopicId`, JSON.stringify({
-            id: id,
-        }))
-            .then(await function (response: any){
-                console.log("FETCHER011: GOT FORUM MESSAGES BY TOPIC_ID RESPONSE:", response.data)
-                return response
-            })
-            .catch(function (error: any){
-                console.log(error);
-                return error
-            })
-    }
-
+    //FORUM MESSAGES
     async getForumMessages(topicSlug: string){
         return await this.controller.post(`${this.baseUrl}/api/getForumMessages`, JSON.stringify({
             topicSlug: topicSlug,
@@ -311,17 +231,7 @@ export default class Fetcher{
                 return error
             })
     }
-
     async setNewForumMessage(data: {message: string, createdAt: string, authorId: number, topicSlug: string}){
-
-        console.log("fetcher", data)
-
-        //code: "ER_NO_SUCH_TABLE"
-        //errno: 1146
-        //message: "Table 'testdb.orumMessages' doesn't exist"
-        //sql: "insert into orumMessages(message, createdAt, authorId, topicSlug)\n        values(\"123\", \"2022-08-12 16:56:44\", 1, \"111\")"
-        //sqlMessage: "Table 'testdb.orumMessages' doesn't exist"
-        //sqlState: "42S02"
 
         this.controller.interceptors.response.use((response: any) => {
                 console.log("fetcher response", response.data)
@@ -343,7 +253,6 @@ export default class Fetcher{
             topicSlug: data.topicSlug,
         }))
     }
-
     async editMessage(id: number, message: string){
 
         return await this.controller.post(`${this.baseUrl}/api/editMessage`, JSON.stringify({
@@ -358,6 +267,7 @@ export default class Fetcher{
                 console.log(error);
             })
     }
+
 
 
 }

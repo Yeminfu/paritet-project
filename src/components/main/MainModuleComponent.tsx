@@ -1,6 +1,7 @@
 import React, {ReactNode} from 'react';
 import './MainModuleComponent.scss';
 import {Link} from "react-router-dom";
+import Utils from "../../lib/utils";
 
 interface Props{
     children?: ReactNode;
@@ -13,6 +14,8 @@ interface Props{
 }
 
 export default function MainModuleComponent({children, data}: Props){
+
+    const utils = new Utils()
 
     return (
         <Link className='main-link' to={`..${data.link}`}>

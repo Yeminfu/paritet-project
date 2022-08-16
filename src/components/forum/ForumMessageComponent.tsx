@@ -46,7 +46,7 @@ export default function ForumMessageComponent({children, data, onEditClick}: Pro
                     <div className={'username'}>{data.username}</div>
                 </div>
                 <div className={'message-header-data'}>
-                    {data.authorId === userId
+                    {data.authorId === userId && localStorage.getItem('username')
                         ? <div className={'edit-button'} onClick={onEditClick}>
                               <img src={process.env.PUBLIC_URL + '/assets/IconEdit.svg'} alt={''}/>
                           </div>

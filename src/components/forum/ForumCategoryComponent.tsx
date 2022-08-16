@@ -1,6 +1,7 @@
 import React, {ReactNode} from 'react';
 import './ForumCategoryComponent.scss';
 import {Link} from "react-router-dom";
+import {setBreadCrumbs} from "../../store/store";
 
 interface Props{
     children?: ReactNode;
@@ -15,7 +16,7 @@ interface Props{
 export default function ForumCategoryComponent({children, data}: Props){
 
     return (
-        <Link to={`../forum/${data.slug}`}
+        <Link to={`../forum/${data.slug}`} onClick={() => {setBreadCrumbs(['Главная', 'Форум', `${data.title}`])}}
               className='forum-category-link'
               style={{maxWidth: '100%'}}
               state={{categoryId: data.id}}>

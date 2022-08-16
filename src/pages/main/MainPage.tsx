@@ -1,6 +1,9 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import { useLocation } from 'react-router-dom';
 import DefaultTmp from "../../components/base/DefaultTmp";
 import MainModuleComponent from "../../components/main/MainModuleComponent";
+import Utils from "../../lib/utils";
+import {setBreadCrumbs} from "../../store/store";
 
 interface Modules {
     title: string;
@@ -69,6 +72,14 @@ let faceModules: Modules[] = [
 
 export default function MainPage(){
 
+    const location = useLocation()
+
+    useEffect(() => {
+        //const utils = new Utils()
+        //utils.getBreadCrumbs(location.pathname)
+        //const breadCrumbs =
+        setBreadCrumbs(['Главная'])
+    })
 
     return(
             <DefaultTmp>

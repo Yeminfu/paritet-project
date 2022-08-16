@@ -28,10 +28,10 @@ export default function HeaderAuthButton({children}: Props){
     }
 
     return(
-        <Link to={'/login'}>
+        <Link to={'/login'} onClick={() => localStorage.removeItem('username')}>
             <div>
                 {
-                    id && username && token && id?.length > 0 && token?.length > 0 && username?.length > 0
+                    id && username && token && id?.length > 0 && token?.length > 0 && username?.length > 0 && localStorage.getItem('username')
                         ? <button type="button" className="btn btn-danger">Выйти</button>
                         : <button type="button" className="btn btn-primary">Войти</button>
                 }

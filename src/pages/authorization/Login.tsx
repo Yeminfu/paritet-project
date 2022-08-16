@@ -1,5 +1,4 @@
 import React, {ReactNode, useEffect, useState} from 'react'
-import '../MainPage/MainPage.scss'
 import { Form, Field } from 'react-final-form'
 import './Login.scss'
 import Fetcher from "../../Fetcher/Fetcher";

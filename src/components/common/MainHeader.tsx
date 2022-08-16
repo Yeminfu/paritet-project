@@ -1,9 +1,11 @@
-import React, {ReactNode, useEffect} from "react";
+import React, {ReactNode} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import './MainHeader.scss'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import HeaderAuthButton from "../buttons/HeaderAuthButton";
-import {$auth} from "../../store/store";
+import {$auth, $breadCrumbs} from "../../store/store";
+import { useList } from "effector-react";
+import BreadCrumbs from "./BreadCrumbs";
 
 interface Props{
     children?: ReactNode;
@@ -12,10 +14,6 @@ interface Props{
 export default function MainHeader({children}: Props){
 
     const navigate = useNavigate()
-
-    useEffect(() => {
-        console.log("HEADERRRR")
-    })
 
     return(
             <div className={'main-header'}>
@@ -30,7 +28,12 @@ export default function MainHeader({children}: Props){
                         </div>
                     </div>
                     <div className={'lower-header'}>
-
+                        <BreadCrumbs/>
+                        {/*{
+                            useList($breadCrumbs, (e: {crumb: string}, i: number) => (
+                                <div>{e.crumb}</div>
+                            ))
+                        }*/}
                     </div>
                 </div>
             </div>

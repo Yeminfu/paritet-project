@@ -1,13 +1,13 @@
 import React, {ReactNode, useEffect, useState} from 'react'
-import '../MainPage/MainPage.scss'
 import Fetcher from "../../Fetcher/Fetcher";
 import ForumTopicComponent from "../../components/forum/ForumTopicComponent";
 import FloatButtonComponent from "../../components/buttons/FloatButtonComponent";
 import NewTopicModalComponent from "../../components/modals/NewTopicModalComponent";
 import Utils from "../../lib/utils";
 import slugify from "slugify";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import DefaultTmp from "../../components/base/DefaultTmp";
+import {setBreadCrumbs} from "../../store/store";
 
 
 interface Props{
@@ -22,25 +22,19 @@ export default function ForumTopicsPage({}: Props){
     const [msgID, setMsgID] = useState(0)
     const [initialModalMsg, setInitialModalMsg] = useState('')
 
-    const navigate = useNavigate()
     const location = useLocation();
 
     let fetcher = new Fetcher()
     const utils = new Utils()
 
     useEffect(() => {
+        //const utils = new Utils()
+        //utils.getBreadCrumbs(location.pathname)
+        setBreadCrumbs(['Главная', 'Форум'])
         async function loadTopics(){
             try{
-                const state = location.state as any;
-                console.log("CATCHED_ID", state.categoryId)
-                //const response = await fetcher.getTopicsByCategoryId(state.categoryId)
-
-
                 let url = location.pathname.split('/', 10)
-                console.log("PATHHH", url[url.length-1])
                 const response = await fetcher.getForumTopics(url[url.length-1])
-                console.log("rs", response)
-
                 setTopics(response.data)
             }
             catch{
@@ -65,7 +59,7 @@ export default function ForumTopicsPage({}: Props){
         setVisibility(false)
 
         const authorId = parseInt(String(localStorage.getItem('id')))
-        //const categoryId = parseInt(String(localStorage.getItem('currentForumCategory')))
+
         let url = location.pathname.split('/', 10)
         const categorySlug = url[url.length-1]
         const slug = slugify(title)
@@ -120,10 +114,14 @@ export default function ForumTopicsPage({}: Props){
                             onAccept={onModalAccepted}/>
                         : null
                 }
-                <FloatButtonComponent clicked={onFloatClicked}
-                                      title={'Новая тема'}
-                                      color={'lightblue'}
-                                      icon={'/assets/IconNewTopic.svg'}/>
+                {
+                    localStorage.getItem('username')
+                        ? <FloatButtonComponent clicked={onFloatClicked}
+                                          title={'Новая тема'}
+                                          color={'lightblue'}
+                                          icon={'/assets/IconNewTopic.svg'}/>
+                        : null
+                }
             </DefaultTmp>
     )
 }

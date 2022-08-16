@@ -1,5 +1,4 @@
 import React, {ReactNode, useEffect, useState} from 'react'
-import '../MainPage/MainPage.scss'
 import Fetcher from "../../Fetcher/Fetcher";
 import FloatButtonComponent from "../../components/buttons/FloatButtonComponent";
 import NewMessageModalComponent from "../../components/modals/NewMessageModalComponent";
@@ -77,8 +76,6 @@ export default function ForumMessagesPage({children}: Props){
                 })
             const response = await fetcher.getForumMessages(slug)
             setMessages(response.data)
-            //const response = await fetcher.getForumMessagesByTopicId(topicId)
-            //setMessages(response.data)
         }
 
         setInitialModalMsg('')
@@ -114,10 +111,15 @@ export default function ForumMessagesPage({children}: Props){
                             onAccept={onModalAccepted}/>
                         : null
                 }
-                <FloatButtonComponent clicked={onFloatClicked}
-                                      title={'Новое сообщение'}
-                                      color={'mediumseagreen'}
-                                      icon={'/assets/IconMessage.svg'}/>
+                {
+                    localStorage.getItem('username')
+                        ? <FloatButtonComponent clicked={onFloatClicked}
+                                          title={'Новое сообщение'}
+                                          color={'mediumseagreen'}
+                                          icon={'/assets/IconMessage.svg'}/>
+                        : null
+
+                }
             </DefaultTmp>
     )
 }
