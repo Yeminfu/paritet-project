@@ -2,6 +2,7 @@ import React, {ReactNode, useEffect, useState} from 'react'
 import Fetcher from "../../Fetcher/Fetcher";
 import NewsModuleComponent from '../../components/news/NewsModuleComponent';
 import DefaultTmp from "../../components/base/DefaultTmp";
+import {setBreadCrumbs} from "../../store/store";
 
 interface Props{
     children?: ReactNode;
@@ -14,6 +15,7 @@ export default function NewsPage({children}: Props){
     let fetcher = new Fetcher()
 
     useEffect(() => {
+        setBreadCrumbs(['Главная', 'Новости'])
         async function loadNews(){
             const response = await fetcher.getNews(0)
             const data = response.data.filter((e: any) => {

@@ -28,7 +28,7 @@ export default function MainHeader({children}: Props){
                         </div>
                     </div>
                     <div className={'lower-header'}>
-                        <BreadCrumbs/>
+                        {/*<BreadCrumbs/>*/}
                         {/*{
                             useList($breadCrumbs, (e: {crumb: string}, i: number) => (
                                 <div>{e.crumb}</div>
