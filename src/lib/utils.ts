@@ -37,6 +37,13 @@ export default class Utils{
         return `${year}-${('0'+month).slice(-2)}-${('0'+day).slice(-2)} ${('0'+hour).slice(-2)}:${('0'+minute).slice(-2)}:${('0'+second).slice(-2)}`
     }
 
+    quotesPatcher(data: string){
+        let result = data.replaceAll('%22', '')
+
+        console.log("RESULT", result)
+        return result
+    }
+
     setBreadCrumbs(address: string){
         console.log("STRING", address)
         let data = $breadCrumbs.getState()

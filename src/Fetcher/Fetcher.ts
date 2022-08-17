@@ -71,6 +71,16 @@ export default class Fetcher{
 
 
     //NEWS
+    async getLastNews(){
+        return await this.controller.post(`${this.baseUrl}/api/getLastNews`)
+            .then(await function (response: any){
+                console.log("FRONT GOT LAST NEWS RESPONSE:", response)
+                return response
+            })
+            .catch(function (error: any){
+                console.log(error);
+            })
+    }
     async getNews(quantity?: number){
         return await this.controller.post(`${this.baseUrl}/api/getNews`, JSON.stringify({
             quantity: quantity?.toString()

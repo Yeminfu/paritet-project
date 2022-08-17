@@ -18,13 +18,27 @@
       width: 100%;
       justify-content: flex-start;
       align-items: center;
-      font-weight: normal;
-      font-size: 20px;
-      line-height: 24px;
-      padding: 24px 24px;
       background-color: #000;
       color: white;
-      text-decoration: none;
+
+      .header-link{
+        text-decoration: underline;
+        color: white;
+
+
+        &:hover{
+          color: #ddd;
+        }
+
+        .header-text{
+          font-weight: normal;
+          font-size: 20px;
+          line-height: 24px;
+          padding: 24px 24px;
+          text-decoration: none;
+
+        }
+      }
     }
 
     .body{
@@ -66,8 +80,9 @@
         overflow: hidden;
         text-overflow: fade;
         font-size: 16px;
-        line-height: 16px;
+        line-height: 18px;
         margin-left: 16px;
+        text-decoration-line: none;
         @media (max-width: 992px){
           align-items: center;
           margin-left: 0;

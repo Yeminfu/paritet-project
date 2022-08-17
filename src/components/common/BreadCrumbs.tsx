@@ -22,8 +22,8 @@ export default function BreadCrumbs({children}: Props){
             {
                 crumbs?.map((e: string, i: number) => {
                     return (i < crumbs.length - 1 && crumbs.length > 1)
-                        ? <div className='crumb'>{e}</div>
-                        : <div className='active'>{e}</div>
+                        ? <div className='crumb' key={i}>{e}</div>
+                        : <div className='active' key={i}>{e}</div>
                 })
             }
 

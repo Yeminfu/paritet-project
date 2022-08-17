@@ -32,21 +32,13 @@ export default function NewsDetailsComponent({children}: Props){
         dateTime: "",
         blocks: "",
     })
-    //let data = {
-    //    id: 0,
-    //    title: "",
-    //    slug: "",
-    //    description: "",
-    //    smallImg: "",
-    //    dateTime: "",
-    //    blocks: "",
-    //}
 
     useEffect(() => {
         async function getData(){
             let url = location.pathname.split('/', 10)
             console.log("PATHHH", url[url.length-1])
-            const response = await fetcher.getNewsDetails(url[url.length-1])
+            utils.quotesPatcher(url[url.length-1])
+            const response = await fetcher.getNewsDetails(url[url.length-1].replaceAll('%22', ''))
             console.log("rs", response)
             setData(response)
         }
