@@ -48,7 +48,7 @@ export default function ForumMessageComponent({children, data, onEditClick}: Pro
                 <div className={'message-header-data'}>
                     {data.authorId === userId && localStorage.getItem('username')
                         ? <div className={'edit-button'} onClick={onEditClick}>
-                              <img src={process.env.PUBLIC_URL + '/assets/IconEdit.svg'} alt={''}/>
+
                           </div>
                         : null}
                     <div className={'post-date'}>{utils.formatDateWithoutTimeZone(data.createdAt.toString())}</div>

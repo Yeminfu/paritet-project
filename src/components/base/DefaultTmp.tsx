@@ -11,13 +11,14 @@ interface Props{
 export default ( {children}: Props ) => {
 
     return (
+    <>
+        <div className='header-content-container'>
+            <MainHeader>
+
+            </MainHeader>
+        </div>
         <div className='container'>
             <div className='default-tmp-wrapper'>
-                <div className='header-content-container'>
-                    <MainHeader>
-
-                    </MainHeader>
-                </div>
                 <div className='container'
                      style={{display: 'flex', flexDirection: 'column', flex: 1, justifyContent: 'space-between'}}>
                     <div className='content-container'>
@@ -31,5 +32,6 @@ export default ( {children}: Props ) => {
                 </div>
             </div>
         </div>
+    </>
     )
 }
