@@ -36,7 +36,21 @@ function closeDB(){
     })
 }
 
+async function checkIsNewsExists(link){
+    console.log("CHECKING")
+    const query = `select exists(select id from News where link = "${link}")`
+    let result = false
+    await connection.promise().query(query)
+        .then(function (res){
+            result = Object.values(res[0][0])[0] === 1
+        })
+        .catch(err => {console.log(`ERROR: ${err}`); result = false})
+    console.log("CHECKED")
+    return result
+}
+
 async function insertNews(news){
+    console.log("INSERTING")
     let query = `
     INSERT INTO News(
         title,
@@ -44,7 +58,8 @@ async function insertNews(news){
         description, 
         smallImg, 
         dateTime, 
-        blocks
+        blocks,
+        link
     )
     VALUES(
         '${news.title}', 
@@ -52,21 +67,16 @@ async function insertNews(news){
         '${news.description}', 
         '${news.smallImg}', 
         '${news.dateTime}', 
-        '${news.blocks}'
+        '${news.blocks}',
+        '${news.link}'
     )`;
 
-    console.log("QUERY", query)
-    connection.promise().query(query)
+    await connection.promise().query(query)
         .then(function (result){
-            //console.log(`RESULT: ${result}`)
             return result
         })
         .catch(err => console.log(`ERROR: ${err}`))
-    //    (err, result) => {
-    //    console.log(err ? `ERROR: ${err}` : `RESULT: ${result}`)
-    //})
 }
-//INSERT INTO `table_name`(column_1,column_2,...) VALUES (value_1,value_2,...);
 
 const url = 'https://www.dvnovosti.ru/sitemap_news.xml';
 
@@ -99,14 +109,17 @@ async function getNewsLinks(){
 async function getArticleByLink(link){
     const browser = await puppeteer.launch({args: ['--no-sandbox'], executablePath: '/usr/bin/chromium-browser'})
     const page = await browser.newPage()
-    await page.goto(link, { })
-
+    console.log("LINK", link)
+    await page.goto(link, {})
+    console.log("TAKING ARTICLE")
     let pageContent = await page.evaluate(() => {
         const title = document.querySelector('.story__title')?.innerHTML
         const description = document.querySelector('.story__lead')?.innerHTML
+        document.querySelectorAll('a').forEach(e => e.removeAttribute('href'))
         const blocks = document.querySelector('.story__blocks_border')?.innerHTML
-        const smallImg = document.querySelector('.story__image_small')?.getAttribute('src')
+        const smallImg = document.querySelector('.story__image_small')?.getAttribute('src') || document.querySelector('.story__image')?.getAttribute('src')
         let dateTime = document.querySelector('.story__time')?.getAttribute('datetime')
+        let src = dateTime
         const newDT = new Date(dateTime)
         dateTime = newDT.getFullYear()+'-'
             +('0'+(newDT.getMonth()+1)).slice(-2)+'-'
@@ -122,10 +135,13 @@ async function getArticleByLink(link){
             description: description?.trim(),
             blocks: blocks,
             smallImg: smallImg,
-            dateTime: dateTime
+            dateTime: dateTime,
+            link: '',
+            src: src
         }
     })
 
+    console.log("TOOK")
     await browser.close()
 
     return pageContent
@@ -143,17 +159,27 @@ async function getAllNews(){
     async function getData(){
         for(let i = 0; i < links.length; i++){
             console.log(`PROCESSING NEWS ${i+1}/${links.length}`)
-            let data = await getArticleByLink(links[i])
-            console.log(`TITLE: "${data.title}"`)
-            console.log(`SLUG: "${data.slug}"`)
-            console.log(`DESC: "${data.description}"`)
-            if(data.slug !== undefined)
-                data.slug = slugger(data.slug, '_').toLowerCase()
-            await insertNews(data)
-            //console.log("DATETIME", links[i], typeof links[i].dateTime)
-            //console.log("NEWS:", await getArticleByLink(links[i]))
+            const isExists = await checkIsNewsExists(links[i])
+            if(isExists === true){
+                console.log("NEWS EXISTS")
+            }
+            else if(isExists === false){
+                console.log("NEWS DOESN'T EXIST")
+                let data = await getArticleByLink(links[i])
+                if(data.slug !== undefined){
+                    data.slug = slugger(data.slug, '_').toLowerCase().replaceAll('"' || '»' || '«' || '\'', '')
+                }
+                data.link = links[i]
+                await insertNews(data)
+            }
         }
         console.log("PROCESSING DONE!")
+        const deletingQuery = 'DELETE FROM News WHERE dateTime < NOW() - INTERVAL 5 DAY'
+        await connection.promise().query(deletingQuery)
+            .then(function (res){
+                console.log(`RESULT: ${res}`)
+            })
+            .catch(err => console.log(`ERROR: ${err}`))
         closeDB()
         //return news
     }
