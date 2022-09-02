@@ -1,17 +1,26 @@
 import MainHeader from "../common/MainHeader";
-import React from "react";
+import React, {useEffect, useLayoutEffect} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './DefaultTmp.scss'
 import MainFooter from "../common/MainFooter";
+import {$mainCoords, setMainCoords} from "../../store/store";
 
 interface Props{
     children: any;
+    getScroll?: any;
 }
 
-export default ( {children}: Props ) => {
+export default ( {children,getScroll}: Props ) => {
+
+    useLayoutEffect(() => {
+
+        return () => {
+            if(getScroll) getScroll(window.scrollY);
+        }
+    }, [])
 
     return (
-    <>
+    <React.Fragment>
         <div className='header-content-container'>
             <MainHeader>
 
@@ -32,6 +41,6 @@ export default ( {children}: Props ) => {
                 </div>
             </div>
         </div>
-    </>
+    </React.Fragment>
     )
 }

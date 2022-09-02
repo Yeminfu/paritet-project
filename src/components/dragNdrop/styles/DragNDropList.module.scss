@@ -1,0 +1,104 @@
+.list{
+  display: flex;
+  min-width: 250px;
+  max-width: 250px;
+  margin: 16px 8px;
+  box-sizing: border-box;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: #e4e4e4;
+  border-radius: 4px;
+  box-shadow: 2px 2px 8px 4px rgba(0,0,0,0.14);
+
+  .listHeaderInput{
+    display: flex;
+    min-height: 42px;
+    color: black;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 8px 16px;
+    box-sizing: border-box;
+
+    .inputForm{
+      width: 100%;
+
+      .inputField{
+        width: 100%;
+        outline: none;
+        border: none;
+        background-color: transparent;
+        color: #333333;
+        caret-color: #333333;
+      }
+    }
+
+    .inputCloser{
+
+    }
+  }
+
+  .listHeader{
+    display: flex;
+    min-height: 42px;
+    color: black;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 8px 16px;
+    box-sizing: border-box;
+    word-break: break-word;
+  }
+
+  .container{
+    display: flex;
+    min-height: 1px;
+    width: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+    //background-color: #0404e433;
+    background-color: #e4e4e4;
+    padding: 0 16px;
+
+  }
+
+  .listFooter{
+    display: flex;
+    min-height: 40px;
+    color: black;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 8px 16px;
+    box-sizing: border-box;
+  }
+
+  .listFooterInput{
+    display: flex;
+    width: 100%;
+    height: 40px;
+    color: black;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 8px 16px;
+    box-sizing: border-box;
+
+    .inputForm{
+      width: 100%;
+
+      .inputField{
+        width: 100%;
+        outline: none;
+        border: none;
+        background-color: transparent;
+        color: #333333;
+        caret-color: #333333;
+      }
+    }
+
+    .inputCloser{
+
+    }
+  }
+}

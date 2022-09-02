@@ -35,13 +35,11 @@ export default function NewMessageModalComponent(
 
 
     const onAccepted = () => {
-        console.log("onAccepted", currentMsg, msgID)
         msgID
             ? onAccept(currentMsg, msgID)
             : onAccept(currentMsg)
     }
     const onClosed = (e: any) => {
-        console.log("onClosed", e.target)
         onClose()
     }
 
@@ -64,7 +62,7 @@ export default function NewMessageModalComponent(
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={(e) => {onClosed(e)}}>Отмена</button>
-                            <button type="submit" className="btn btn-primary" onClick={onAccepted}>Готово</button>
+                            <button type="submit" className="btn btn-primary" onClick={onAccepted}>Отправить</button>
                         </div>
                     </div>
                 </div>

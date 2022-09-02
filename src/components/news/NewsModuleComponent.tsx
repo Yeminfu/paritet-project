@@ -20,15 +20,6 @@ export default function NewsModuleComponent({children, data}: Props){
 
     const utils = new Utils()
 
-    useEffect(() => {
-        console.log("ldd", data)
-    }, [])
-
-    //function goToNewsDetails(url: string){
-    //    console.log(url)
-    //    return `/news/${url.slice(25)}`
-    //}
-
     return(
         <Link to={data.slug}
               className='news-link'>

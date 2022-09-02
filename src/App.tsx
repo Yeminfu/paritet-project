@@ -11,6 +11,9 @@ import ForumMessagesPage from "./pages/forum/ForumMessagesPage";
 import AdminCategoriesPage from "./pages/admin/AdminCategoriesPage";
 import ForumCategoriesPage from "./pages/forum/ForumCategoriesPage";
 import ForumTopicsPage from "./pages/forum/ForumTopicsPage";
+import DragNDropDesk from "./components/dragNdrop/DragNDropDesk";
+import DragNDropList from "./components/dragNdrop/DragNDropList";
+import DragNDropCard from "./components/dragNdrop/DragNDropCard";
 
 
 export default function App(){
@@ -32,6 +35,8 @@ export default function App(){
                     <Route path='/forum' element={<ForumCategoriesPage/>}/>
                     <Route path='/forum/:id' element={<ForumTopicsPage/>}/>
                     <Route path='/forum/:id/:id' element={<ForumMessagesPage/>}/>
+
+                    <Route path='/programs' element={<DragNDropDesk/>}/>
                 </Routes>
             </BrowserRouter>
         </div>

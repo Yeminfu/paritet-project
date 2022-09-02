@@ -2,6 +2,7 @@ import React, {ReactNode} from 'react';
 import './ForumCategoryComponent.scss';
 import {Link} from "react-router-dom";
 import {setBreadCrumbs} from "../../store/store";
+import iconCategory from '../../assets/icons/IconCategory.svg'
 
 interface Props{
     children?: ReactNode;
@@ -27,7 +28,7 @@ export default function ForumCategoryComponent({children, data}: Props){
                 <div className={'body'}>
                     <div className={'icon-segment'}>
                         <div className={'icon'}>
-                            <img src={process.env.PUBLIC_URL+'/assets/IconCategory.svg'}/>
+                            <img src={iconCategory}/>
                         </div>
                     </div>
                     <div className={'description-segment'}>{data.description}</div>

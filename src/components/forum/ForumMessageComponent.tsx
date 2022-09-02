@@ -1,6 +1,8 @@
 import React, {ReactNode, useEffect} from 'react';
 import './ForumMessageComponent.scss';
 import Utils from "../../lib/utils";
+import iconEdit from '../../assets/icons/IconEdit.svg'
+import iconUser from "../../assets/icons/IconUser.svg";
 
 interface Props{
     children?: ReactNode;
@@ -11,7 +13,7 @@ interface Props{
         createdAt: string,
         date: string,
 
-        authorId: number,
+        userId: number,
         username: string
     };
     onEditClick: any;
@@ -42,15 +44,16 @@ export default function ForumMessageComponent({children, data, onEditClick}: Pro
         <div className={'forum-message-module'} style={{maxWidth: '100%'}}>
             <div className={'header'}>
                 <div className={'user-header-data'}>
-                    <div className={'avatar'}>{'username'.substring(0,1).toUpperCase()}</div>
+                    <div className={'avatar'}>{data.username.substring(0,1).toUpperCase()}</div>
                     <div className={'username'}>{data.username}</div>
                 </div>
                 <div className={'message-header-data'}>
-                    {data.authorId === userId && localStorage.getItem('username')
-                        ? <div className={'edit-button'} onClick={onEditClick}>
-
-                          </div>
-                        : null}
+                    {
+                        data.userId === userId && localStorage.getItem('username')
+                        && (<div className={'edit-button'} onClick={onEditClick}>
+                            <img src={iconEdit}/>
+                          </div>)
+                    }
                     <div className={'post-date'}>{utils.formatDateWithoutTimeZone(data.createdAt.toString())}</div>
                 </div>
             </div>

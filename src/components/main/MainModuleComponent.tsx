@@ -20,28 +20,28 @@ export default function MainModuleComponent({children, data}: Props){
 
 
     return (
-        <Link className='main-link' to={`..${data.link}`}>
+        <Link className='main-link' to={`${data.link}`}>
             <div className={'main-module'}>
-                    <div className={'header'}
-                         onClick={(e) => {
-                             e.preventDefault()
-                             e.stopPropagation();
-                             e.nativeEvent.stopImmediatePropagation();
-                         }}>
-                        <Link className={'header-link'} to={data.link === '/news'
-                            ? `..${data.link}/${slugger(data.title, '_').toLowerCase()}`
-                            : `/${slugger(data.title, '_').toLowerCase()}`}>
+                    <div className={'header'}>
                             <div className={'header-text'}>
                                 {data.title}
                             </div>
-                        </Link>
                     </div>
-                <div className={'body'}>
-                    <div className='photo-wrapper'>
-                        <img className={'photo'} src={data.img}/>
-                    </div>
-                    <div className={'text-content'}>{data.text}</div>
-                </div>
+                {
+                    children
+                        ? <React.Fragment>
+                            {children}
+                    </React.Fragment>
+                        :
+                        <div className={'body'}>
+                            <div className='photo-wrapper'>
+                                <img className={'photo'} src={data.img}/>
+                            </div>
+                            <div className={'text-content'}>{data.text}</div>
+
+                        </div>
+
+                }
             </div>
         </Link>
     )

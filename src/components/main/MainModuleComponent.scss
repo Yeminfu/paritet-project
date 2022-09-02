@@ -1,5 +1,6 @@
 .main-link{
   display: flex;
+
   .main-module{
     display: flex;
     flex-direction: column;
@@ -21,22 +22,15 @@
       background-color: #000;
       color: white;
 
-      .header-link{
-        text-decoration: underline;
-        color: white;
-
+      .header-text{
+        font-weight: normal;
+        font-size: 20px;
+        line-height: 24px;
+        padding: 24px 24px;
+        text-decoration: none;
 
         &:hover{
           color: #ddd;
-        }
-
-        .header-text{
-          font-weight: normal;
-          font-size: 20px;
-          line-height: 24px;
-          padding: 24px 24px;
-          text-decoration: none;
-
         }
       }
     }
@@ -69,6 +63,9 @@
           background-position: top;
           @media (max-width: 992px){
             margin-right: 0;
+          }
+          @media (max-width: 768px){
+            width: 100%;
           }
         }
       }

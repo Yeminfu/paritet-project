@@ -1,20 +1,41 @@
-import React, {ReactNode, useEffect, useState} from 'react'
+import React, {ReactNode, useEffect, useLayoutEffect, useState} from 'react'
 import Fetcher from "../../Fetcher/Fetcher";
 import NewsModuleComponent from '../../components/news/NewsModuleComponent';
 import DefaultTmp from "../../components/base/DefaultTmp";
-import {setBreadCrumbs} from "../../store/store";
+import {
+    $mainCoords,
+    $newsCache,
+    $newsCoords,
+    setBreadCrumbs,
+    setMainCoords,
+    setNewsCache,
+    setNewsCoords
+} from "../../store/store";
+import PreloaderComponent from "../../components/common/PreloaderComponent";
 
 interface Props{
     children?: ReactNode;
 }
 
+interface NewsModel {
+    id: number;
+    title: string;
+    slug: string;
+    description: string;
+    smallImg: string;
+    dateTime: string;
+    blocks: string;
+    link: string;
+}
+
 export default function NewsPage({children}: Props){
-    console.log("START NEWS PAGE")
-    const [news, setNews] = useState([])
+    const [news, setNews] = useState<null | NewsModel[]>(null)
+    const [isLoaded, setIsLoaded] = useState(true)
 
     let fetcher = new Fetcher()
 
     useEffect(() => {
+        setIsLoaded(true)
         setBreadCrumbs(['Главная', 'Новости'])
         async function loadNews(){
             const response = await fetcher.getNews(0)
@@ -23,16 +44,34 @@ export default function NewsPage({children}: Props){
                     return e
             })
             setNews(data)
+            setNewsCache(data)
+            setIsLoaded(false)
+            console.log("NEWS SCROLL TO", $newsCoords.getState())
+            setTimeout(() => {
+                window.scrollTo(0, $newsCoords.getState())
+                console.log("CHECK", $newsCoords.getState())
+            }, 0)
         }
-        loadNews();
+        if(!$newsCache.getState()){
+            console.log("FROM BACK")
+            loadNews();
+        }
+        else{
+            console.log("FROM CACHE")
+            setNews($newsCache.getState())
+            setIsLoaded(false)
+            console.log("NEWS SCROLL TO", $newsCoords.getState())
+            setTimeout(() => {
+                window.scrollTo(0, $newsCoords.getState())
+                console.log("CHECK", $newsCoords.getState())
+            }, 0)
+        }
     }, []);
 
-    function getURLTemplate(url: string){
-        return `/news/${url.slice(25)}`
-    }
-
     return(
-            <DefaultTmp>
+        isLoaded
+            ? <PreloaderComponent/>
+            : <DefaultTmp getScroll={(data: number) => {setNewsCoords(data)}}>
                 {
                     news?.map(function(e:any, index){
                         return <NewsModuleComponent data={e} key={index}/>

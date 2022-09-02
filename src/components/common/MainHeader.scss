@@ -19,6 +19,12 @@
         font-family: 'Lobster', cursive;
         font-size: 32px;
         cursor: pointer;
+
+        .main-icon{
+          display: flex;
+          width: 48px;
+          height: 48px;
+        }
       }
 
       .exit-button-wrapper{

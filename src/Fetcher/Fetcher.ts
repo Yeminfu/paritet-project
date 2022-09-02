@@ -1,6 +1,8 @@
 import axios from "axios"
 import swal from 'sweetalert2'
+import Utils from "../lib/utils";
 
+const utils = new Utils()
 
 export default class Fetcher{
 
@@ -94,7 +96,6 @@ export default class Fetcher{
             })
     }
     async getNewsDetails(slug: string){
-        console.log("FTCH", slug)
         return await this.controller.post(`${this.baseUrl}/api/getNewsDetails`, JSON.stringify({
             slug: slug
         }))
@@ -194,14 +195,15 @@ export default class Fetcher{
 
 
     //FORUM TOPICS
-    async setNewForumTopic(data: {title: string, slug: string, authorId: number, categorySlug: string, message: string, date: string}){
+    async setNewForumTopic(data: {title: string, slug: string, userId: number, categorySlug: string, message: string, date: string, username: string | undefined}){
         return await this.controller.post(`${this.baseUrl}/api/setNewForumTopic`, JSON.stringify({
             title: data.title,
             slug: data.slug,
-            authorId: data.authorId,
+            userId: data.userId,
             categorySlug: data.categorySlug,
             message: data.message,
             date: data.date,
+            username: data.username
         }))
             .then(await function (response: any){
                 console.log("FETCHER009: GOT SET NEW FORUM TOPIC RESPONSE:", response.data)
@@ -213,6 +215,7 @@ export default class Fetcher{
             })
     }
     async getForumTopics(slug: string){
+        console.log("getForumTopics:", slug)
         return await this.controller.post(`${this.baseUrl}/api/getForumTopics`, JSON.stringify({
             slug: slug,
         }))
@@ -225,15 +228,13 @@ export default class Fetcher{
                 return error
             })
     }
-
-
-    //FORUM MESSAGES
-    async getForumMessages(topicSlug: string){
-        return await this.controller.post(`${this.baseUrl}/api/getForumMessages`, JSON.stringify({
-            topicSlug: topicSlug,
+    async getLastForumTopics(slug: string){
+        console.log("getLastForumTopics:", slug)
+        return await this.controller.post(`${this.baseUrl}/api/getLastForumTopics`, JSON.stringify({
+            slug: slug,
         }))
             .then(await function (response: any){
-                console.log("FETCHER016: GOT FORUM MESSAGES BY SLUG RESPONSE:", response.data)
+                console.log("FETCHER018: GOT LAST 5 FORUM TOPICS RESPONSE:", response.data)
                 return response
             })
             .catch(function (error: any){
@@ -241,31 +242,79 @@ export default class Fetcher{
                 return error
             })
     }
-    async setNewForumMessage(data: {message: string, createdAt: string, authorId: number, topicSlug: string}){
-
-        this.controller.interceptors.response.use((response: any) => {
-                console.log("fetcher response", response.data)
-                return response.data;
-            },
-            (error: any) => {
-                console.log("fetcher error", error)
-                swal.fire(
-                    `${JSON.stringify(error.name, null, " ")}`,
-                    `<pre class="text-left">${JSON.stringify(error.message, null, " ")}</pre>`
-                )
-                return error;
+    async incrementForumTopicViews(id: number){
+        return await this.controller.post(`${this.baseUrl}/api/incrementForumTopicViews`, JSON.stringify({
+            id: id,
+        }))
+            .then(await function (response: any){
+                console.log("FETCHER023: GOT RESPONSE:", response.data)
+                return response
             })
+            .catch(function (error: any){
+                console.log(error);
+                return error
+            })
+    }
+    async setForumTopicMsgCount(topicSlug: string){
+        return await this.controller.post(`${this.baseUrl}/api/setForumTopicMsgCount`, JSON.stringify({
+            topicSlug: topicSlug,
+        }))
+            .then(await function (response: any){
+                console.log("FETCHER022: GOT RESPONSE:", response.data)
+                return response
+            })
+            .catch(function (error: any){
+                console.log(error);
+                return error
+            })
+    }
+
+    //FORUM MESSAGES
+    async getForumMessages(topicSlug: string){
+        return await this.controller.post(`${this.baseUrl}/api/getForumMessages`, JSON.stringify({
+            topicSlug: utils.quotesDispatcher(topicSlug),
+        }))
+            .then(await function (response: any){
+                console.log("FETCHER016: GOT FORUM MESSAGES BY SLUG RESPONSE "+topicSlug+":", response.data)
+                return response
+            })
+            .catch(function (error: any){
+                console.log(error);
+                return error
+            })
+    }
+    async setNewForumMessage(data: {message: string, createdAt: string, userId: number, topicSlug: string}){
+
+        //this.controller.interceptors.response.use((response: any) => {
+        //        console.log("fFETCHER017 SET NEW FORUM MESSAGE", response.data)
+        //        return response.data;
+        //    },
+        //    (error: any) => {
+        //        console.log("fetcher error", error)
+        //        swal.fire(
+        //            `${JSON.stringify(error.name, null, " ")}`,
+        //            `<pre class="text-left">${JSON.stringify(error.message, null, " ")}</pre>`
+        //        )
+        //        return error;
+        //    })
 
         return await this.controller.post(`${this.baseUrl}/api/setNewForumMessage`, JSON.stringify({
             message: data.message,
             createdAt: data.createdAt,
-            authorId: data.authorId,
+            userId: data.userId,
             topicSlug: data.topicSlug,
         }))
+            .then(await function(response: any){
+                console.log("fFETCHER017 SET NEW FORUM MESSAGE", response.data)
+                return response
+            })
+            .catch(function (error: any){
+                console.log(error);
+            })
     }
-    async editMessage(id: number, message: string){
+    async editForumMessage(id: number, message: string){
 
-        return await this.controller.post(`${this.baseUrl}/api/editMessage`, JSON.stringify({
+        return await this.controller.post(`${this.baseUrl}/api/editForumMessage`, JSON.stringify({
             id: id,
             message: message
         }))
