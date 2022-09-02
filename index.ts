@@ -40,170 +40,23 @@ server.listen(PORT, () => {
     console.log("SERVER LISTENING...")
 })
 
-let currentUser = null
 let response = null
 
-let users = [
-    {id: 1, username: 'superuser', password: '000000', token: null, tokenUpdate: null},
-    {id: 2, username: 'user_1', password: '111111', token: null, tokenUpdate: null},
-    {id: 3, username: 'user_2', password: '222222', token: null, tokenUpdate: null},
-    {id: 4, username: 'user_3', password: '333333', token: null, tokenUpdate: null},
-    {id: 5, username: 'user_4', password: '444444', token: null, tokenUpdate: null},
-]
 
-let categories = [
-    {
-        id: 1,
-        title: "Политика/Новости",
-        description: "Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.\n",
-    },
-    {
-        id: 2,
-        title: "Форум",
-        description: "Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.\n",
-    },
-    {
-        id: 3,
-        title: "Муниципальные/Социальные программы",
-        description: "Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.\n",
-    },
-    {
-        id: 4,
-        title: "Проекты/Голосования",
-        description: "Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.\n",
-    },
-    {
-        id: 5,
-        title: "Юриспруденция",
-        description: "Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.\n",
-    },
-    {
-        id: 6,
-        title: "ЖКХ",
-        description: "Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.\n",
-    },
-    {
-        id: 7,
-        title: "Объявления",
-        description: "Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.\n",
-    },
-    {
-        id: 8,
-        title: "Трудоустройство",
-        description: "Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.\n",
-    },
-    {
-        id: 9,
-        title: "Частные услуги",
-        description: "Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.\n",
-    },
-]
-
-let news = [
-    {
-        id: 1,
-        title: "Новостной заголовок #1",
-        article: "Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной \"рыбой\" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.\n\n Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной \"рыбой\" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.",
-        content: {},
-        date: Date,
-    },
-    {
-        id: 2,
-        title: "Новостной заголовок #2",
-        article: "Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной \"рыбой\" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.\n\n Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной \"рыбой\" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.",
-        content: {},
-        date: Date,
-    },
-    {
-        id: 3,
-        title: "Новостной заголовок #3",
-        article: "Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной \"рыбой\" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.\n\n Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной \"рыбой\" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.",
-        content: {},
-        date: Date,
-    },
-    {
-        id: 4,
-        title: "Новостной заголовок #4",
-        article: "Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной \"рыбой\" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.\n\n Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной \"рыбой\" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.",
-        content: {},
-        date: Date,
-    },
-    {
-        id: 5,
-        title: "Новостной заголовок #5",
-        article: "Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной \"рыбой\" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.\n\n Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной \"рыбой\" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.",
-        content: {},
-        date: Date,
-    },
-    {
-        id: 6,
-        title: "Новостной заголовок #6",
-        article: "Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной \"рыбой\" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.\n\n Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной \"рыбой\" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.",
-        content: {},
-        date: Date,
-    },
-    {
-        id: 7,
-        title: "Новостной заголовок #7",
-        article: "Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной \"рыбой\" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.\n\n Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной \"рыбой\" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.",
-        content: {},
-        date: Date,
-    },
-    {
-        id: 8,
-        title: "Новостной заголовок #8",
-        article: "Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной \"рыбой\" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.\n\n Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной \"рыбой\" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.",
-        content: {},
-        date: Date,
-    },
-    {
-        id: 9,
-        title: "Новостной заголовок #9",
-        article: "Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной \"рыбой\" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.\n\n Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной \"рыбой\" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.",
-        content: {},
-        date: Date,
-    },
-    {
-        id: 10,
-        title: "Новостной заголовок #10",
-        article: "Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной \"рыбой\" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.\n\n Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной \"рыбой\" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.",
-        content: {},
-        date: Date,
-    },
-]
-//server.use(express.static(__dirname));
-//server.get('/*', function(req, res) {
-//    console.log("GET /*")
-//    res.sendFile(path.join(__dirname, 'index.html'))
-//})
-//server.get('/news', function(req, res) {
-//    console.log("GET /news")
-//    res.sendFile(path.join(__dirname, 'index.html'))
-//})
-
-
-
-
-
-
-
-
-//REGISTRATION/LOG IN
+//REGISTRATION/AUTHORIZATION
 server.post('/api/getRegistration', async (req, res) => {
     console.log("BACK GOT REG REQUEST", req)
     let data = Object.keys(req.body)
     await getRegistration(JSON.parse(data[0]).username.toString(), JSON.parse(data[0]).password.toString())
     res.send(response)
-    if(response !== null) response = null
+    response = null
 })
 async function getRegistration(username, password){
     response = {}
     console.log("SENDED", username, password)
     const query = `SELECT id FROM Users WHERE username = "${username}"`
     const result = await connection.promise().query(query)
-    console.log("RESSss:", result[0])
     const isUserExists = result[0].length === 0 ? false : true
-    console.log("isUserExists", isUserExists)
     if(!isUserExists){
         const newToken = createToken()
         const currentDTInMsecsPlus5Min = new Date().getTime()+5*60000
@@ -233,7 +86,6 @@ async function getRegistration(username, password){
         response = 'TAKEN'
     }
 }
-
 server.post('/api/getAuth', async (req, res) => {
     //console.log("BACK GOT REQUEST", req)
     let data = Object.keys(req.body)
@@ -272,37 +124,15 @@ async function getAuth(username, password){
     }
 }
 
-
-
-
-
-
-
-
-
-//LOG OUT
-server.get('/api/logOut', (req, res) => {
-    for(let i = 0; i < users.length; i++){
-        console.log(users[i])
-        if(currentUser === users[i]){
-            users[i].token = null
-            users[i].tokenUpdate = null
-            currentUser = null
-        }
-    }
-    res.send(response)
-})
-
-
-
-
-
-
-
-
-
-
 //NEWS
+server.post('/api/getLastNews', async (req, res) => {
+    const query = 'select * from News order by dateTime desc limit 5'
+    let data = await connection.promise().query(query)
+    response = JSON.stringify(data)
+    res.send(response)
+    console.log("SERVER: LAST NEWS OBTAINED", data)
+    response = null
+})
 server.post('/api/getNews', async (req, res) => {
     console.log("SERVER:", 'getNews()')
     let data = Object.keys(req.body)
@@ -312,7 +142,7 @@ server.post('/api/getNews', async (req, res) => {
 })
 async function getNews(quantity){
     if(quantity === 0){
-        const query = 'SELECT * FROM News ORDER BY id DESC'
+        const query = 'SELECT * FROM News ORDER BY dateTime DESC'
         let data = await connection.promise().query(query)
         response = JSON.stringify(data[0])
         console.log("SERVER: NEWS OBTAINED")
@@ -321,7 +151,6 @@ async function getNews(quantity){
     //    response = JSON.stringify([...news.slice(quantity*-1)])
     //}
 }
-
 server.post('/api/getNewsDetails', async (req, res) => {
     console.log("SERVER:", 'getNewsDetails()')
     console.log(">>>>> req.body", req.body)
@@ -336,15 +165,16 @@ server.post('/api/getNewsDetails', async (req, res) => {
     res.send(response[0])
     response = null
 })
-
-
-
-
-
-
-
-
-
+server.post('/api/checkNewsExist', async (req, res) => {
+    let data = Object.keys(req.body)
+    const parsed = JSON.parse(data[0])
+    const link = parsed.link
+    const query = `SELECT EXISTS(SELECT id FROM News WHERE link = "${link}")`
+    response = await connection.promise().query(query).catch(e => response = e)
+    console.log("ANSWER", response[0])
+    //res.send(response[0])
+    //response = null
+})
 
 
 //FORUM CATEGORIES
@@ -366,7 +196,6 @@ async function setNewForumCategory(data){
     response = result
     console.log("SERVER: NEW FORUM CATEGORY CREATED")
 }
-
 server.post('/api/getForumCategories', async (req, res) => {
     console.log("SERVER: getForumCategories()")
     const query = 'SELECT * FROM ForumCategories WHERE parent IS NULL'
@@ -375,7 +204,6 @@ server.post('/api/getForumCategories', async (req, res) => {
     res.send(response)
     console.log("SERVER: FORUM CATEGORIES OBTAINED", data)
 })
-
 server.post('/api/getForumCategoriesByParentId', async (req, res) => {
     console.log("SERVER: getForumCategoriesByParentId()")
     let data = Object.keys(req.body)
@@ -393,11 +221,8 @@ async function getForumCategoriesByParentId(data){
     //let result = 'SUCCESSFUL'
     let result = await connection.promise().query(query)
     response = JSON.stringify(result[0])
-    //await connection.promise().query(query).catch(e => {result = e})
-    //response = result
     console.log("SERVER: GOT FORUM CATEGORY BY ID")
 }
-
 server.post('/api/getCategoryParent', async (req, res) => {
     console.log("SERVER: getCategoryParent()")
     let data = Object.keys(req.body)
@@ -406,18 +231,12 @@ server.post('/api/getCategoryParent', async (req, res) => {
     response = null
 })
 async function getCategoryParent(data){
-    //console.log("DATA", data)
     const requestData = JSON.parse(data)
     console.log("SERVER: getCategoryParent("+requestData.id+")")
-    //console.log("DATA", requestData)
     const query = `SELECT * FROM ForumCategories WHERE id=${requestData.id}`
     let result = await connection.promise().query(query)
     response = JSON.stringify(result[0])
-    //await connection.promise().query(query).catch(e => {result = e})
-    //response = result
-    //console.log("SERVER: GOT FORUM CATEGORY PARENT")
 }
-
 server.post('/api/editForumCategory', async (req, res) => {
     console.log("SERVER: editForumCategory()")
     const data = Object.keys(req.body)
@@ -433,7 +252,6 @@ server.post('/api/editForumCategory', async (req, res) => {
     res.send(response)
     response = null
 })
-
 server.post('/api/deleteForumCategory', async (req, res) => {
     const data = Object.keys(req.body)
     const requestData = JSON.parse(data[0])
@@ -446,29 +264,28 @@ server.post('/api/deleteForumCategory', async (req, res) => {
 })
 
 
-
-
-
-
-
-
-
 //FORUM TOPICS
 server.post('/api/setNewForumTopic', async (req, res) => {
     const data = Object.keys(req.body)
     const requestData = JSON.parse(data[0])
-    console.log("SERVER: setNewForumTopic()", requestData)
-    //title, slug, authorId, categoryId, message, date
+    //console.log("SERVER: setNewForumTopic()", requestData)
     let result = 'SUCCESSFUL'
-    const insertTopicQuery = `insert into ForumTopics(title, slug, authorId, categorySlug) 
-        values("${requestData.title}", "${requestData.slug}", ${requestData.authorId}, "${requestData.categorySlug}")`
-    let topicResponse = await connection.promise().query(insertTopicQuery).catch(e => {result = e})
-
-    //console.log("SERVER: TR:", topicResponse[0].insertId)
+    const insertTopicQuery = `insert into ForumTopics(title, slug, userId, categorySlug, createdAt, lastUsername, lastCreatedAt) 
+        values("${quotesPatcher(requestData.title)}", 
+        "${quotesPatcher(requestData.slug)}", 
+        ${requestData.userId}, 
+        "${quotesPatcher(requestData.categorySlug)}", 
+        "${requestData.date}", "${requestData.username}", "${requestData.date}")`
+    await connection.promise().query(insertTopicQuery).catch(e => {result = e})
+    console.log("result", result)
     if(result === "SUCCESSFUL"){
-        const addMessageQuery = `insert into Messages(userId, topicId, message, createdBy, date) 
-        values("${requestData.authorId}", "${topicResponse[0].insertId}", "${requestData.message}", "${requestData.date}", "${requestData.date}")`
-        let messageResponse = await connection.promise().query(addMessageQuery).catch(e => {result = e})
+        console.log("msg", requestData.message)
+        console.log("date", requestData.date)
+        console.log("userId", requestData.userId)
+        console.log("slug", requestData.slug)
+        const addMessageQuery = `insert into ForumMessages(message, createdAt, userId, topicSlug)
+        values("${quotesPatcher(requestData.message)}", "${requestData.date}", ${requestData.userId}, "${requestData.slug}")`
+        await connection.promise().query(addMessageQuery).catch(e => {result = e})
         response = result
         res.send(response)
     }
@@ -477,97 +294,173 @@ server.post('/api/setNewForumTopic', async (req, res) => {
         res.send(response)
         response = null
     }
+    res.send(response)
+    response = null
 
 })
-
-server.post('/api/getTopicsByCategoryId', async (req, res) => {
-    const data = Object.keys(req.body)
-    console.log("SERVER: data >>>>", data)
-    const requestData = JSON.parse(data[0])
-    console.log("SERVER: getTopicsByCategoryId("+requestData.id+")", requestData.id)
-    const query = `select * from ForumTopics where categoryId = ${requestData.id}`
-    const answer = await connection.promise().query(query)
-    console.log("ANSWER:", answer[0])
-    res.send(answer[0])
-})
-
-
-
 server.post('/api/getForumTopics', async (req, res) => {
+    console.log(">>>>> GET FORUM TOPICS")
+    console.log(">>>>> req.body", req.body)
+
+    //[ 'message', 'code', 'errno', 'sql', 'sqlState', 'sqlMessage' ]
+    let data = Object.keys(req.body)
+    const requestData = JSON.parse(data[0])
+    const query = `SELECT ForumTopics.*, Users.username as username FROM ForumTopics
+        INNER JOIN Users
+            ON ForumTopics.userId = Users.id
+        WHERE categorySlug = "${requestData.slug}" ORDER BY createdAt DESC`
+
+
+    //SELECT * FROM ForumMessages ORDER BY createdAt DESC LIMIT 1
+    //LEFT JOIN ForumMessages
+    //ON ForumMessages.createdAt = (SELECT * FROM ForumMessages ORDER BY createdAt DESC LIMIT 1) as lastCreatedBy
+    //LEFT JOIN (SELECT * FROM ForumMessages ORDER BY createdAt DESC LIMIT 1) as lastCreatedBy
+    //ON ForumTopics.slug = ForumMessages.topicSlug
+    // последнее_значение(Users.username)
+    //      из(у всех у кого ForumTopics.userId
+    //      сортировать по Users.username) как lastUsername
+    await connection.promise()
+        .query(query).then(res => response = res)
+        .then(r => response = r)
+        .catch(e => response = e)
+    let topics = response[0]
+    for(let i = 0; i < topics.length; i++){
+        console.log("1["+i+"]", topics[i])
+        let lastUserId = 0
+        const lastCreatedAtQuery = `SELECT ForumMessages.createdAt, ForumMessages.userId FROM ForumMessages WHERE topicSlug = "${topics[i].slug}" ORDER BY createdAt DESC LIMIT 1`
+        await connection.promise()
+            .query(lastCreatedAtQuery)
+            .then(res => {topics[i].lastCreatedAt = res[0][0].createdAt; lastUserId = res[0][0].userId})
+            .catch(e => console.log('err', e))
+        const lastUsernameQuery = `SELECT Users.username FROM Users WHERE id = ${lastUserId}`
+        await connection.promise()
+            .query(lastUsernameQuery)
+            .then(res => topics[i].lastUsername = res[0][0].username)
+            .catch(e => console.log('err', e))
+        console.log("2["+i+"]", topics[i])
+    }
+    //console.log("RESPONSE", Object.keys(response[0]))
+    //console.log("RESPONSE", Object.keys(response[1])
+
+    res.send(topics)
+    response = null
+
+})
+server.post('/api/getLastForumTopics', async (req, res) => {
+    let data = Object.keys(req.body)
+    const requestData = JSON.parse(data[0])
+    const query = `SELECT ForumTopics.*, Users.username AS username FROM ForumTopics AS FT
+        INNER JOIN Users
+            ON FT.userId = Users.id
+        ORDER BY createdAt DESC LIMIT 5`
+
+    await connection.promise()
+        .query(query).then(res => response = res)
+        .then(r => response = r)
+        .catch(e => response = e)
+    console.log(response)
+
+    let topics = response ? response[0] : []
+    for(let i = 0; i < topics.length; i++){
+        console.log("1["+i+"]", topics[i])
+        let lastUserId = 0
+        const lastCreatedAtQuery = `SELECT ForumMessages.createdAt, ForumMessages.userId FROM ForumMessages WHERE topicSlug = "${topics[i].slug}" ORDER BY createdAt DESC LIMIT 1`
+        await connection.promise()
+            .query(lastCreatedAtQuery)
+            .then(res => {topics[i].lastCreatedAt = res[0][0].createdAt; lastUserId = res[0][0].userId})
+            .catch(e => console.log('err', e))
+        const lastUsernameQuery = `SELECT Users.username FROM Users WHERE id = ${lastUserId}`
+        await connection.promise()
+            .query(lastUsernameQuery)
+            .then(res => topics[i].lastUsername = res[0][0].username)
+            .catch(e => console.log('err', e))
+        console.log("2["+i+"]", topics[i])
+    }
+
+    console.log("RESPONSE", topics)
+    res.send(topics)
+    response = null
+})
+server.post('/api/incrementForumTopicViews', async (req, res) => {
+    let data = Object.keys(req.body)
+    const requestData = JSON.parse(data[0])
+    console.log("CHANGE VIEWS OF ID:", requestData.id)
+    const query = `UPDATE ForumTopics SET views = views + 1 WHERE id = ${requestData.id}`
+    response = await connection.promise().query(query).catch(e => response = e)
+    console.log("RESPONSE", response[0])
+    //res.send(response[0])
+    response = null
+})
+server.post('/api/setForumTopicMsgCount', async (req, res) => {
+    let data = Object.keys(req.body)
+    const requestData = JSON.parse(data[0])
+    console.log("CHANGE MSG OF topicSlug:", requestData.topicSlug)
+    const query = `SELECT count(*) FROM ForumMessages WHERE topicSlug = "${requestData.topicSlug}"`
+    response = await connection.promise().query(query).catch(e => response = e)
+    let tmp = Object.values(response[0])
+    const msgCount = Object.values(tmp[0])[0]
+    const querySetCount = `UPDATE ForumTopics SET messagesCount = ${msgCount} WHERE slug = "${requestData.topicSlug}"`
+    response = await connection.promise().query(querySetCount).catch(e => response = e)
+    //console.log("RESPONSE", response[0])
+    res.send(response[0])
+    response = null
+})
+
+
+//FORUM MESSAGES
+server.post('/api/getForumMessages', async (req, res) => {
     console.log(">>>>> req.body", req.body)
 
     let data = Object.keys(req.body)
     const requestData = JSON.parse(data[0])
+    //console.log(">>", requestData.topicSlug)
 
-    const query = `SELECT * FROM ForumTopics 
-        INNER JOIN Users
-        ON ForumTopics.authorId = Users.id
-        WHERE categorySlug = "${requestData.slug}"`
+    const query = `SELECT ForumMessages.*, Users.username as username FROM ForumMessages 
+        LEFT JOIN Users
+        ON ForumMessages.userId = Users.id
+        WHERE topicSlug = "${quotesDispatcher(requestData.topicSlug)}"`
 
     response = await connection.promise().query(query).catch(e => response = e)
-    //console.log("RESPONSE", response[0])
+    //console.log("RESPONSE", response)
     res.send(response[0])
     response = null
 
 })
+server.post('/api/setNewForumMessage', async (req, res) => {
 
-
-
-
-
-
-
-
-
-
-
-//FORUM MESSAGES
-server.post('/api/setNewMessage', async (req, res) => {
-    let data = Object.keys(req.body)
-    const requestData = JSON.parse(data[0])
-    console.log("NM:", requestData)
-
-    const addMessageQuery = `insert into Messages(userId, topicId, message, createdBy, date) 
-        values(${requestData.userId}, ${requestData.topicId}, "${requestData.message}", "${requestData.createdBy}", "${requestData.date}")`
-
-    const answer = await connection.promise().query(addMessageQuery)
-    console.log("ANSWER:", answer[0])
-    res.send(answer[0])
-})
-
-server.post('/api/getMessages', async (req, res) => {
-    let data = Object.keys(req.body)
-    await getMessages()
-    res.send(response)
-    response = null
-})
-async function getMessages(){
-    console.log("START GET MESSAGES")
-    const query = 'SELECT * FROM Messages'
-    let data = await connection.promise().query(query)
-    response = JSON.stringify(data[0])
-    console.log("MESSAGES OBTAINED")
-}
-
-server.post('/api/getForumMessagesByTopicId', async (req, res) => {
     const data = Object.keys(req.body)
-    console.log("SERVER: data >>>>", data)
     const requestData = JSON.parse(data[0])
-    console.log("SERVER: getMessagesByCategoryId("+requestData.id+")", requestData.id)
-    const query = `select * from Messages 
-    inner join Users on Messages.userId = Users.id
-    where topicId = ${requestData.id}`
-    const answer = await connection.promise().query(query)
-    console.log("ANSWER:", answer[0])
-    res.send(answer[0])
-})
+    console.log("SERVER: setNewForumMessage()", requestData)
 
-server.post('/api/editMessage', async (req, res) => {
+    const addMessageQuery = `insert into ForumMessages(message, createdAt, userId, topicSlug)
+        values("${quotesPatcher(requestData.message)}", "${requestData.createdAt}", ${requestData.userId}, "${quotesPatcher(requestData.topicSlug)}")`
+    let resInfo
+    response = await connection.promise().query(addMessageQuery)
+        .then(res => resInfo = res[0])
+        .catch(e => {
+            console.log("e", e)
+            response = {data: null, error: e.code}
+        })
+
+    console.log("SET LAST_ID:", resInfo?.insertId, ' FOR SLUG:', requestData.topicSlug)
+
+    const setLastMessageQuery = `UPDATE ForumTopics SET lastCreatedAt = "${requestData.createdAt}", lastUserId = ${requestData.userId} WHERE slug = "${requestData.topicSlug}"`
+    await connection.promise().query(setLastMessageQuery)
+        .then(res => response = res)
+        .catch(e => {
+            console.log("e", e)
+            response = {data: null, error: e.code}
+        })
+
+
+    res.send(response)
+})
+server.post('/api/editForumMessage', async (req, res) => {
     let data = Object.keys(req.body)
 
     const requestData = JSON.parse(data[0])
     console.log("SERVER: data[0]", data[0])
-    const query = `UPDATE ForumMessages SET message = "${requestData.message}" WHERE id = "${requestData.id}"`
+    const query = `UPDATE ForumMessages SET message = "${quotesPatcher(requestData.message)}" WHERE id = "${requestData.id}"`
 
     let result = 'SUCCESSFUL'
     await connection.promise().query(query)
@@ -580,48 +473,6 @@ server.post('/api/editMessage', async (req, res) => {
     res.send(response)
     response = null
 })
-
-
-server.post('/api/getForumMessages', async (req, res) => {
-    console.log(">>>>> req.body", req.body)
-
-    let data = Object.keys(req.body)
-    const requestData = JSON.parse(data[0])
-
-    const query = `SELECT * FROM ForumMessages 
-        INNER JOIN Users
-        ON ForumMessages.authorId = Users.id
-        WHERE topicSlug = "${requestData.topicSlug}"`
-
-    response = await connection.promise().query(query).catch(e => response = e)
-    console.log("RESPONSE", response[0])
-    res.send(response[0])
-    response = null
-
-})
-server.post('/api/setNewForumMessage', async (req, res) => {
-
-    const data = Object.keys(req.body)
-
-    const requestData = JSON.parse(data[0])
-
-    console.log("SERVER: setNewForumMessage()", requestData)
-
-    const addMessageQuery = `insert into ForumMessages(message, createdAt, authorId, topicSlug)
-        values("${requestData.message}", "${requestData.createdAt}", ${requestData.authorId}, "${requestData.topicSlug}")`
-
-    await connection.promise().query(addMessageQuery)
-        .catch(e => {
-            console.log("e", e.code)
-            response = {data: null, error: e.code}
-        })
-
-    res.send(response)
-})
-
-
-
-
 
 
 //MAIN CATEGORIES
@@ -642,14 +493,10 @@ async function getCategories(){
 }
 
 
-
-
-
-
-
+//UTILS
 function createToken(){
-    let result           = '';
-    let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let charactersLength = characters.length;
     for(let i = 0; i < 20; i++){
         result += characters.charAt(Math.floor(Math.random() *
@@ -657,22 +504,48 @@ function createToken(){
     }
     return result;
 }
-function checkReceivedData(userslist, username, password){
-    response = JSON.stringify('unkuser')
-    for(let i = 0; i < userslist.length; i++){
-        console.log(userslist[i].username, username)
-        if(userslist[i].username === username){
-            if(userslist[i].password === password){
-                currentUser = users[i]
-                users[i].token = createToken()
-                let time = new Date
-                time.setMinutes(time.getMinutes()+5)
-                users[i].tokenUpdate = time
-                response = JSON.stringify(users[i])
-                break
-            }
-            response = JSON.stringify('wrongpass')
-            break
+function quotesPatcher(data){
+    //console.log("res_t0", data)
+    let result = data
+    for(let i = 0; i < result.length; i++){
+
+        //console.log('=>', result[i])
+        if(result[i] === '"'){
+            result = result.slice(0, i)+"\""+result.slice(i)
+            i++
         }
+        else if(result[i] === '\'')
+            result[i] = '\\'+result[i]
+        else if(result[i] === '\`')
+            result[i] = '\\'+result[i]
     }
+    //console.log("res_t1", result)
+    return result
 }
+function quotesDispatcher(data){
+    //console.log("res_t0", data)
+    let result = data
+    for(let i = 0; i < result.length; i++){
+
+        console.log('=>', result[i])
+        if(result[i] === '"'){
+            result = result.slice(0, i)+"\\"+result.slice(i)
+            i++
+        }
+        else if(result[i] === '\'')
+            result[i] = '\\'+result[i]
+        else if(result[i] === '\`')
+            result[i] = '\\'+result[i]
+    }
+    //console.log("res_t1", result)
+    return result
+}
+
+//server.use(function(err, req, res, next) {
+//    console.error(err.stack);
+//    //res.status(500).send('Something broke!');
+//});
+
+server.get('*', async () => {
+    console.log("** *** ** *** ** *** ** *** ** *** ** *** ** *** ** ***")
+})
