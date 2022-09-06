@@ -1,0 +1,19 @@
+
+
+.btn-group{
+  margin-left: 8px;
+  margin-right: 16px;
+  .icon-menu{
+
+    @media (max-width: 572px) {
+      display: none;
+    }
+  }
+  .btn{
+    border: none;
+  }
+  .dropdown-menu{
+    border: none;
+    box-shadow: 0 4px 12px 4px rgba(0,0,0,0.24);
+  }
+}

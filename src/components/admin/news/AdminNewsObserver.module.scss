@@ -1,0 +1,113 @@
+.newsObserver{
+  width: 100%;
+  padding-right: 6px;
+  box-sizing: border-box;
+  height: 100%;
+  overflow-y: auto;
+
+  .observerHeader{
+    display: flex;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 48px;
+    font-weight: bold;
+    font-size: 24px;
+    background-color: #dddddd;
+  }
+
+  .newsWrapper{
+    display: block;
+    width: 100%;
+    flex-direction: column;
+    overflow-y: auto;
+    padding-right: 8px;
+    box-sizing: border-box;
+
+    .newsComponent{
+      display: flex;
+      width: 100%;
+      margin-bottom: 8px;
+      background-color: white;
+      border-radius: 4px;
+      padding: 4px 0 8px 6px;
+      box-sizing: border-box;
+      box-shadow: 1px 1px 8px 0 rgba(0,0,0,0.14);
+
+      .newsContent{
+        display: flex;
+        width: 100%;
+        font-size: 14px;
+        flex-direction: column;
+
+        .newsHeader{
+          display: flex;
+          width: 100%;
+          min-height: 32px;
+          align-items: center;
+          box-sizing: border-box;
+
+          .newsDateTime{
+            display: flex;
+            width: 200px;
+          }
+
+          .newsTitle{
+            display: flex;
+            width: 100%;
+            margin-left: 16px;
+            font-weight: bold;
+          }
+        }
+
+        .newsBody{
+          display: flex;
+          width: 100%;
+          box-sizing: border-box;
+
+          .newsImg{
+            display: flex;
+            width: 200px;
+            min-height: 16px;
+            background-color: #333333;
+          }
+
+          .newsDescription{
+            display: flex;
+            width: 100%;
+            margin-left: 16px;
+          }
+        }
+      }
+
+      .handlers{
+        display: flex;
+        width: 48px;
+        height: 100%;
+        flex-direction: column;
+        box-sizing: border-box;
+
+        .optionalButton{
+          display: flex;
+          width: 32px;
+          height: 32px;
+          margin: 4px;
+          justify-content: center;
+          align-items: center;
+          border-radius: 4px;
+          background-color: #ddd;
+          padding: 6px;
+          box-sizing: border-box;
+          cursor: pointer;
+          transition: background-color 0.3s ease-in-out;
+
+          &:hover{
+            background-color: dodgerblue;
+          }
+        }
+      }
+    }
+  }
+
+}
+

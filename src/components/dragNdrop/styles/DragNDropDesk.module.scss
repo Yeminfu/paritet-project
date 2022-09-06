@@ -1,0 +1,11 @@
+.desk{
+  display: flex;
+  width: 100%;
+  min-width: calc(100% - 8px);
+  height: 100vh;
+  box-sizing: border-box;
+  //background-color: black;
+  justify-content: flex-start;
+  align-items: flex-start;
+  overflow-x: auto;
+}

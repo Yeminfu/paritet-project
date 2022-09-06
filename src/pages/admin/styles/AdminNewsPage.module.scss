@@ -1,0 +1,99 @@
+.adminNewsPage{
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  background-color: white;
+  flex-direction: column;
+
+  .header{
+    display: flex;
+    width: 100%;
+    height: 112px;
+    flex-direction: column;
+
+    .upperHeader{
+      display: flex;
+      width: 100%;
+      height: 48px;
+      align-items: center;
+      padding: 16px 32px;
+      box-sizing: border-box;
+
+      .backButtonLink{
+        text-decoration: none;
+        color: black;
+
+        .backButton{
+          display: flex;
+          width: 32px;
+          height: 32px;
+          justify-content: center;
+          align-items: center;
+          margin-right: 8px;
+          cursor: pointer;
+          border-radius: 4px;
+
+          &:hover{
+            background-color: #dddddd;
+          }
+        }
+      }
+    }
+
+    .lowerHeader{
+      display: flex;
+      width: 100%;
+      height: 64px;
+      align-items: center;
+      padding: 16px;
+      box-sizing: border-box;
+      font-size: 24px;
+      font-weight: bold;
+    }
+  }
+
+  .mainArea{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+
+    .adminArea{
+      display: flex;
+      width: 40%;
+      height: 100%;
+      padding: 16px;
+      box-sizing: border-box;
+      background-color: #dddddd;
+    }
+
+    .viewArea{
+      display: flex;
+      width: 60%;
+      flex: 1;
+      padding: 16px;
+      box-sizing: border-box;
+      overflow-y: auto;
+      background-color: #dddddd;
+    }
+  }
+
+  .alertWrapper{
+    position: fixed;
+    display: flex;
+    width: 100%;
+    bottom: 50px;
+    justify-content: center;
+    align-items: center;
+
+    .alert, .alert-danger{
+      display: flex;
+      width: 600px;
+
+      @media (max-width: 572px){
+        width: 85%;
+
+      }
+    }
+  }
+}

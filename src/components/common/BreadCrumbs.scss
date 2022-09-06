@@ -1,0 +1,27 @@
+.bread-crumbs{
+  display: flex;
+  background-color: #228822;
+  width: 100%;
+
+
+  .crumb{
+    display: flex;
+    background-color: lightpink;
+
+    &:after{
+      display: flex;
+      background-color: lime;
+      margin-left: 6px;
+      margin-right: 6px;
+      content: ' 🡆 ';
+    }
+  }
+
+  .active{
+    background-color: lightskyblue;
+
+    &:after{
+      content: '';
+    }
+  }
+}

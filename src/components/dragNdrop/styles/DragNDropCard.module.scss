@@ -1,0 +1,48 @@
+.card{
+  display: flex;
+  width: 100%;
+  padding: 4px 8px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: #ffffff;
+  border-radius: 4px;
+  overflow-x: auto;
+  cursor: pointer;
+  box-shadow: 2px 2px 8px 4px rgba(0,0,0,0.14);
+
+  .cardInput{
+    display: flex;
+    color: black;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+    min-height: 32px;
+
+    .inputForm{
+      width: 100%;
+
+      .inputField{
+        width: 100%;
+        outline: none;
+        border: none;
+        background-color: transparent;
+        color: #333333;
+        caret-color: #333333;
+
+      }
+    }
+
+    .inputCloser{
+
+    }
+  }
+
+  .cardHeader{
+    display: flex;
+    color: black;
+    min-height: 32px;
+    align-items: center;
+  }
+}

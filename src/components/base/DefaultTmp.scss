@@ -1,0 +1,47 @@
+.header-content-container{
+  z-index: 1;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  //margin: 0 12px;
+  //@media (max-width: 768px){
+  //  margin-right: 4px;
+  //}
+}
+
+.container{
+  position: relative;
+  .default-tmp-wrapper{
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+
+
+  .content-container{
+    display: flex;
+    flex-direction: column;
+    flex-flow: wrap;
+    justify-content: flex-start;
+    margin: -4px;
+    padding: 24px 0;
+    position: relative;
+    //ЭТО КОСТЫЛЬ, ТАК НЕ НАДО ДЕЛАТЬ
+    &>*:not(.float-button, .preloader-container){
+      max-width: calc(50% - 8px);
+      margin: 4px;
+      text-decoration: none;
+      @media (max-width: 768px){
+          min-width: 100%;
+          max-width: unset;
+      }
+    }
+  }
+
+  .footer-content-container{
+
+    @media (max-width: 768px){
+      margin-right: -8px;
+    }
+  }
+}
+}
