@@ -16,8 +16,8 @@ import { getParsed } from './modules/xmlParser.js';
   });
 
   const browser = await puppeteer.launch({
-    headless: true, // используем новый режим без головы
-    args: ['--no-sandbox', '--disable-setuid-sandbox'] // дополнительные параметры запуска браузера
+    headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
   const page = await browser.newPage();
 
@@ -28,10 +28,46 @@ import { getParsed } from './modules/xmlParser.js';
 
   let links = getParsed(pageXML);
 
-  links.forEach(link => {
-    console.log('link', link);
-  });
+  for (let index = 0; index < links.length; index++) {
+    const link = links[index];
+    if (index === 0) {
+      console.log('link', link);
+      await page.goto(link, { waitUntil: 'networkidle2' })
+      let a = await page.evaluate(() => {
+        console.log('manamana');
+        return JSON.stringify(
+          {
+            title: document.querySelector('h1.story__title').innerText,
+            undertitle: document.querySelector('p.story__lead').innerText,
+            image: ['image', document.querySelector('.story__blocks>figure img').src],
+            content: ['content',
+              Array.from(document.querySelector('.content.story__block.story__block_text').children)
+                .map(x => {
+                  if (x.tagName === "P" || x.tagName === "BLOCKQUOTE") return {
+                    tagName: x.tagName,
+                    // innerText: x.innerText,
+                  }
+                  if (x.tagName === "FIGURE") return {
+                    tagName: x.tagName,
+                    innerHTML: x.innerHTML,
+                  }
+                  return x.tagName;
+                })
+            ],
+          },
+          null,
+          2
+        );
+      });
 
+      for (let index = 0; index < a.length; index++) {
+        const element = a[index];
+
+      }
+
+      console.log('a', a);
+    }
+  }
 
   await browser.close();
 
