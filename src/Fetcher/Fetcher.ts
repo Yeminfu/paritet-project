@@ -8,7 +8,7 @@ export default class Fetcher{
 
     controller: any;
     //baseUrl = 'https://maksia2w.beget.tech'
-    baseUrl = 'http://62.113.110.6:3002'
+    baseUrl = 'http://192.168.0.10:3002'
 
 
     constructor(){
